@@ -6,3 +6,6 @@
 - [-] Linkki sovelluksen toimivaan versioon (jos verkossa).
 - [ ] Asennus- ja käyttöohje.
 - [ ] Määriteltävä lisenssi.
+
+Jäsenet:
+-Eetu
