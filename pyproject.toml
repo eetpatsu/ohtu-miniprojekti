@@ -2,7 +2,7 @@
 name = "miniprojekti"
 version = "0.1.0"
 description = ""
-authors = [""]
+authors = ["Olli-Antti","Lauri","Lasse","Eetu","Elias","Harri"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
