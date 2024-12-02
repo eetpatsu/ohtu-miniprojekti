@@ -4,7 +4,8 @@ from pathlib import Path
 class ViiteEditori:
     def __init__(self, io):
         self.io = io
-    
+        self.aktiivinen_tiedosto = None
+
     def run(self):
         '''Käynnistää sovelluksen ja kysyy komennon.'''
         self.io.kirjoita("Viite-editori   ('exit' sulkee ohjelman)")
@@ -24,6 +25,9 @@ class ViiteEditori:
                 tiedostonimi = self.io.lue("Anna luotavan tiedoston sijainti/nimi (suhteessa tähän hakemistoon): ")
                 self.luo_ja_avaa_tiedosto(tiedostonimi)
 
+            if syote.strip() == "tulosta":
+                self.Tulosta_tiedosto(tiedostonimi)
+
     def avaa_tiedosto(self, tiedostonimi):
         '''Avaa tiedoston sovelluksen käsiteltäväksi.'''
         tiedosto = None
@@ -39,6 +43,7 @@ class ViiteEditori:
         try:
             # Avaa tiedoston read/write tilassa tai I/O error, jos tiedostoa ei löydy
             tiedosto = open(polku, "r+")
+            self.aktiivinen_tiedosto = polku
             self.io.kirjoita("Avataan tiedosto: "+str(polku))
         except IOError:
             self.io.kirjoita("Tapahtui virhe: Tiedostoa "+str(polku)+" ei löynyt.")
@@ -68,3 +73,16 @@ class ViiteEditori:
         finally:
             if tiedosto is not None:
                 tiedosto.close()
+
+    '''Tulostaa avatun tidoston sisällön.(aktiivinen_tiedosto)'''
+    def Tulosta_tiedosto(self, tiedostonimi):
+        if self.aktiivinen_tiedosto is None:
+            self.io.kirjoita("Ei avattua tiedostoa. Avaa tiedosto ensin komennolla 'avaa'.")
+            return
+        
+        try:
+            with open(self.aktiivinen_tiedosto, "r") as tiedosto:
+                sisalto = tiedosto.read()
+                self.io.kirjoita(f"Tiedoston {self.aktiivinen_tiedosto.name} sisältö:\n{sisalto}")
+        except IOError:
+            self.io.kirjoita(f"Tapahtui virhe: Tiedostoa {self.tiedosto} ei voitu lukea.")
