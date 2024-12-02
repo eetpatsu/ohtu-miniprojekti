@@ -82,7 +82,7 @@ class ViiteEditori:
     def Tulosta_tiedosto(self, tiedostonimi):
         if self.aktiivinen_tiedosto is None:
             self.io.kirjoita("Ei avattua tiedostoa. Avaa tiedosto ensin komennolla 'avaa'.")
-            return
+            return -1
         
         try:
             with open(self.aktiivinen_tiedosto, "r") as tiedosto:
@@ -90,6 +90,8 @@ class ViiteEditori:
                 self.io.kirjoita(f"Tiedoston {self.aktiivinen_tiedosto.name} sisältö:\n{sisalto}")
         except IOError:
             self.io.kirjoita(f"Tapahtui virhe: Tiedostoa {self.tiedosto} ei voitu lukea.")
+        finally:
+            return 0
 
     '''Ottaa käyttäjältä vastaan valmiita bib-viitteitä ja tallentaa aktiiviseen tiedostoon'''
     def syota_bib_viite(self):
