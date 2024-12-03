@@ -23,7 +23,8 @@ yksikkötestit. Toiminnallisuus on esitetty asiakkaalle ja asiakas on sen hyväk
    - kun olet liittänyt haluamasi rivit, vahvista syötetyt rivit komennolla 'valmis'
 5. Muokkaa haluamaasi viitettä seuraavalla komennolla: muokkaa <muokattavan viitteen avain> <muokattavan parametrin tyyppi> <muokkauksen jälkeinen haluttu merkkijono>
    - esimerkkiviite:
-    *@article{kadiyala2018applications,
+```      
+    @article{kadiyala2018applications,
     title={Applications of python to evaluate the performance of decision tree-based boosting algorithms},
     author={Kadiyala, Akhil and Kumar, Ashok},
     journal={Environmental Progress \& Sustainable Energy},
@@ -32,10 +33,12 @@ yksikkötestit. Toiminnallisuus on esitetty asiakkaalle ja asiakas on sen hyväk
     pages={618--623},
     year={2018},
     publisher={Wiley Online Library}
-    }*
+    }
+```
   - esimerkkikomento: "muokkaa kadiyala2018applications author "Kadiyala et al"
   - tulos:
-    *@article{kadiyala2018applications,
+```
+    @article{kadiyala2018applications,
     title={Applications of python to evaluate the performance of decision tree-based boosting algorithms},
     author={Kadiyala et al},
     journal={Environmental Progress \& Sustainable Energy},
@@ -44,5 +47,6 @@ yksikkötestit. Toiminnallisuus on esitetty asiakkaalle ja asiakas on sen hyväk
     pages={618--623},
     year={2018},
     publisher={Wiley Online Library}
-    }*
+    }
+```
 7. Poistu ohjelmasta komennolla 'exit'
