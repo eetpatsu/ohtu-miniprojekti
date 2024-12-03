@@ -9,20 +9,20 @@ yksikkötestit. Toiminnallisuus on esitetty asiakkaalle ja asiakas on sen hyväk
 - Linkki CI-palveluun: https://github.com/eetupsutinen/ohtu-miniprojekti/actions
 - [ ] Lisenssi?
 
-*Asennus- ja käyttöohje:*
+**Asennus- ja käyttöohje:**
 
 1. Siirry hakemistoon, johon olet ladannut ohjelman. Aja ohjelma terminaalissa (src/index.py).
 2. Avaa
    - olemassaoleva bib-tiedosto komennolla 'avaa' 
-   - TAI luo uusi tiedosto komennolla 'luo'
+   - **tai** luo uusi tiedosto komennolla 'luo'
    - kummassakin tapauksessa syötä tiedostonimi suhteessa polkuun, jossa olet.
 3. Tulosta bib-tiedoston sisältö komennolla 'tulosta'.
 4. Lisää lähteitä bib-muodossa komennolla 'syota'
    - voit liittää useita bib-tiedoston rivejä leikepöydältä tai kirjoittaa ne käsin
    - voit lisätä myös rivinvaihtoja haluamallasi tavalla
-   - kun olet liittänyt haluamasi rivit, vahvista syötetyt rivit komennolla 'valmis'
+   - kun olet liittänyt haluamasi rivit, vahvista syötetyt rivit komennolla kirjaamalla **tyhjälle riville** ```valmis```
 5. Muokkaa haluamaasi viitettä seuraavalla komennolla: ```muokkaa <muokattavan viitteen avain> <muokattavan parametrin tyyppi> <muokkauksen jälkeinen haluttu merkkijono>```
-   - esimerkkiviite:
+- esimerkkiviite:
 ```@article{kadiyala2018applications,
 title={Applications of python to evaluate the performance of decision tree-based boosting algorithms},
 author={Kadiyala, Akhil and Kumar, Ashok},
@@ -34,8 +34,8 @@ year={2018},
 publisher={Wiley Online Library}
 }
 ```
-  - esimerkkikomento: ```muokkaa kadiyala2018applications author "Kadiyala et al"```
-  - tulos:
+- esimerkkikomento: ```muokkaa kadiyala2018applications author "Kadiyala et al"```
+- tulos:
 ```@article{kadiyala2018applications,
 title={Applications of python to evaluate the performance of decision tree-based boosting algorithms},
 author={Kadiyala et al},
