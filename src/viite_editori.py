@@ -71,6 +71,7 @@ class ViiteEditori:
             polku = tyohakemisto_polku / tiedostonimi_polku
         try:
             # Luo ja avaa uuden tiedoston read/write tilassa, antaa errorin, jos tiedosto on jo olemassa
+            self.aktiivinen_tiedosto = polku
             tiedosto = open(polku, "x+")
             self.io.kirjoita("Luodaan tiedosto sijaintiin: "+str(polku))
         except IOError:
@@ -97,6 +98,9 @@ class ViiteEditori:
 
     '''Ottaa käyttäjältä vastaan valmiita bib-viitteitä ja tallentaa aktiiviseen tiedostoon'''
     def syota_bib_viite(self):
+        if self.aktiivinen_tiedosto is None:
+            self.io.kirjoita("Ei avattua tiedostoa. Avaa tiedosto ensin komennolla 'avaa'.")
+            return -1
         self.io.kirjoita("Syötä lisättävä bib-data. Lopeta syöttämällä 'valmis'.")
         rivit = []
         while True:
