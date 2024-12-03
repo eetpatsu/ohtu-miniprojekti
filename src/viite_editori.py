@@ -9,6 +9,7 @@ class ViiteEditori:
     def run(self):
         '''Käynnistää sovelluksen ja kysyy komennon.'''
         self.io.kirjoita("Viite-editori   ('exit' sulkee ohjelman)")
+        tiedostonimi = None
         while True:
             # Luetaan käyttäjältä syötettä, kunnes annetaan exit-komento
             syote = self.io.lue("Avaa bib-tiedosto tai luo uusi ('avaa' tai 'luo')?: ")
@@ -80,6 +81,7 @@ class ViiteEditori:
 
     '''Tulostaa avatun tidoston sisällön.(aktiivinen_tiedosto)'''
     def Tulosta_tiedosto(self, tiedostonimi):
+        
         if self.aktiivinen_tiedosto is None:
             self.io.kirjoita("Ei avattua tiedostoa. Avaa tiedosto ensin komennolla 'avaa'.")
             return -1
@@ -88,10 +90,10 @@ class ViiteEditori:
             with open(self.aktiivinen_tiedosto, "r") as tiedosto:
                 sisalto = tiedosto.read()
                 self.io.kirjoita(f"Tiedoston {self.aktiivinen_tiedosto.name} sisältö:\n{sisalto}")
+                return 0
         except IOError:
             self.io.kirjoita(f"Tapahtui virhe: Tiedostoa {self.tiedosto} ei voitu lukea.")
-        finally:
-            return 0
+            return -1
 
     '''Ottaa käyttäjältä vastaan valmiita bib-viitteitä ja tallentaa aktiiviseen tiedostoon'''
     def syota_bib_viite(self):
