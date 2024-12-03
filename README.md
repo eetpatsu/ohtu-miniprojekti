@@ -21,7 +21,7 @@ yksikkötestit. Toiminnallisuus on esitetty asiakkaalle ja asiakas on sen hyväk
    - voit liittää useita bib-tiedoston rivejä leikepöydältä tai kirjoittaa ne käsin
    - voit lisätä myös rivinvaihtoja haluamallasi tavalla
    - kun olet liittänyt haluamasi rivit, vahvista syötetyt rivit komennolla 'valmis'
-5. Muokkaa haluamaasi viitettä seuraavalla komennolla: muokkaa <muokattavan viitteen avain> <muokattavan parametrin tyyppi> <muokkauksen jälkeinen haluttu merkkijono>
+5. Muokkaa haluamaasi viitettä seuraavalla komennolla: ```muokkaa <muokattavan viitteen avain> <muokattavan parametrin tyyppi> <muokkauksen jälkeinen haluttu merkkijono>```
    - esimerkkiviite:
 ```      
     @article{kadiyala2018applications,
@@ -35,7 +35,7 @@ yksikkötestit. Toiminnallisuus on esitetty asiakkaalle ja asiakas on sen hyväk
     publisher={Wiley Online Library}
     }
 ```
-  - esimerkkikomento: "muokkaa kadiyala2018applications author "Kadiyala et al"
+  - esimerkkikomento: ```muokkaa kadiyala2018applications author "Kadiyala et al"```
   - tulos:
 ```
     @article{kadiyala2018applications,
