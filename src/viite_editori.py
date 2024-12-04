@@ -96,8 +96,11 @@ class ViiteEditori:
             self.io.kirjoita(f"Tapahtui virhe: Tiedostoa {self.tiedosto} ei voitu lukea.")
             return -1
 
-    '''Syötä valitulle tiedostolle bib-viitteitä'''
+    '''Ottaa käyttäjältä vastaan valmiita viitteitä bib-syntaksissa ja tallentaa aktiiviseen tiedostoon'''
     def syota_bib_viite(self):
+        if self.aktiivinen_tiedosto is None:
+            self.io.kirjoita("Ei avattua tiedostoa. Avaa tiedosto ensin komennolla 'avaa'.")
+            return -1
         self.io.kirjoita("Syötä lisättävä bib-data. Lopeta syöttö kirjaamalla tyhjälle riville 'valmis'.")
         rivit = []
         while True:
@@ -115,6 +118,6 @@ class ViiteEditori:
             uusi_data = "\n" + uusi_data
         
         with open(self.aktiivinen_tiedosto, "a") as tiedosto:
-            tiedosto.write(uusi_data + "\n")  
+            tiedosto.write(uusi_data + "\n\n")  
         
         self.io.kirjoita("Viite lisätty tiedoston loppuun.")
