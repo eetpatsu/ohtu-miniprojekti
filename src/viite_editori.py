@@ -1,5 +1,6 @@
 import os
 from pathlib import Path
+from viite_parseri import ViiteParseri
 
 class ViiteEditori:
     def __init__(self, io):
@@ -31,6 +32,12 @@ class ViiteEditori:
             
             if syote.strip() == "syota":
                 self.syota_bib_viite()
+
+            if syote.strip() == "muokkaa":
+                viitteen_avain = self.io.lue("Anna muokattan viitteen avain: ")
+                parametrin_tyyppi = self.io.lue("Anna parametrin tyyppi: ")
+                muokattu_parametri = self.io.lue("Anna muokattu parametri: ")
+                self.muokkaa_tiedosto(viitteen_avain, parametrin_tyyppi, muokattu_parametri)
 
 
     def avaa_tiedosto(self, tiedostonimi):
@@ -121,3 +128,21 @@ class ViiteEditori:
             tiedosto.write(uusi_data + "\n\n")  
         
         self.io.kirjoita("Viite lisätty tiedoston loppuun.")
+
+    '''Muokkaa valitun viitteen haluttua parametriä'''
+    def muokkaa_tiedosto(self, viitteen_avain, parametrin_tyyppi, muokattu_parametri ):
+        if self.aktiivinen_tiedosto is None:
+            self.io.kirjoita("Ei avattua tiedostoa. Avaa tiedosto ensin komennolla 'avaa'.")
+            return -1
+        
+        try:
+            with open(self.aktiivinen_tiedosto, "r") as tiedosto:
+                viite_teksti = tiedosto.read()
+                parseri = ViiteParseri(viite_teksti)
+                
+                tulos = parseri.muokkaa(parametrin_tyyppi, muokattu_parametri)
+                
+                self.io.kirjoita(f"{tulos} Tiedoston näyttää nyt tältä {parseri} kun viitteeksi annettu:{viitteen_avain} parametriuksi:{parametrin_tyyppi}sekä muokattu parametri:{muokattu_parametri}:\n")
+
+        except FileNotFoundError:
+            print(f"Tiedostoa ei löytynyt.")
