@@ -1,6 +1,7 @@
 # ohtu-miniprojekti
 ![GHA workflow badge](https://github.com/eetupsutinen/ohtu-miniprojekti/workflows/CI/badge.svg)
 [![codecov](https://codecov.io/gh/eetupsutinen/ohtu-miniprojekti/graph/badge.svg?token=2A06H0INDB)](https://codecov.io/gh/eetupsutinen/ohtu-miniprojekti)
+[![linting: pylint](https://img.shields.io/badge/linting-pylint-yellowgreen)](https://github.com/pylint-dev/pylint)
 
 *Definition of Done: User storyn kuvaama toiminta on mahdollista ja toteutus täyttää hyväksymiskriteerit. Koodille on tehty hyväksymiskriteerejä vastaavat 
 yksikkötestit. Toiminnallisuus on esitetty asiakkaalle ja asiakas on sen hyväksynyt.*
