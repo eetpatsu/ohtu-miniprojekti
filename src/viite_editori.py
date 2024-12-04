@@ -137,12 +137,23 @@ class ViiteEditori:
         
         try:
             with open(self.aktiivinen_tiedosto, "r") as tiedosto:
-                viite_teksti = tiedosto.read()
-                parseri = ViiteParseri(viite_teksti)
-                
-                tulos = parseri.muokkaa(parametrin_tyyppi, muokattu_parametri)
-                
-                self.io.kirjoita(f"{tulos} Tiedoston näyttää nyt tältä {parseri} kun viitteeksi annettu:{viitteen_avain} parametriuksi:{parametrin_tyyppi}sekä muokattu parametri:{muokattu_parametri}:\n")
+                viite_alku = tiedosto.read()
+
+                tiedoston_viitteet = viite_alku.split('@')[1:]  # Jokainen viite alkaa '@'
+                viitteet = ["@" + viite.strip() for viite in tiedoston_viitteet]
+        
+            muokattava_viite = None
+            for viite in viitteet:
+                if viitteen_avain in viite:
+                    muokattava_viite = viite
+                    break
+
+            parseri = ViiteParseri(muokattava_viite)
+            tulos = parseri.muokkaa(parametrin_tyyppi, muokattu_parametri)
+
+            self.io.kirjoita(f"{tulos} Tiedoston näyttää nyt tältä {parseri} kun viitteeksi annettu:{viitteen_avain} parametriuksi:{parametrin_tyyppi}sekä muokattu parametri:{muokattu_parametri}:\n")
+
+
 
         except FileNotFoundError:
             print(f"Tiedostoa ei löytynyt.")
