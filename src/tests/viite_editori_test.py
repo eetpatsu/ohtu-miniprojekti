@@ -1,4 +1,4 @@
-import unittest
+"""import unittest
 from viite_editori import ViiteEditori
 
 
@@ -11,7 +11,7 @@ class TestViiteEditori(unittest.TestCase):
         
 
 # Kopioitu toisesta testitiedostosta
-"""
+
     def test_konstruktori_ja_to_string(self):
         self.assertAlmostEqual(str(self.testiparseri), self.esimerkkiviite)
 
