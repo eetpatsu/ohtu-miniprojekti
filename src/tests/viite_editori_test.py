@@ -31,6 +31,20 @@ class TestViiteEditori(unittest.TestCase):
         if os.path.exists("temptiedosto.bib"):
             os.remove("temptiedosto.bib")
 
+    def test_lisays_ilman_rivinvaihtoa(self):
+        DummyConsoleIO.data = [
+            "author = {Another Author}",
+            "valmis"
+        ]
+        self.testieditori.aktiivinen_tiedosto = "temptiedosto.bib"
+        alkuperainen_sisalto = "Alkuperäinen sisältö ilman rivinvaihtoa"
+        with open(self.testieditori.aktiivinen_tiedosto, "w") as f:
+            f.write(alkuperainen_sisalto)
+        self.testieditori.syota_bib_viite()
+        with open(self.testieditori.aktiivinen_tiedosto, "r") as f:
+            sisalto = f.read()
+        odotettu_sisalto = "Alkuperäinen sisältö ilman rivinvaihtoa\nauthor = {Another Author}\n\n"
+        self.assertEqual(sisalto, odotettu_sisalto)
 
 class DummyConsoleIO:
     data = []
