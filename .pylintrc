@@ -6,15 +6,17 @@ ignore=tests
 
 disable=raw-checker-failed,
         bad-inline-option,
+        consider-using-enumerate,
         locally-disabled,
         file-ignored,
         suppressed-message,
         useless-suppression,
         deprecated-pragma,
         use-symbolic-message-instead,
+        unspecified-encoding,
         missing-module-docstring,
         missing-function-docstring,
-        missing-class-docstring
+        missing-class-docstring,
 
 [FORMAT]
 
