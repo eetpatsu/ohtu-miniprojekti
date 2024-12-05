@@ -7,6 +7,11 @@ class TestViiteEditori(unittest.TestCase):
     def setUp(self):
         self.testieditori = ViiteEditori(DummyConsoleIO())
 
+    def test_tiedosto_ei_auki(self):
+        self.testieditori.aktiivinen_tiedosto = None
+        result = self.testieditori.syota_bib_viite()
+        self.assertEqual(result, -1)
+    
     def test_tulosta_tiedosto(self):
         nimi = "testitiedosto.bib"
         self.testieditori.avaa_tiedosto(nimi)
@@ -27,9 +32,54 @@ class TestViiteEditori(unittest.TestCase):
         odotettu_sisalto = "\nauthor = {Test Author}\ntitle = {Test Title}\nyear = {2024}\n\n"
         self.assertEqual(sisalto, odotettu_sisalto)
         
+    def test_lisays_ilman_rivinvaihtoa(self):
+        DummyConsoleIO.data = [
+            "author = {Another Author}",
+            "valmis"
+        ]
+        self.testieditori.aktiivinen_tiedosto = "temptiedosto.bib"
+        alkuperainen_sisalto = "Alkuperäinen sisältö ilman rivinvaihtoa"
+        with open(self.testieditori.aktiivinen_tiedosto, "w") as f:
+            f.write(alkuperainen_sisalto)
+        self.testieditori.syota_bib_viite()
+        with open(self.testieditori.aktiivinen_tiedosto, "r") as f:
+            sisalto = f.read()
+        odotettu_sisalto = "Alkuperäinen sisältö ilman rivinvaihtoa\nauthor = {Another Author}\n\n"
+        self.assertEqual(sisalto, odotettu_sisalto)
+
     def tearDown(self):
         if os.path.exists("temptiedosto.bib"):
             os.remove("temptiedosto.bib")
+
+    def test_lisays_ilman_rivinvaihtoa(self):
+        DummyConsoleIO.data = [
+            "author = {Another Author}",
+            "valmis"
+        ]
+        self.testieditori.aktiivinen_tiedosto = "temptiedosto.bib"
+        alkuperainen_sisalto = "Alkuperäinen sisältö ilman rivinvaihtoa"
+        with open(self.testieditori.aktiivinen_tiedosto, "w") as f:
+            f.write(alkuperainen_sisalto)
+        self.testieditori.syota_bib_viite()
+        with open(self.testieditori.aktiivinen_tiedosto, "r") as f:
+            sisalto = f.read()
+        odotettu_sisalto = "Alkuperäinen sisältö ilman rivinvaihtoa\nauthor = {Another Author}\n\n"
+        self.assertEqual(sisalto, odotettu_sisalto)
+
+    def test_lisays_ilman_rivinvaihtoa(self):
+        DummyConsoleIO.data = [
+            "author = {Another Author}",
+            "valmis"
+        ]
+        self.testieditori.aktiivinen_tiedosto = "temptiedosto.bib"
+        alkuperainen_sisalto = "Alkuperäinen sisältö ilman rivinvaihtoa"
+        with open(self.testieditori.aktiivinen_tiedosto, "w") as f:
+            f.write(alkuperainen_sisalto)
+        self.testieditori.syota_bib_viite()
+        with open(self.testieditori.aktiivinen_tiedosto, "r") as f:
+            sisalto = f.read()
+        odotettu_sisalto = "Alkuperäinen sisältö ilman rivinvaihtoa\nauthor = {Another Author}\n\n"
+        self.assertEqual(sisalto, odotettu_sisalto)
 
     def test_lisays_ilman_rivinvaihtoa(self):
         DummyConsoleIO.data = [
