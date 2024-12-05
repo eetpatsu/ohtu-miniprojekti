@@ -10,7 +10,6 @@ class TestViiteEditori(unittest.TestCase):
         self.testitiedosto = "testi.bib"
 
     def test_avaa_tiedosto_onnistuneesti(self):
-        # Luo testitiedoston
         with open(self.testitiedosto, "w") as f:
             f.write("Testitiedoston sisältö")
         self.testieditori.avaa_tiedosto(self.testitiedosto)
@@ -18,7 +17,6 @@ class TestViiteEditori(unittest.TestCase):
 
     def test_tiedosto_lisataan_paatteella(self):
         tiedostonimi_ilman_paatetta = "tiedosto_ilman_paatetta"
-        # Luo testitiedoston .bib-päätteellä
         with open(tiedostonimi_ilman_paatetta + ".bib", "w") as f:
             f.write("Sisältöä")
         self.testieditori.avaa_tiedosto(tiedostonimi_ilman_paatetta)
@@ -30,14 +28,20 @@ class TestViiteEditori(unittest.TestCase):
         self.testieditori.avaa_tiedosto(tiedostonimi_ilman_paatetta)
         odotettu_polkumuoto = os.path.join(os.getcwd(), tiedostonimi_ilman_paatetta + ".bib")
         self.assertEqual(str(self.testieditori.aktiivinen_tiedosto), odotettu_polkumuoto)
-        
+
+    def test_luo_ja_avaa_uusi_tiedosto(self):
+        tiedostonimi = "uusi_tiedosto.bib"
+        self.testieditori.luo_ja_avaa_tiedosto(tiedostonimi)
+        self.assertEqual(str(self.testieditori.aktiivinen_tiedosto), str(Path(os.getcwd()) / tiedostonimi))
+        self.assertIn(f"Luodaan tiedosto sijaintiin: {str(Path(os.getcwd()) / tiedostonimi)}", self.testieditori.io.messages)
+        self.assertTrue(os.path.exists(tiedostonimi))
+
     def test_tiedosto_ei_auki(self):
         self.testieditori.aktiivinen_tiedosto = None
         result = self.testieditori.syota_bib_viite()
         self.assertEqual(result, -1)
     
     def test_tulosta_tiedosto_onnistuneesti(self):
-
         tiedoston_sisalto = "Testitiedoston sisältö"
         with open(self.testitiedosto, "w") as f:
             f.write(tiedoston_sisalto)
