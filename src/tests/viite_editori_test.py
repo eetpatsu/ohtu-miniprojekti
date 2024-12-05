@@ -29,6 +29,17 @@ class TestViiteEditori(unittest.TestCase):
         odotettu_polkumuoto = os.path.join(os.getcwd(), tiedostonimi_ilman_paatetta + ".bib")
         self.assertEqual(str(self.testieditori.aktiivinen_tiedosto), odotettu_polkumuoto)
 
+    def test_avaa_tiedosto_ei_olemassa(self):
+        tiedostonimi_ei_olemassa = "eioletamannimista"
+        self.testieditori.avaa_tiedosto(tiedostonimi_ei_olemassa)
+        odotettu_polku = Path(tiedostonimi_ei_olemassa + ".bib").resolve()
+        self.assertIn("Tapahtui virhe: Tiedostoa "+str(odotettu_polku)+" ei löynyt.",
+                      self.testieditori.io.messages)
+
+
+
+
+
     def test_tiedosto_ei_auki(self):
         self.testieditori.aktiivinen_tiedosto = None
         result = self.testieditori.syota_bib_viite()
