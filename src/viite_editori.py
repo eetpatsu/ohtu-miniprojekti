@@ -10,6 +10,7 @@ class ViiteEditori:
     def run(self):
         '''Käynnistää sovelluksen ja kysyy komennon.'''
         tiedostonimi = None
+        self.helppi()
         while True:
             # Luetaan käyttäjältä syötettä, kunnes annetaan exit-komento
             syote = self.io.lue("")
@@ -50,7 +51,7 @@ avaa:\t\tavaa bib-tiedoston\n\
 luo:\t\tluo bib-tiedoston\n\
 tulosta:\ttulostaa aktiivisen bib-tiedoston sisällön\n\
 syota:\t\ttallentaa bib-viitteen aktiiviseen bib-tiedostoon\n\
-muokkaa:\tmuokkaa valitun viitteen haluttua parametria\
+muokkaa:\tmuokkaa valitun viitteen haluttua parametria\n\
 ")
         return 0
     def avaa_tiedosto(self, tiedostonimi):

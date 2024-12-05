@@ -147,7 +147,7 @@ avaa:\t\tavaa bib-tiedoston\n\
 luo:\t\tluo bib-tiedoston\n\
 tulosta:\ttulostaa aktiivisen bib-tiedoston sisällön\n\
 syota:\t\ttallentaa bib-viitteen aktiiviseen bib-tiedostoon\n\
-muokkaa:\tmuokkaa valitun viitteen haluttua parametria\
+muokkaa:\tmuokkaa valitun viitteen haluttua parametria\n\
 ",
             self.testieditori.io.messages)
 
