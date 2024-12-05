@@ -13,8 +13,11 @@ class ViiteEditori:
         while True:
             # Luetaan käyttäjältä syötettä, kunnes annetaan exit-komento
             syote = self.io.lue("")
-
+    
             # strip poistaa whitespacen, joten ylimääräiset välilyönnit eivät haittaa
+            if syote.strip() == "help":
+                self.helppi()
+            
             if syote.strip() == "exit":
                 break
 
@@ -39,7 +42,16 @@ class ViiteEditori:
                 self.muokkaa_tiedosto(viitteen_avain, parametrin_tyyppi, muokattu_parametri)
 
  
-
+    def helppi(self):
+        self.io.kirjoita("\nKomennot:\n\
+help:\t\ttulostaa tämän viestin\n\
+exit:\t\tpoistuu ohjelmasta\n\
+avaa:\t\tavaa bib-tiedoston\n\
+luo:\t\tluo bib-tiedoston\n\
+tulosta:\ttulostaa aktiivisen bib-tiedoston sisällön\n\
+syota:\t\ttallentaa bib-viitteen aktiiviseen bib-tiedostoon\n\
+muokkaa:\tmuokkaa valitun viitteen haluttua parametria\
+")
     def avaa_tiedosto(self, tiedostonimi):
         '''Avaa tiedoston sovelluksen käsiteltäväksi.'''
         tiedosto = None
