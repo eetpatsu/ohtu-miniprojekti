@@ -2,30 +2,35 @@
 
 class ViiteParseri:
 
-    viite_teksti = ''
 
-    viitteen_tyyppi = ''
-    viitteen_avain = ''
-
-    viitteen_tiedot = []
     #viitteen_tagit = [] # Taulukko jota tagit tulevat käyttämään jossain vaiheessa.
 
     def __init__(self, viite_teksti):
         self.viite_teksti = viite_teksti
+        self.viitteen_tyyppi = ''
+        self.viitteen_avain = ''
+        self.viitteen_tiedot = []
         self.parse()
 
     def parse(self):
-        """Jäsentää viite_teksti:n sisältämän viitteen ja tallentaa tiedot attribuutteihin."""
-        # parse(self)-metodi on tarkoitettu vain olion sisäisen logiikan toimintaan.
+        """
+        Metodi jäsentää viite_teksit-attribuutin sisältämän bibTeX-viitteen tiedeot
+        ja tallentaa ne olion attribuutteihin. Viitteen oikeallisuutta, vaan se on
+        olion käyttäjän vastuulla.
+
+        Tämä metodi on tarkoitettu ainoastaan luokan sisäiseen toimintalogiikkaan ja 
+        sen käyttö ulkopuolelta ei pitäisi olla tarpeellista.
+        """
 
         viite_teksti_lista = self.viite_teksti.splitlines()
 
-        self.viitteen_tyyppi = viite_teksti_lista[0][1:viite_teksti_lista[0].index("{")]
-        self.viitteen_avain = viite_teksti_lista[0][viite_teksti_lista[0].index("{")+1:viite_teksti_lista[0].index(",")]
+        self.viitteen_tyyppi = viite_teksti_lista[0][1:viite_teksti_lista[0].index("{")].strip()
+        self.viitteen_avain = viite_teksti_lista[0][viite_teksti_lista[0].index("{")+1:viite_teksti_lista[0].index(",")].strip()
 
         def siivoa_rivi(rivi):
             jaettu_rivi = rivi.split('=')
-            jaettu_rivi[1] = jaettu_rivi[1][jaettu_rivi[1].index("{")+1:jaettu_rivi[1].index("}")]
+            jaettu_rivi[0] = jaettu_rivi[0].strip()
+            jaettu_rivi[1] = jaettu_rivi[1][jaettu_rivi[1].index("{")+1:jaettu_rivi[1].index("}")].strip()
             self.viitteen_tiedot.append(jaettu_rivi)
 
         for i in range(1,len(viite_teksti_lista)-1):
@@ -43,7 +48,17 @@ class ViiteParseri:
 
 
     def muokkaa(self, field, uusi_tieto):
-        """"Asettaa paramentrin nimisen kentän arvoksi uuden tiedon"""
+        """"
+        Asettaa annetun nimisen kentän arvoksi uuden tiedon.
+
+        Args:
+            field (string): Kenttä, jonka tieto halutaan vaihtaa
+            uusi_tieto (string): Tieto miksi kyseisen kentän arvo halutaan vaihtaa
+
+        Returns:
+            int: -1 mikäli kyseistä kentää ei ole olemassa ja päivity epäonnistui.
+                >= 0 mikäli päivitys onnistui.
+        """
 
         field_numero = -1
 
@@ -55,9 +70,6 @@ class ViiteParseri:
 
         self.update()
 
-        # Palauttaa -1, mikäli kyseistä kenttää ei ole olemassakaan.
-        # Muussa tapauksessa palauttaa kentän indeksin.
-        # Eli jos field_numero >= 0, muokkaus onnistui.
         return field_numero
 
     def __str__(self):
