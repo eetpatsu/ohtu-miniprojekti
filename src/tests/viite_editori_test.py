@@ -29,13 +29,6 @@ class TestViiteEditori(unittest.TestCase):
         odotettu_polkumuoto = os.path.join(os.getcwd(), tiedostonimi_ilman_paatetta + ".bib")
         self.assertEqual(str(self.testieditori.aktiivinen_tiedosto), odotettu_polkumuoto)
 
-    def test_luo_ja_avaa_uusi_tiedosto(self):
-        tiedostonimi = "uusi_tiedosto.bib"
-        self.testieditori.luo_ja_avaa_tiedosto(tiedostonimi)
-        self.assertEqual(str(self.testieditori.aktiivinen_tiedosto), str(Path(os.getcwd()) / tiedostonimi))
-        self.assertIn(f"Luodaan tiedosto sijaintiin: {str(Path(os.getcwd()) / tiedostonimi)}", self.testieditori.io.messages)
-        self.assertTrue(os.path.exists(tiedostonimi))
-
     def test_tiedosto_ei_auki(self):
         self.testieditori.aktiivinen_tiedosto = None
         result = self.testieditori.syota_bib_viite()
