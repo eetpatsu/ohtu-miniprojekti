@@ -52,6 +52,7 @@ tulosta:\ttulostaa aktiivisen bib-tiedoston sisällön\n\
 syota:\t\ttallentaa bib-viitteen aktiiviseen bib-tiedostoon\n\
 muokkaa:\tmuokkaa valitun viitteen haluttua parametria\
 ")
+        return 0
     def avaa_tiedosto(self, tiedostonimi):
         '''Avaa tiedoston sovelluksen käsiteltäväksi.'''
         tiedosto = None

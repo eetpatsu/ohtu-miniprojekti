@@ -138,6 +138,19 @@ class TestViiteEditori(unittest.TestCase):
         odotettu_sisalto = "Alkuperäinen sisältö ilman rivinvaihtoa\nauthor = {Another Author}\n\n"
         self.assertEqual(sisalto, odotettu_sisalto)
 
+    def test_helppi(self):
+        self.assertEqual(self.testieditori.helppi(), 0)
+        self.assertIn("\nKomennot:\n\
+help:\t\ttulostaa tämän viestin\n\
+exit:\t\tpoistuu ohjelmasta\n\
+avaa:\t\tavaa bib-tiedoston\n\
+luo:\t\tluo bib-tiedoston\n\
+tulosta:\ttulostaa aktiivisen bib-tiedoston sisällön\n\
+syota:\t\ttallentaa bib-viitteen aktiiviseen bib-tiedostoon\n\
+muokkaa:\tmuokkaa valitun viitteen haluttua parametria\
+",
+            self.testieditori.io.messages)
+
 class DummyConsoleIO:
     data = []
     indeksi = 0
