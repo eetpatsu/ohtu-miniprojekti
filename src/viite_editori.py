@@ -14,11 +14,11 @@ class ViiteEditori:
         while True:
             # Luetaan käyttäjältä syötettä, kunnes annetaan exit-komento
             syote = self.io.lue("")
-    
+
             # strip poistaa whitespacen, joten ylimääräiset välilyönnit eivät haittaa
             if syote.strip() == "help":
                 self.helppi()
-            
+
             if syote.strip() == "exit":
                 break
 
@@ -32,7 +32,7 @@ class ViiteEditori:
 
             if syote.strip() == "tulosta":
                 self.Tulosta_tiedosto(tiedostonimi)
-            
+
             if syote.strip() == "syota":
                 self.syota_bib_viite()
 
@@ -42,7 +42,7 @@ class ViiteEditori:
                 muokattu_parametri = self.io.lue("Anna muokattu parametri: ")
                 self.muokkaa_tiedosto(viitteen_avain, parametrin_tyyppi, muokattu_parametri)
 
- 
+
     def helppi(self):
         self.io.kirjoita("\nKomennot:\n\
 help:\t\ttulostaa tämän viestin\n\
@@ -103,11 +103,11 @@ muokkaa:\tmuokkaa valitun viitteen haluttua parametria\n\
 
     '''Tulostaa avatun tidoston sisällön.(aktiivinen_tiedosto)'''
     def Tulosta_tiedosto(self, tiedostonimi):
-        
+
         if self.aktiivinen_tiedosto is None:
             self.io.kirjoita("Ei avattua tiedostoa. Avaa tiedosto ensin komennolla 'avaa'.")
             return -1
-        
+
         try:
             with open(self.aktiivinen_tiedosto, "r") as tiedosto:
                 sisalto = tiedosto.read()
@@ -129,18 +129,18 @@ muokkaa:\tmuokkaa valitun viitteen haluttua parametria\n\
             if rivi == "valmis":
                 break
             rivit.append(rivi)
-        
+
         uusi_data = "\n".join(rivit)
-        
+
         with open(self.aktiivinen_tiedosto, "r") as tiedosto:
             sisalto = tiedosto.read()
-        
+
         if not sisalto.endswith("\n"):
             uusi_data = "\n" + uusi_data
-        
+
         with open(self.aktiivinen_tiedosto, "a") as tiedosto:
-            tiedosto.write(uusi_data + "\n\n")  
-        
+            tiedosto.write(uusi_data + "\n\n")
+
         self.io.kirjoita("Viite lisätty tiedoston loppuun.")
 
     '''Muokkaa valitun viitteen haluttua parametriä'''
@@ -148,14 +148,14 @@ muokkaa:\tmuokkaa valitun viitteen haluttua parametria\n\
         if self.aktiivinen_tiedosto is None:
             self.io.kirjoita("Ei avattua tiedostoa. Avaa tiedosto ensin komennolla 'avaa'.")
             return -1
-        
+
         try:
             with open(self.aktiivinen_tiedosto, "r") as tiedosto:
                 viite_alku = tiedosto.read()
 
                 tiedoston_viitteet = viite_alku.split('@')[1:]  # Jokainen viite alkaa '@'
                 viitteet = ["@" + viite.strip() for viite in tiedoston_viitteet]
-        
+
             muokattava_viite = None
             for viite in viitteet:
                 if viitteen_avain in viite:
