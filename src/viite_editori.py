@@ -9,11 +9,10 @@ class ViiteEditori:
 
     def run(self):
         '''Käynnistää sovelluksen ja kysyy komennon.'''
-        self.io.kirjoita("Viite-editori   ('exit' sulkee ohjelman)")
         tiedostonimi = None
         while True:
             # Luetaan käyttäjältä syötettä, kunnes annetaan exit-komento
-            syote = self.io.lue("Avaa bib-tiedosto tai luo uusi ('avaa' tai 'luo')?: ")
+            syote = self.io.lue("")
 
             # strip poistaa whitespacen, joten ylimääräiset välilyönnit eivät haittaa
             if syote.strip() == "exit":
@@ -39,6 +38,7 @@ class ViiteEditori:
                 muokattu_parametri = self.io.lue("Anna muokattu parametri: ")
                 self.muokkaa_tiedosto(viitteen_avain, parametrin_tyyppi, muokattu_parametri)
 
+ 
 
     def avaa_tiedosto(self, tiedostonimi):
         '''Avaa tiedoston sovelluksen käsiteltäväksi.'''
