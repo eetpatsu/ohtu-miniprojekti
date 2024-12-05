@@ -101,9 +101,8 @@ muokkaa:\tmuokkaa valitun viitteen haluttua parametria\n\
             if tiedosto is not None:
                 tiedosto.close()
 
-    '''Tulostaa avatun tidoston sisällön.(aktiivinen_tiedosto)'''
     def Tulosta_tiedosto(self, tiedostonimi):
-
+        '''Tulostaa avatun tidoston sisällön.(aktiivinen_tiedosto)'''
         if self.aktiivinen_tiedosto is None:
             self.io.kirjoita("Ei avattua tiedostoa. Avaa tiedosto ensin komennolla 'avaa'.")
             return -1
@@ -117,8 +116,8 @@ muokkaa:\tmuokkaa valitun viitteen haluttua parametria\n\
             self.io.kirjoita(f"Tapahtui virhe: Tiedostoa {self.aktiivinen_tiedosto} ei voitu lukea.")
             return -1
 
-    '''Ottaa käyttäjältä vastaan valmiita viitteitä bib-syntaksissa ja tallentaa aktiiviseen tiedostoon'''
     def syota_bib_viite(self):
+        '''Ottaa käyttäjältä vastaan valmiita viitteitä bib-syntaksissa ja tallentaa aktiiviseen tiedostoon'''
         if self.aktiivinen_tiedosto is None:
             self.io.kirjoita("Ei avattua tiedostoa. Avaa tiedosto ensin komennolla 'avaa'.")
             return -1
@@ -143,8 +142,8 @@ muokkaa:\tmuokkaa valitun viitteen haluttua parametria\n\
 
         self.io.kirjoita("Viite lisätty tiedoston loppuun.")
 
-    '''Muokkaa valitun viitteen haluttua parametriä'''
     def muokkaa_tiedosto(self, viitteen_avain, parametrin_tyyppi, muokattu_parametri ):
+        '''Muokkaa valitun viitteen haluttua parametriä'''
         if self.aktiivinen_tiedosto is None:
             self.io.kirjoita("Ei avattua tiedostoa. Avaa tiedosto ensin komennolla 'avaa'.")
             return -1
