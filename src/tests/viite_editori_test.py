@@ -36,11 +36,32 @@ class TestViiteEditori(unittest.TestCase):
         result = self.testieditori.syota_bib_viite()
         self.assertEqual(result, -1)
     
-    def test_tulosta_tiedosto(self):
-        nimi = "testitiedosto.bib"
-        self.testieditori.avaa_tiedosto(nimi)
-        self.assertEqual(self.testieditori.Tulosta_tiedosto(nimi), 0)
+    def test_tulosta_tiedosto_onnistuneesti(self):
 
+        tiedoston_sisalto = "Testitiedoston sisältö"
+        with open(self.testitiedosto, "w") as f:
+            f.write(tiedoston_sisalto)
+        self.testieditori.aktiivinen_tiedosto = Path(self.testitiedosto)
+        
+        result = self.testieditori.Tulosta_tiedosto(self.testitiedosto)
+        self.assertEqual(result, 0)
+        self.assertIn(f"Tiedoston {Path(self.testitiedosto).name} sisältö:\n{tiedoston_sisalto}",
+                      self.testieditori.io.messages)
+
+    def test_tulosta_tiedosto_ei_avaa(self):
+        self.testieditori.aktiivinen_tiedosto = None
+        result = self.testieditori.Tulosta_tiedosto("testi.bib")
+        self.assertEqual(result, -1)
+        self.assertIn("Ei avattua tiedostoa. Avaa tiedosto ensin komennolla 'avaa'.",
+                    self.testieditori.io.messages)
+    
+    def test_tulosta_tiedosto_lukuvirhe(self):
+        self.testieditori.aktiivinen_tiedosto = Path("olemassa_olematon_tiedosto.bib")
+        result = self.testieditori.Tulosta_tiedosto("olemassa_olematon_tiedosto.bib")
+        self.assertEqual(result, -1)
+        self.assertIn(f"Tapahtui virhe: Tiedostoa {self.testieditori.aktiivinen_tiedosto} ei voitu lukea.",
+                    self.testieditori.io.messages)
+    
     def test_syotetty_viite_lisataan_tiedostoon(self):
         DummyConsoleIO.data = [
             "author = {Test Author}\ntitle = {Test Title}\nyear = {2024}",
@@ -123,9 +144,11 @@ class TestViiteEditori(unittest.TestCase):
 class DummyConsoleIO:
     data = []
     indeksi = 0
+    messages = []
 
     def kirjoita(self, str):
-        pass
+        self.messages.append(str)
+
     def lue(self, kehote=""):
         if self.indeksi < len(self.data):
             result = self.data[self.indeksi]
