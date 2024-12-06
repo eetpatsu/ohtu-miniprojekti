@@ -19,13 +19,13 @@ class ViiteParseri:
         olion käyttäjän vastuulla.
 
         Tämä metodi on tarkoitettu ainoastaan luokan sisäiseen toimintalogiikkaan ja 
-        sen käyttö ulkopuolelta ei pitäisi olla tarpeellista.
+        sen käyttö objektin ulkopuolelta ei pitäisi olla tarpeellista.
         """
 
         viite_teksti_lista = self.viite_teksti.splitlines()
 
         self.viitteen_tyyppi = viite_teksti_lista[0][1:viite_teksti_lista[0].index("{")].strip()
-        self.viitteen_avain = viite_teksti_lista[0][viite_teksti_lista[0].index("{")+1:viite_teksti_lista[0].index(",")].strip()
+        self.viitteen_avain = viite_teksti_lista[0][viite_teksti_lista[0].index("{")+1:viite_teksti_lista[0].index(",")].strip() # pylint: disable=line-too-long
 
         def siivoa_rivi(rivi):
             jaettu_rivi = rivi.split('=')
@@ -37,12 +37,41 @@ class ViiteParseri:
             siivoa_rivi(viite_teksti_lista[i])
 
 
-    def update(self): #TODO: Ei vaikuta palauttavan täysin identtistä syötettä mitä se sasi vastaan. Luultavasti testi ei realistinen.
-        """Päivittää viite_teksti:n uusille muokatuille attribuutelle."""
+    def update(self):
+        """
+        Tallentaa objektin attribuuttien arvot BibTeX-muotoiseen merkkijonoon.
+        Luotu merkkijono tallennetaan objektin viite_teksti attribuuttiin, josta
+        se voidaan palauttaa __str__(self)-metodilla.
 
-        self.viite_teksti = '@' + self.viitteen_tyyppi + '{' + self.viitteen_avain
+        Tämä metodi on tarkoitettu ainoastaan luokan sisäiseen toimintalogiikkaan ja 
+        sen käyttö objektin ulkopuolelta ei pitäisi olla tarpeellista.
+        """
+
+        self.viite_teksti = ('@'
+                             + self.viitteen_tyyppi
+                             + '{'
+                             + self.viitteen_avain
+                             )
+
+        suurin_pituus = 0
+
         for k in self.viitteen_tiedot:
-            self.viite_teksti += ',\n' + k[0] + '={' + k[1] + '}'
+            suurin_pituus = max(suurin_pituus, len(k))
+
+        def whitespace_fuller (kentta):
+            whitespace_pituus = suurin_pituus - len(kentta)
+            whitespace = ''
+            while whitespace_pituus > 0:
+                whitespace += ' '
+                whitespace_pituus -= 1
+            return whitespace
+
+        for k in self.viitteen_tiedot:
+            self.viite_teksti += (',\n  '
+                                  + k[0]
+                                  + whitespace_fuller(k[0])
+                                  + ' = {'
+                                  + k[1] + '}')
 
         self.viite_teksti += '\n}'
 
@@ -62,8 +91,8 @@ class ViiteParseri:
 
         field_numero = -1
 
-        for i in range(len(self.viitteen_tiedot)): # TODO: vähemmän ö-luokkaisen näköinen looppi
-            if (field == self.viitteen_tiedot[i][0]):
+        for i in range(len(self.viitteen_tiedot)):
+            if field == self.viitteen_tiedot[i][0]:
                 self.viitteen_tiedot[i][1] = uusi_tieto
                 field_numero = i
                 break

@@ -5,8 +5,8 @@ from console_io import ConsoleIO
 def main():
     '''Importtaa tarvittavat luokat ja käynnistää sovelluksen.'''
     console_io = ConsoleIO()
-    viiteEditori = ViiteEditori(console_io)
-    viiteEditori.run()
+    viite_editori = ViiteEditori(console_io)
+    viite_editori.run()
 
 
 if __name__ == "__main__":
