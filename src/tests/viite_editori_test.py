@@ -51,21 +51,21 @@ class TestViiteEditori(unittest.TestCase):
             f.write(tiedoston_sisalto)
         self.testieditori.aktiivinen_tiedosto = Path(self.testitiedosto)
         
-        result = self.testieditori.Tulosta_tiedosto(self.testitiedosto)
+        result = self.testieditori.tulosta_tiedosto(self.testitiedosto)
         self.assertEqual(result, 0)
         self.assertIn(f"Tiedoston {Path(self.testitiedosto).name} sisältö:\n{tiedoston_sisalto}",
                       self.testieditori.io.messages)
 
     def test_tulosta_tiedosto_ei_avaa(self):
         self.testieditori.aktiivinen_tiedosto = None
-        result = self.testieditori.Tulosta_tiedosto("testi.bib")
+        result = self.testieditori.tulosta_tiedosto("testi.bib")
         self.assertEqual(result, -1)
         self.assertIn("Ei avattua tiedostoa. Avaa tiedosto ensin komennolla 'avaa'.",
                     self.testieditori.io.messages)
     
     def test_tulosta_tiedosto_lukuvirhe(self):
         self.testieditori.aktiivinen_tiedosto = Path("olemassa_olematon_tiedosto.bib")
-        result = self.testieditori.Tulosta_tiedosto("olemassa_olematon_tiedosto.bib")
+        result = self.testieditori.tulosta_tiedosto("olemassa_olematon_tiedosto.bib")
         self.assertEqual(result, -1)
         self.assertIn(f"Tapahtui virhe: Tiedostoa {self.testieditori.aktiivinen_tiedosto} ei voitu lukea.",
                     self.testieditori.io.messages)

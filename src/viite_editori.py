@@ -31,7 +31,7 @@ class ViiteEditori:
                 self.luo_ja_avaa_tiedosto(tiedostonimi)
 
             if syote.strip() == "tulosta":
-                self.Tulosta_tiedosto(tiedostonimi)
+                self.tulosta_tiedosto(tiedostonimi)
 
             if syote.strip() == "syota":
                 self.syota_bib_viite()
@@ -101,7 +101,7 @@ muokkaa:\tmuokkaa valitun viitteen haluttua parametria\n\
             if tiedosto is not None:
                 tiedosto.close()
 
-    def Tulosta_tiedosto(self, tiedostonimi):
+    def tulosta_tiedosto(self, tiedostonimi):
         '''Tulostaa avatun tidoston sisällön.(aktiivinen_tiedosto)'''
         if self.aktiivinen_tiedosto is None:
             self.io.kirjoita("Ei avattua tiedostoa. Avaa tiedosto ensin komennolla 'avaa'.")
@@ -164,9 +164,12 @@ muokkaa:\tmuokkaa valitun viitteen haluttua parametria\n\
             parseri = ViiteParseri(muokattava_viite)
             tulos = parseri.muokkaa(parametrin_tyyppi, muokattu_parametri)
 
-            self.io.kirjoita(f"{tulos} Tiedoston näyttää nyt tältä {parseri} kun viitteeksi annettu:{viitteen_avain} parametriuksi:{parametrin_tyyppi}sekä muokattu parametri:{muokattu_parametri}:\n")
+            self.io.kirjoita(
+                f"{tulos} Tiedoston näyttää nyt tältä {parseri} kun viitteeksi annettu:{viitteen_avain} "
+                f"parametriuksi:{parametrin_tyyppi}sekä muokattu parametri:{muokattu_parametri}:\n"
+            )
 
 
 
         except FileNotFoundError:
-            print(f"Tiedostoa ei löytynyt.")
+            print("Tiedostoa ei löytynyt.")
