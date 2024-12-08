@@ -68,9 +68,9 @@ muokkaa:\tmuokkaa valitun viitteen haluttua parametria\n\
             polku = tyohakemisto_polku / tiedostonimi_polku
         try:
             # Avaa tiedoston read/write tilassa tai I/O error, jos tiedostoa ei löydy
-            tiedosto = open(polku, "r+")
-            self.aktiivinen_tiedosto = polku
-            self.io.kirjoita("Avataan tiedosto: "+str(polku))
+            with open(polku, "r+") as tiedosto:
+                self.aktiivinen_tiedosto = polku
+                self.io.kirjoita("Avataan tiedosto: "+str(polku))
         except IOError:
             self.io.kirjoita("Tapahtui virhe: Tiedostoa "+str(polku)+" ei löynyt.")
         finally:
@@ -92,9 +92,9 @@ muokkaa:\tmuokkaa valitun viitteen haluttua parametria\n\
             polku = tyohakemisto_polku / tiedostonimi_polku
         try:
             # Luo ja avaa uuden tiedoston read/write tilassa, antaa errorin, jos tiedosto on jo olemassa
-            self.aktiivinen_tiedosto = polku
-            tiedosto = open(polku, "x+")
-            self.io.kirjoita("Luodaan tiedosto sijaintiin: "+str(polku))
+            with open(polku, "x+") as tiedosto:
+                self.aktiivinen_tiedosto = polku
+                self.io.kirjoita("Luodaan tiedosto sijaintiin: "+str(polku))
         except IOError:
             self.io.kirjoita("Tapahtui virhe: Tiedosto "+str(polku)+" on jo olemassa.")
         finally:
