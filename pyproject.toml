@@ -12,6 +12,7 @@ python = "^3.12"
 pytest = "^8.3.3"
 coverage = "^7.6.8"
 pylint = "^3.3.2"
+robotframework = "^7.1.1"
 
 [build-system]
 requires = ["poetry-core"]
