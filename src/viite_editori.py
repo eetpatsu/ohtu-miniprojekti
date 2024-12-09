@@ -13,7 +13,7 @@ class ViiteEditori:
         self.helppi()
         while True:
             # Luetaan käyttäjältä syötettä, kunnes annetaan exit-komento
-            syote = self.io.lue("Syötä komento. Listaa komennot syöttämällä help > ")
+            syote = self.io.lue("Syötä komento. (Listaa komennot syöttämällä help.) > ")
 
             # strip poistaa whitespacen, joten ylimääräiset välilyönnit eivät haittaa
             if syote.strip() == "help":
