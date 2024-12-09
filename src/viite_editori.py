@@ -165,6 +165,10 @@ muokkaa\t\tmuokkaa valitun viitteen haluttua parametria\n\
                     muokattava_viite = viite
                     break
 
+            if not muokattava_viite:
+                self.io.kirjoita(f"Viitettä avaimella '{viitteen_avain}' ei löytynyt.")
+                return -1
+
             parseri = ViiteParseri(muokattava_viite)
             tulos = parseri.muokkaa(parametrin_tyyppi, muokattu_parametri)
 
@@ -176,7 +180,7 @@ muokkaa\t\tmuokkaa valitun viitteen haluttua parametria\n\
             if tulos >= 0:
                 self.io.kirjoita("Muokkaus onnistui")
             else:
-                self.io.kirjoita("Muokkaus epäonnistui")
-            
+                self.io.kirjoita("Muokkaus epäonnistui tarkista parametrin tyyppi")
+
         except FileNotFoundError:
             print("Tiedostoa ei löytynyt.")
