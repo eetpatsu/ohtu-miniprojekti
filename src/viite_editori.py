@@ -27,11 +27,11 @@ class ViiteEditori:
                 self.avaa_tiedosto(tiedostonimi)
 
             elif syote == "luo":
-                tiedostonimi = self.io.lue("Anna luotavan tiedosto muodossa sijainti/nimi (suhteessa tähän hakemistoon): ")
+                tiedostonimi = self.io.lue("Anna luotava tiedoston polku/nimi (suhteessa työhakemistoon): ")
                 self.luo_ja_avaa_tiedosto(tiedostonimi)
 
             elif syote == "tulosta":
-                self.tulosta_tiedosto(tiedostonimi)
+                self.tulosta_tiedosto()
 
             elif syote == "syota":
                 self.syota_bib_viite()
@@ -105,7 +105,7 @@ muokkaa\t\tmuokkaa valitun viitteen haluttua parametria\n\
             if tiedosto is not None:
                 tiedosto.close()
 
-    def tulosta_tiedosto(self, tiedostonimi):
+    def tulosta_tiedosto(self):
         '''Tulostaa avatun tidoston sisällön.(aktiivinen_tiedosto)'''
         if self.aktiivinen_tiedosto is None:
             self.io.kirjoita("Ei avattua tiedostoa. Avaa tiedosto ensin komennolla 'avaa'.")
@@ -145,6 +145,7 @@ muokkaa\t\tmuokkaa valitun viitteen haluttua parametria\n\
             tiedosto.write(uusi_data + "\n\n")
 
         self.io.kirjoita("Viite lisätty tiedoston loppuun.")
+        return 0
 
     def muokkaa_tiedosto(self, viitteen_avain, parametrin_tyyppi, muokattu_parametri ):
         '''Muokkaa valitun viitteen haluttua parametriä'''
@@ -181,6 +182,8 @@ muokkaa\t\tmuokkaa valitun viitteen haluttua parametria\n\
                 self.io.kirjoita("Muokkaus onnistui")
             else:
                 self.io.kirjoita("Muokkaus epäonnistui tarkista parametrin tyyppi")
+            return 0
 
         except FileNotFoundError:
             print("Tiedostoa ei löytynyt.")
+            return -1
