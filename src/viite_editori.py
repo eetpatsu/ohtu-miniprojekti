@@ -13,34 +13,38 @@ class ViiteEditori:
         self.helppi()
         while True:
             # Luetaan käyttäjältä syötettä, kunnes annetaan exit-komento
-            syote = self.io.lue("Syötä komento. (Listaa komennot syöttämällä help.) > ")
-
+            syote_raaka = self.io.lue("Syötä komento. (Listaa komennot syöttämällä help.) > ")
             # strip poistaa whitespacen, joten ylimääräiset välilyönnit eivät haittaa
-            if syote.strip() == "help":
+            syote = syote_raaka.strip()
+            if syote == "help":
                 self.helppi()
 
-            if syote.strip() == "exit":
+            elif syote == "exit":
                 break
 
-            if syote.strip() == "avaa":
+            elif syote == "avaa":
                 tiedostonimi = self.io.lue("Anna avattava tiedosto muodossa sijainti/nimi: ")
                 self.avaa_tiedosto(tiedostonimi)
 
-            if syote.strip() == "luo":
+            elif syote == "luo":
                 tiedostonimi = self.io.lue("Anna luotavan tiedosto muodossa sijainti/nimi (suhteessa tähän hakemistoon): ")
                 self.luo_ja_avaa_tiedosto(tiedostonimi)
 
-            if syote.strip() == "tulosta":
+            elif syote == "tulosta":
                 self.tulosta_tiedosto(tiedostonimi)
 
-            if syote.strip() == "syota":
+            elif syote == "syota":
                 self.syota_bib_viite()
 
-            if syote.strip() == "muokkaa":
+            elif syote == "muokkaa":
                 viitteen_avain = self.io.lue("Anna muokattan viitteen avain: ")
                 parametrin_tyyppi = self.io.lue("Anna parametrin tyyppi: ")
                 muokattu_parametri = self.io.lue("Anna muokattu parametri: ")
                 self.muokkaa_tiedosto(viitteen_avain, parametrin_tyyppi, muokattu_parametri)
+            else:
+                if syote == "":
+                    continue
+                self.io.kirjoita("Tuntematon komento \""+syote+"\"")
 
 
     def helppi(self):
