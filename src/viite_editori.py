@@ -23,11 +23,11 @@ class ViiteEditori:
                 break
 
             if syote.strip() == "avaa":
-                tiedostonimi = self.io.lue("Anna avattavan tiedoston sijainti/nimi: ")
+                tiedostonimi = self.io.lue("Anna avattava tiedosto muodossa sijainti/nimi: ")
                 self.avaa_tiedosto(tiedostonimi)
 
             if syote.strip() == "luo":
-                tiedostonimi = self.io.lue("Anna luotavan tiedoston sijainti/nimi (suhteessa tähän hakemistoon): ")
+                tiedostonimi = self.io.lue("Anna luotavan tiedosto muodossa sijainti/nimi (suhteessa tähän hakemistoon): ")
                 self.luo_ja_avaa_tiedosto(tiedostonimi)
 
             if syote.strip() == "tulosta":
@@ -45,13 +45,13 @@ class ViiteEditori:
 
     def helppi(self):
         self.io.kirjoita("\nKomennot:\n\
-help:\t\ttulostaa tämän viestin\n\
-exit:\t\tpoistuu ohjelmasta\n\
-avaa:\t\tavaa bib-tiedoston\n\
-luo:\t\tluo bib-tiedoston\n\
-tulosta:\ttulostaa aktiivisen bib-tiedoston sisällön\n\
-syota:\t\ttallentaa bib-viitteen aktiiviseen bib-tiedostoon\n\
-muokkaa:\tmuokkaa valitun viitteen haluttua parametria\n\
+help\t\ttulostaa tämän viestin\n\
+exit\t\tpoistuu ohjelmasta\n\
+avaa\t\tavaa bib-tiedoston\n\
+luo\t\tluo bib-tiedoston\n\
+tulosta\t\ttulostaa aktiivisen bib-tiedoston sisällön\n\
+syota\t\ttallentaa bib-dataa aktiiviseen bib-tiedostoon\n\
+muokkaa\t\tmuokkaa valitun viitteen haluttua parametria\n\
 ")
         return 0
     def avaa_tiedosto(self, tiedostonimi):
@@ -70,7 +70,7 @@ muokkaa:\tmuokkaa valitun viitteen haluttua parametria\n\
             # Avaa tiedoston read/write tilassa tai I/O error, jos tiedostoa ei löydy
             with open(polku, "r+") as tiedosto:
                 self.aktiivinen_tiedosto = polku
-                self.io.kirjoita("Avataan tiedosto: "+str(polku))
+                self.io.kirjoita("Avattiin tiedosto: "+str(polku))
         except IOError:
             self.io.kirjoita("Tapahtui virhe: Tiedostoa "+str(polku)+" ei löynyt.")
         finally:

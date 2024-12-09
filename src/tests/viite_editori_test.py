@@ -36,10 +36,6 @@ class TestViiteEditori(unittest.TestCase):
         self.assertIn("Tapahtui virhe: Tiedostoa "+str(odotettu_polku)+" ei löynyt.",
                       self.testieditori.io.messages)
 
-
-
-
-
     def test_tiedosto_ei_auki(self):
         self.testieditori.aktiivinen_tiedosto = None
         result = self.testieditori.syota_bib_viite()
@@ -152,13 +148,13 @@ class TestViiteEditori(unittest.TestCase):
     def test_helppi(self):
         self.assertEqual(self.testieditori.helppi(), 0)
         self.assertIn("\nKomennot:\n\
-help:\t\ttulostaa tämän viestin\n\
-exit:\t\tpoistuu ohjelmasta\n\
-avaa:\t\tavaa bib-tiedoston\n\
-luo:\t\tluo bib-tiedoston\n\
-tulosta:\ttulostaa aktiivisen bib-tiedoston sisällön\n\
-syota:\t\ttallentaa bib-viitteen aktiiviseen bib-tiedostoon\n\
-muokkaa:\tmuokkaa valitun viitteen haluttua parametria\n\
+help\t\ttulostaa tämän viestin\n\
+exit\t\tpoistuu ohjelmasta\n\
+avaa\t\tavaa bib-tiedoston\n\
+luo\t\tluo bib-tiedoston\n\
+tulosta\t\ttulostaa aktiivisen bib-tiedoston sisällön\n\
+syota\t\ttallentaa bib-dataa aktiiviseen bib-tiedostoon\n\
+muokkaa\t\tmuokkaa valitun viitteen haluttua parametria\n\
 ",
             self.testieditori.io.messages)
 
