@@ -164,12 +164,13 @@ muokkaa\t\tmuokkaa valitun viitteen haluttua parametria\n\
             parseri = ViiteParseri(muokattava_viite)
             tulos = parseri.muokkaa(parametrin_tyyppi, muokattu_parametri)
 
-            self.io.kirjoita(
-                f"{tulos} Tiedoston näyttää nyt tältä {parseri} kun viitteeksi annettu:{viitteen_avain} "
-                f"parametriuksi:{parametrin_tyyppi}sekä muokattu parametri:{muokattu_parametri}:\n"
-            )
+            viitteet = [viite if viite != muokattava_viite else str(parseri) for viite in viitteet]
 
+            with open(self.aktiivinen_tiedosto, "w") as tiedosto:
+                tiedosto.write("\n\n".join(viitteet))
 
-
+            if tulos >= 0:
+                self.io.kirjoita("Muokkaus onnistui")
+            
         except FileNotFoundError:
             print("Tiedostoa ei löytynyt.")
