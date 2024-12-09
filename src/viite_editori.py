@@ -175,6 +175,8 @@ muokkaa\t\tmuokkaa valitun viitteen haluttua parametria\n\
 
             if tulos >= 0:
                 self.io.kirjoita("Muokkaus onnistui")
+            else:
+                self.io.kirjoita("Muokkaus epäonnistui")
             
         except FileNotFoundError:
             print("Tiedostoa ei löytynyt.")
