@@ -15,7 +15,7 @@ jobs:
       - name: Set up Python 3.12
         uses: actions/setup-python@v4
         with:
-          python-version: '3.12'
+          python-version: "3.12"
       - name: Install Poetry
         run: pip install poetry
       - name: Install dependencies
@@ -28,5 +28,5 @@ jobs:
         uses: codecov/codecov-action@v3
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-      #- name: Lint
-        #run: poetry run pylint src
+      - name: Lint
+        run: poetry run pylint src
