@@ -66,11 +66,11 @@ muokkaa\t\tmuokkaa valitun viitteen haluttua parametria\n\
             tiedostonimi = tiedostonimi + ".bib"
         if Path(tiedostonimi).is_absolute():
             return Path(tiedostonimi)
-        else:
-            tyohakemisto_str = os.path.abspath(os.getcwd())
-            tyohakemisto_polku = Path(tyohakemisto_str)
-            tiedostonimi_polku = Path(tiedostonimi)
-            return tyohakemisto_polku / tiedostonimi_polku
+
+        tyohakemisto_str = os.path.abspath(os.getcwd())
+        tyohakemisto_polku = Path(tyohakemisto_str)
+        tiedostonimi_polku = Path(tiedostonimi)
+        return tyohakemisto_polku / tiedostonimi_polku
 
 
     def parse_argumentti(self):
