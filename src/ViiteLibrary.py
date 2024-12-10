@@ -40,8 +40,8 @@ class ViiteLibrary:
         tuloste = self.get_standard_output()
         if odotettu not in tuloste:
             raise AssertionError(f"Odotettu teksti '{odotettu}' ei löytynyt tulosteesta:\n{tuloste}")
-        logger.info(f"Odotettu teksti '{odotettu}' löytyi tulosteesta.")
-        
+        logger.info("Odotettu teksti %s löytyi tulosteesta.", odotettu)
+
 class MockConsoleIO(ConsoleIO):
     def __init__(self):
         self.commands = []
