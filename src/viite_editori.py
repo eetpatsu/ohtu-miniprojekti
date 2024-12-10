@@ -1,4 +1,5 @@
 import os
+import sys
 from pathlib import Path
 from viite_parseri import ViiteParseri
 
@@ -10,6 +11,7 @@ class ViiteEditori:
     def run(self):
         '''Käynnistää sovelluksen ja kysyy komennon.'''
         tiedostonimi = None
+        self.parse_argumentti()
         self.helppi()
         while True:
             # Luetaan käyttäjältä syötettä, kunnes annetaan exit-komento
@@ -70,6 +72,17 @@ muokkaa\t\tmuokkaa valitun viitteen haluttua parametria\n\
             tiedostonimi_polku = Path(tiedostonimi)
             return tyohakemisto_polku / tiedostonimi_polku
 
+
+    def parse_argumentti(self):
+        if len(sys.argv) > 1:
+            tiedostonimi = sys.argv[1];
+            polku = self.muuta_bibiksi_ja_absoluuttiseksi(tiedostonimi)
+            if os.path.isfile(polku):
+                self.avaa_tiedosto(str(polku))
+            else:
+                self.luo_ja_avaa_tiedosto(str(polku))
+            
+        
 
     def avaa_tiedosto(self, tiedostonimi):
         '''Avaa tiedoston sovelluksen käsiteltäväksi.'''
