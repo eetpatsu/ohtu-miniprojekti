@@ -54,7 +54,6 @@ class ViiteEditori:
                     if syote == "":
                         continue
                     self.io.kirjoita("Tuntematon komento \""+syote+"\"")
-                    continue
 
     def helppi(self):
         self.io.kirjoita("\nKomennot:\n\
