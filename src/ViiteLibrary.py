@@ -33,9 +33,6 @@ class ViiteLibrary:
         else:
             self.next_command = komento
 
-    #def get_responses(self):
-    #    return self.io.responses
-    
     def get_standard_output(self):
         return "\n".join(self.io.responses)
 
