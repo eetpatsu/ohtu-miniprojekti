@@ -1,5 +1,5 @@
 *** Settings ***
-Library  ../ViiteLibrary.py
+Library  ../viite_library.py
 Library  OperatingSystem
 
 *** Variables ***
