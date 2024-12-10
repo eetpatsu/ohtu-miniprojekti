@@ -32,12 +32,13 @@ publisher={Wiley Online Library}
   pages={273002},
   year={2017},
   publisher={IOP Publishing}
-}"""]
+}@comment{larsen,   fysiikka  , 2017}"""]
 
     def setUp(self):
         self.testiparserit = [
             ViiteParseri(self.esimerkkiviitteet[0]),
-            ViiteParseri(self.esimerkkiviitteet[1])
+            ViiteParseri(self.esimerkkiviitteet[1]),
+            ViiteParseri(self.esimerkkiviitteet[2])
         ]
 
     def test_konstruktori_ja_to_string(self):
@@ -45,19 +46,21 @@ publisher={Wiley Online Library}
 
         self.assertEqual(str(self.testiparserit[1]), self.esimerkkiviitteet[1])
 
-#    def test_update(self): # Tämä testi ei luultavasti järkevä. Ei myöskään mene läpi atm.
-#        self.testiparseri.update()
-#        self.assertEqual(str(self.testiparseri),self.esimerkkiviite)
+        self.assertEqual(str(self.testiparserit[2]), self.esimerkkiviitteet[2])
 
     def test_viitteen_tyyppi(self):
         self.assertEqual(self.testiparserit[0].viitteen_tyyppi, "article")
 
         self.assertEqual(self.testiparserit[1].viitteen_tyyppi, "article")
 
+        self.assertEqual(self.testiparserit[2].viitteen_tyyppi, "article")
+
     def test_viitteen_avain(self):
         self.assertEqual(self.testiparserit[0].viitteen_avain, "kadiyala2018applications")
 
         self.assertEqual(self.testiparserit[1].viitteen_avain, "saabith2019python")
+
+        self.assertEqual(self.testiparserit[2].viitteen_avain, "larsen2017atomic")
 
     def test_viitteen_tiedot(self):
         self.assertEqual(self.testiparserit[0].viitteen_tiedot[0][0], "title")
@@ -67,9 +70,34 @@ publisher={Wiley Online Library}
         self.assertEqual(self.testiparserit[1].viitteen_tiedot[3][0], "volume")
         self.assertEqual(self.testiparserit[1].viitteen_tiedot[3][1], "6")
 
+        self.assertEqual(self.testiparserit[2].viitteen_tiedot[5][0], "pages")
+        self.assertEqual(self.testiparserit[2].viitteen_tiedot[5][1], "273002")
+
     def test_viitteen_muokkaus(self):
         self.testiparserit[0].muokkaa("author","Kadiyala et al")
         self.assertEqual(self.testiparserit[0].viitteen_tiedot[1][1],"Kadiyala et al")
 
         self.testiparserit[1].muokkaa("title","Python current trend applications")
         self.assertEqual(self.testiparserit[1].viitteen_tiedot[0][1],"Python current trend applications")
+
+        self.testiparserit[2].muokkaa("pages","273--275")
+        self.assertEqual(self.testiparserit[2].viitteen_tiedot[5][1],"273--275")
+
+    def test_viitteen_tagien_luku(self):
+        self.assertEqual(self.testiparserit[2].viitteen_tagit[0],"larsen")
+        self.assertEqual(self.testiparserit[2].viitteen_tagit[1],"fysiikka")
+        self.assertEqual(self.testiparserit[2].viitteen_tagit[2],"2017")
+
+    def test_tagien_lisaus(self): # Lisäys, ei listaus. Ääkkösongelmia nimeämisessä.
+        self.testiparserit[0].tagaa("   python     ")
+        self.assertEqual(self.testiparserit[0].viitteen_tagit[0],"python")
+
+        self.testiparserit[1].tagaa("trend overview")
+        self.assertEqual(self.testiparserit[1].viitteen_tagit[0],"trend overview")
+
+        self.testiparserit[2].tagaa("python")
+        self.assertEqual(self.testiparserit[2].viitteen_tagit[3],"python")
+
+    def test_tagien_poisto(self):
+        self.testiparserit[2].poista_tagi("fysiikka")
+        self.assertEqual(self.testiparserit[2].viitteen_tagit[1],"2017")

@@ -3,14 +3,15 @@
 class ViiteParseri:
 
 
-    #viitteen_tagit = [] # Taulukko jota tagit tulevat käyttämään jossain vaiheessa.
-
     def __init__(self, viite_teksti):
         self.viite_teksti = viite_teksti
         self.viitteen_tyyppi = ''
         self.viitteen_avain = ''
         self.viitteen_tiedot = []
+        self.viitteen_tagit = []
+
         self.parse()
+
 
     def parse(self):
         """
@@ -35,6 +36,18 @@ class ViiteParseri:
 
         for i in range(1,len(viite_teksti_lista)-1):
             siivoa_rivi(viite_teksti_lista[i])
+
+        def lue_tagit(viimeinen_rivi):
+            viimeinen_rivi = viimeinen_rivi[viimeinen_rivi.index("@comment")+8:]
+            viimeinen_rivi = viimeinen_rivi[viimeinen_rivi.index("{")+1:viimeinen_rivi.index("}")]
+
+            jaettu_viimeinen_rivi = viimeinen_rivi.split(",")
+
+            for tagi in jaettu_viimeinen_rivi:
+                self.viitteen_tagit.append(tagi.strip())
+
+        if "@comment" in viite_teksti_lista[-1]:
+            lue_tagit(viite_teksti_lista[-1])
 
 
     def update(self):
@@ -75,6 +88,14 @@ class ViiteParseri:
 
         self.viite_teksti += '\n}'
 
+        if len(self.viitteen_tagit) > 1:
+            self.viite_teksti += '@comment{'
+
+            for i in range( len(self.viitteen_tagit) - 1 ):
+                self.viite_teksti += (self.viitteen_tagit[i] + ', ')
+
+            self.viite_teksti += self.viitteen_tagit[-1]
+
 
     def muokkaa(self, field, uusi_tieto):
         """"
@@ -100,6 +121,44 @@ class ViiteParseri:
         self.update()
 
         return field_numero
+
+
+    def tagaa(self,tagi):
+        """""
+        Lisää uuden tagin viitteeseen.
+
+        Args:
+            tagi (string): Lisättävän tagin nimi
+        """
+
+        self.viitteen_tagit.append(tagi.strip())
+
+        self.update()
+
+
+    def poista_tagi(self,tagi):
+        """"
+        Poistaa jo olemassaolevan tagin ja palauttaa tiedon onnistuko poisto.
+
+        Args:
+            tagi (string): Poistettavan tagin nimi
+
+        Returns:
+            boolean: 'true' mikäli tagi oli olemassa ja poisto onnistui
+                'false' mikäli kyseistä tagia ei ollut olemassa
+        """
+
+        olemassa = False
+
+        if tagi in self.viitteen_tagit:
+            olemassa = True
+
+            self.viitteen_tagit.remove(tagi)
+
+        self.update()
+
+        return olemassa
+
 
     def __str__(self):
         return self.viite_teksti
