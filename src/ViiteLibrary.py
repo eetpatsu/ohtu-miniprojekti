@@ -31,7 +31,7 @@ class ViiteLibrary:
             self.next_command = komento
 
     def get_responses(self):
-        return self.io.responses    
+        return self.io.responses
 
 class MockConsoleIO(ConsoleIO):
     def __init__(self):
