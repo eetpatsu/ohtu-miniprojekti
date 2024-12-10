@@ -1,3 +1,4 @@
+from asyncio.log import logger
 from viite_editori import ViiteEditori
 from console_io import ConsoleIO
 
@@ -17,7 +18,9 @@ class ViiteLibrary:
     def syota_komento(self, komento, syote=None):
         print(f"Syötetään komento: {komento}, syöte: {syote}")
         self.io.syota_komento(komento, syote)
-        if self.next_command == "luo":
+        if komento == "help":
+            self.viite_editori.helppi()
+        elif self.next_command == "luo":
             self.luo_bib_tiedosto(komento)
             self.next_command = None
         elif komento == "luo":
@@ -30,9 +33,18 @@ class ViiteLibrary:
         else:
             self.next_command = komento
 
-    def get_responses(self):
-        return self.io.responses
+    #def get_responses(self):
+    #    return self.io.responses
+    
+    def get_standard_output(self):
+        return "\n".join(self.io.responses)
 
+    def output_should_contain(self, odotettu):
+        tuloste = self.get_standard_output()
+        if odotettu not in tuloste:
+            raise AssertionError(f"Odotettu teksti '{odotettu}' ei löytynyt tulosteesta:\n{tuloste}")
+        logger.info(f"Odotettu teksti '{odotettu}' löytyi tulosteesta.")
+        
 class MockConsoleIO(ConsoleIO):
     def __init__(self):
         self.commands = []
