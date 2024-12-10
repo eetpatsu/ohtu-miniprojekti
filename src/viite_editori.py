@@ -18,36 +18,43 @@ class ViiteEditori:
             syote_raaka = self.io.lue("Syötä komento. (Listaa komennot syöttämällä help.) > ")
             # strip poistaa whitespacen, joten ylimääräiset välilyönnit eivät haittaa
             syote = syote_raaka.strip()
-            if syote == "help":
-                self.helppi()
-
-            elif syote == "exit":
-                break
-
-            elif syote == "avaa":
-                tiedostonimi = self.io.lue("Anna avattava tiedosto muodossa sijainti/nimi: ")
-                self.avaa_tiedosto(tiedostonimi)
-
-            elif syote == "luo":
-                tiedostonimi = self.io.lue("Anna luotava tiedoston polku/nimi (suhteessa työhakemistoon): ")
-                self.luo_ja_avaa_tiedosto(tiedostonimi)
-
-            elif syote == "tulosta":
-                self.tulosta_tiedosto()
-
-            elif syote == "syota":
-                self.syota_bib_viite()
-
-            elif syote == "muokkaa":
-                viitteen_avain = self.io.lue("Anna muokattan viitteen avain: ")
-                parametrin_tyyppi = self.io.lue("Anna parametrin tyyppi: ")
-                muokattu_parametri = self.io.lue("Anna muokattu parametri: ")
-                self.muokkaa_tiedosto(viitteen_avain, parametrin_tyyppi, muokattu_parametri)
-            else:
-                if syote == "":
+            match syote:
+                case "help":
+                    self.helppi()
                     continue
-                self.io.kirjoita("Tuntematon komento \""+syote+"\"")
 
+                case "exit":
+                    break
+
+                case "avaa":
+                    tiedostonimi = self.io.lue("Anna avattava tiedosto muodossa sijainti/nimi: ")
+                    self.avaa_tiedosto(tiedostonimi)
+                    continue
+
+                case "luo":
+                    tiedostonimi = self.io.lue("Anna luotava tiedoston polku/nimi (suhteessa työhakemistoon): ")
+                    self.luo_ja_avaa_tiedosto(tiedostonimi)
+                    continue
+
+                case "tulosta":
+                    self.tulosta_tiedosto()
+                    continue
+
+                case "syota":
+                    self.syota_bib_viite()
+                    continue
+
+                case "muokkaa":
+                    viitteen_avain = self.io.lue("Anna muokattan viitteen avain: ")
+                    parametrin_tyyppi = self.io.lue("Anna parametrin tyyppi: ")
+                    muokattu_parametri = self.io.lue("Anna muokattu parametri: ")
+                    self.muokkaa_tiedosto(viitteen_avain, parametrin_tyyppi, muokattu_parametri)
+                    continue
+                case _:
+                    if syote == "":
+                        continue
+                    self.io.kirjoita("Tuntematon komento \""+syote+"\"")
+                    continue
 
     def helppi(self):
         self.io.kirjoita("\nKomennot:\n\
