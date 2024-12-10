@@ -58,18 +58,23 @@ syota\t\ttallentaa bib-dataa aktiiviseen bib-tiedostoon\n\
 muokkaa\t\tmuokkaa valitun viitteen haluttua parametria\n\
 ")
         return 0
-    def avaa_tiedosto(self, tiedostonimi):
-        '''Avaa tiedoston sovelluksen käsiteltäväksi.'''
-        tiedosto = None
+    
+    def muuta_bibiksi_ja_absoluuttiseksi(self, tiedostonimi):
         if not tiedostonimi.strip().endswith(".bib"):
             tiedostonimi = tiedostonimi + ".bib"
         if Path(tiedostonimi).is_absolute():
-            polku = tiedostonimi
+            return Path(tiedostonimi)
         else:
             tyohakemisto_str = os.path.abspath(os.getcwd())
             tyohakemisto_polku = Path(tyohakemisto_str)
             tiedostonimi_polku = Path(tiedostonimi)
-            polku = tyohakemisto_polku / tiedostonimi_polku
+            return tyohakemisto_polku / tiedostonimi_polku
+
+
+    def avaa_tiedosto(self, tiedostonimi):
+        '''Avaa tiedoston sovelluksen käsiteltäväksi.'''
+        tiedosto = None
+        polku = self.muuta_bibiksi_ja_absoluuttiseksi(tiedostonimi)
         try:
             # Avaa tiedoston read/write tilassa tai I/O error, jos tiedostoa ei löydy
             with open(polku, "r+") as tiedosto:
@@ -85,15 +90,8 @@ muokkaa\t\tmuokkaa valitun viitteen haluttua parametria\n\
     def luo_ja_avaa_tiedosto(self, tiedostonimi):
         '''Luo uuden .bib-tiedoston ja avaa sen sovelluksen käsiteltäväksi.'''
         tiedosto = None
-        if not tiedostonimi.strip().endswith(".bib"):
-            tiedostonimi = tiedostonimi + ".bib"
-        if Path(tiedostonimi).is_absolute():
-            polku = tiedostonimi
-        else:
-            tyohakemisto_str = os.path.abspath(os.getcwd())
-            tyohakemisto_polku = Path(tyohakemisto_str)
-            tiedostonimi_polku = Path(tiedostonimi)
-            polku = tyohakemisto_polku / tiedostonimi_polku
+        polku = self.muuta_bibiksi_ja_absoluuttiseksi(tiedostonimi)
+        
         try:
             # Luo ja avaa uuden tiedoston read/write tilassa, antaa errorin, jos tiedosto on jo olemassa
             with open(polku, "x+") as tiedosto:
