@@ -60,7 +60,7 @@ syota\t\ttallentaa bib-dataa aktiiviseen bib-tiedostoon\n\
 muokkaa\t\tmuokkaa valitun viitteen haluttua parametria\n\
 ")
         return 0
-    
+
     def muuta_bibiksi_ja_absoluuttiseksi(self, tiedostonimi):
         if not tiedostonimi.strip().endswith(".bib"):
             tiedostonimi = tiedostonimi + ".bib"
@@ -72,17 +72,14 @@ muokkaa\t\tmuokkaa valitun viitteen haluttua parametria\n\
         tiedostonimi_polku = Path(tiedostonimi)
         return tyohakemisto_polku / tiedostonimi_polku
 
-
     def parse_argumentti(self):
         if len(sys.argv) > 1:
-            tiedostonimi = sys.argv[1];
+            tiedostonimi = sys.argv[1]
             polku = self.muuta_bibiksi_ja_absoluuttiseksi(tiedostonimi)
             if os.path.isfile(polku):
                 self.avaa_tiedosto(str(polku))
             else:
                 self.luo_ja_avaa_tiedosto(str(polku))
-            
-        
 
     def avaa_tiedosto(self, tiedostonimi):
         '''Avaa tiedoston sovelluksen käsiteltäväksi.'''
@@ -104,7 +101,7 @@ muokkaa\t\tmuokkaa valitun viitteen haluttua parametria\n\
         '''Luo uuden .bib-tiedoston ja avaa sen sovelluksen käsiteltäväksi.'''
         tiedosto = None
         polku = self.muuta_bibiksi_ja_absoluuttiseksi(tiedostonimi)
-        
+
         try:
             # Luo ja avaa uuden tiedoston read/write tilassa, antaa errorin, jos tiedosto on jo olemassa
             with open(polku, "x+") as tiedosto:
