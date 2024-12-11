@@ -140,6 +140,12 @@ muokkaa\t\tmuokkaa valitun viitteen haluttua parametria\n\
         self.assertEqual(sisalto.strip(), odotettu_sisalto.strip())
         self.assertIn("Muokkaus onnistui", self.testieditori.io.messages)
 
+    def test_muokkaa_tiedosto_ei_avattua_tiedostoa(self):
+        self.testieditori.aktiivinen_tiedosto = None
+        tulos = self.testieditori.muokkaa_tiedosto("test1", "author", "New Author")
+        self.assertEqual(tulos, -1)
+        self.assertIn("Ei avattua tiedostoa. Avaa tiedosto ensin komennolla 'avaa'.", self.testieditori.io.messages)
+
 class DummyConsoleIO:
     data = []
     indeksi = 0
