@@ -2,7 +2,6 @@
 Library   ../ViiteLibrary.py
 Library  OperatingSystem
 Library  String  # Tarvitaan tulosteen tarkistamiseen
-Test Timeout  5s
 
 *** Variables ***
 ${TIEDOSTONIMI}   test.bib
@@ -14,13 +13,8 @@ ${TIEDOSTONIMI}   test.bib
     #[Teardown]  Remove File  ${TIEDOSTONIMI}
 
 Luo Bib Tiedosto Syottamalla
-    Syotetaan Komento  luo
-    Syotetaan Komento  ${TIEDOSTONIMI}
-    Syotetaan Komento  exit
+    Syota Komento  luo
+    Syota Komento  ${TIEDOSTONIMI}
+    Syota Komento  exit
     File Should Exist  ${TIEDOSTONIMI}
     [Teardown]  Remove File  ${TIEDOSTONIMI}
-
-*** Keywords ***
-Syotetaan Komento
-    [Arguments]  ${syote}
-    Run Keyword  syota_komento  ${syote}

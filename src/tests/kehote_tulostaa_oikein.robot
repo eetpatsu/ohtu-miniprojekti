@@ -11,11 +11,5 @@ ${OHJETEKSTI}     \nKomennot:\n\help\t\ttulostaa tämän viestin\n\exit\t\tpoist
 
 *** Test Cases ***
 Testaa Help Komento
-    Syotetaan Komento  help
+    Syota Komento  help
     Output Should Contain  ${OHJETEKSTI}
-
-*** Keywords ***
-Syotetaan Komento
-    [Arguments]  ${syote}
-    Run Keyword  syota_komento  ${syote}
-
