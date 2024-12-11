@@ -1,6 +1,7 @@
 *** Settings ***
 Library   ../ViiteLibrary.py
 Library  OperatingSystem
+Library  String  # Tarvitaan tulosteen tarkistamiseen
 Test Timeout  5s
 
 *** Variables ***

@@ -1,4 +1,5 @@
 import os
+import sys
 from pathlib import Path
 from viite_parseri import ViiteParseri
 
@@ -10,42 +11,49 @@ class ViiteEditori:
     def run(self):
         '''Käynnistää sovelluksen ja kysyy komennon.'''
         tiedostonimi = None
+        self.parse_argumentti()
         self.helppi()
         while True:
             # Luetaan käyttäjältä syötettä, kunnes annetaan exit-komento
             syote_raaka = self.io.lue("Syötä komento. (Listaa komennot syöttämällä help.) > ")
             # strip poistaa whitespacen, joten ylimääräiset välilyönnit eivät haittaa
             syote = syote_raaka.strip()
-            if syote == "help":
-                self.helppi()
-
-            elif syote == "exit":
-                break
-
-            elif syote == "avaa":
-                tiedostonimi = self.io.lue("Anna avattava tiedosto muodossa sijainti/nimi: ")
-                self.avaa_tiedosto(tiedostonimi)
-
-            elif syote == "luo":
-                tiedostonimi = self.io.lue("Anna luotava tiedoston polku/nimi (suhteessa työhakemistoon): ")
-                self.luo_ja_avaa_tiedosto(tiedostonimi)
-
-            elif syote == "tulosta":
-                self.tulosta_tiedosto()
-
-            elif syote == "syota":
-                self.syota_bib_viite()
-
-            elif syote == "muokkaa":
-                viitteen_avain = self.io.lue("Anna muokattan viitteen avain: ")
-                parametrin_tyyppi = self.io.lue("Anna parametrin tyyppi: ")
-                muokattu_parametri = self.io.lue("Anna muokattu parametri: ")
-                self.muokkaa_tiedosto(viitteen_avain, parametrin_tyyppi, muokattu_parametri)
-            else:
-                if syote == "":
+            match syote:
+                case "help":
+                    self.helppi()
                     continue
-                self.io.kirjoita("Tuntematon komento \""+syote+"\"")
 
+                case "exit":
+                    break
+
+                case "avaa":
+                    tiedostonimi = self.io.lue("Anna avattava tiedosto muodossa sijainti/nimi: ")
+                    self.avaa_tiedosto(tiedostonimi)
+                    continue
+
+                case "luo":
+                    tiedostonimi = self.io.lue("Anna luotava tiedoston polku/nimi (suhteessa työhakemistoon): ")
+                    self.luo_ja_avaa_tiedosto(tiedostonimi)
+                    continue
+
+                case "tulosta":
+                    self.tulosta_tiedosto()
+                    continue
+
+                case "syota":
+                    self.syota_bib_viite()
+                    continue
+
+                case "muokkaa":
+                    viitteen_avain = self.io.lue("Anna muokattan viitteen avain: ")
+                    parametrin_tyyppi = self.io.lue("Anna parametrin tyyppi: ")
+                    muokattu_parametri = self.io.lue("Anna muokattu parametri: ")
+                    self.muokkaa_tiedosto(viitteen_avain, parametrin_tyyppi, muokattu_parametri)
+                    continue
+                case _:
+                    if syote == "":
+                        continue
+                    self.io.kirjoita("Tuntematon komento \""+syote+"\"")
 
     def helppi(self):
         self.io.kirjoita("\nKomennot:\n\
@@ -58,18 +66,31 @@ syota\t\ttallentaa bib-dataa aktiiviseen bib-tiedostoon\n\
 muokkaa\t\tmuokkaa valitun viitteen haluttua parametria\n\
 ")
         return 0
-    def avaa_tiedosto(self, tiedostonimi):
-        '''Avaa tiedoston sovelluksen käsiteltäväksi.'''
-        tiedosto = None
+
+    def muuta_bibiksi_ja_absoluuttiseksi(self, tiedostonimi):
         if not tiedostonimi.strip().endswith(".bib"):
             tiedostonimi = tiedostonimi + ".bib"
         if Path(tiedostonimi).is_absolute():
-            polku = tiedostonimi
-        else:
-            tyohakemisto_str = os.path.abspath(os.getcwd())
-            tyohakemisto_polku = Path(tyohakemisto_str)
-            tiedostonimi_polku = Path(tiedostonimi)
-            polku = tyohakemisto_polku / tiedostonimi_polku
+            return Path(tiedostonimi)
+
+        tyohakemisto_str = os.path.abspath(os.getcwd())
+        tyohakemisto_polku = Path(tyohakemisto_str)
+        tiedostonimi_polku = Path(tiedostonimi)
+        return tyohakemisto_polku / tiedostonimi_polku
+
+    def parse_argumentti(self):
+        if len(sys.argv) > 1:
+            tiedostonimi = sys.argv[1]
+            polku = self.muuta_bibiksi_ja_absoluuttiseksi(tiedostonimi)
+            if os.path.isfile(polku):
+                self.avaa_tiedosto(str(polku))
+            else:
+                self.luo_ja_avaa_tiedosto(str(polku))
+
+    def avaa_tiedosto(self, tiedostonimi):
+        '''Avaa tiedoston sovelluksen käsiteltäväksi.'''
+        tiedosto = None
+        polku = self.muuta_bibiksi_ja_absoluuttiseksi(tiedostonimi)
         try:
             # Avaa tiedoston read/write tilassa tai I/O error, jos tiedostoa ei löydy
             with open(polku, "r+") as tiedosto:
@@ -85,15 +106,8 @@ muokkaa\t\tmuokkaa valitun viitteen haluttua parametria\n\
     def luo_ja_avaa_tiedosto(self, tiedostonimi):
         '''Luo uuden .bib-tiedoston ja avaa sen sovelluksen käsiteltäväksi.'''
         tiedosto = None
-        if not tiedostonimi.strip().endswith(".bib"):
-            tiedostonimi = tiedostonimi + ".bib"
-        if Path(tiedostonimi).is_absolute():
-            polku = tiedostonimi
-        else:
-            tyohakemisto_str = os.path.abspath(os.getcwd())
-            tyohakemisto_polku = Path(tyohakemisto_str)
-            tiedostonimi_polku = Path(tiedostonimi)
-            polku = tyohakemisto_polku / tiedostonimi_polku
+        polku = self.muuta_bibiksi_ja_absoluuttiseksi(tiedostonimi)
+
         try:
             # Luo ja avaa uuden tiedoston read/write tilassa, antaa errorin, jos tiedosto on jo olemassa
             with open(polku, "x+") as tiedosto:
