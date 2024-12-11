@@ -163,6 +163,27 @@ muokkaa\t\tmuokkaa valitun viitteen haluttua parametria\n\
         self.assertEqual(tulos, -1)
         self.assertIn("Viitettä avaimella 'test1' ei löytynyt.", self.testieditori.io.messages)
 
+    def test_muokkaa_parametrin_muokkaus_epaonnistuu(self):
+        alkuperainen_sisalto = """
+@article{test1,
+  author = {Old Author},
+  title = {Old Title},
+  year = {2020}
+}
+"""
+        with open(self.testitiedosto, "w") as f:
+            f.write(alkuperainen_sisalto)
+
+        self.testieditori.aktiivinen_tiedosto = Path(self.testitiedosto)
+        tulos = self.testieditori.muokkaa_tiedosto("test1", "nonexistent_param", "New Value")
+
+        self.assertEqual(tulos, 0)
+        self.assertIn("Muokkaus epäonnistui tarkista parametrin tyyppi", self.testieditori.io.messages)
+
+    def tear_down(self):
+        if os.path.exists(self.testitiedosto):
+            os.remove(self.testitiedosto)
+
 class DummyConsoleIO:
     data = []
     indeksi = 0
