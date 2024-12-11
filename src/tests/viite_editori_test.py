@@ -113,7 +113,7 @@ muokkaa\t\tmuokkaa valitun viitteen haluttua parametria\n\
 ",
             self.testieditori.io.messages)
 
-    def test_muokkaa_tiedosto_onnistuneesti(self):
+    def test_muokkaa_viite_onnistuneesti(self):
         alkuperainen_sisalto = """
 @article{test1,
   author = {Old Author},
@@ -140,11 +140,28 @@ muokkaa\t\tmuokkaa valitun viitteen haluttua parametria\n\
         self.assertEqual(sisalto.strip(), odotettu_sisalto.strip())
         self.assertIn("Muokkaus onnistui", self.testieditori.io.messages)
 
-    def test_muokkaa_tiedosto_ei_avattua_tiedostoa(self):
+    def test_muokkaa_ei_avattua_tiedostoa(self):
         self.testieditori.aktiivinen_tiedosto = None
         tulos = self.testieditori.muokkaa_tiedosto("test1", "author", "New Author")
         self.assertEqual(tulos, -1)
         self.assertIn("Ei avattua tiedostoa. Avaa tiedosto ensin komennolla 'avaa'.", self.testieditori.io.messages)
+
+    def test_muokkaa_viite_ei_loytynyt(self):
+        alkuperainen_sisalto = """
+@article{other1,
+  author = {Some Author},
+  title = {Some Title},
+  year = {2021}
+}
+"""
+        with open(self.testitiedosto, "w") as f:
+            f.write(alkuperainen_sisalto)
+
+        self.testieditori.aktiivinen_tiedosto = Path(self.testitiedosto)
+        tulos = self.testieditori.muokkaa_tiedosto("test1", "author", "New Author")
+
+        self.assertEqual(tulos, -1)
+        self.assertIn("Viitettä avaimella 'test1' ei löytynyt.", self.testieditori.io.messages)
 
 class DummyConsoleIO:
     data = []
