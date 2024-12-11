@@ -47,3 +47,27 @@ publisher={Wiley Online Library}
             ViiteValitsin.hae_tagit(self.esimerkkiviitteet[2]),
             ["larsen","fysiikka","2017"]
         )
+
+    def test_tagine_olemassaolo_tiedustelu(self):
+        self.assertEqual(
+            ViiteValitsin.tagi_tiedustelu(self.esimerkkiviitteet[0],"testitagi"),
+            False
+        )
+
+        self.assertEqual(
+            ViiteValitsin.tagi_tiedustelu(self.esimerkkiviitteet[1],"python"),
+            True
+        )
+        self.assertEqual(
+            ViiteValitsin.tagi_tiedustelu(self.esimerkkiviitteet[1],"java"),
+            False
+        )
+
+        self.assertEqual(
+            ViiteValitsin.tagi_tiedustelu(self.esimerkkiviitteet[2],"fysiikka"),
+            True
+        )
+        self.assertEqual(
+            ViiteValitsin.tagi_tiedustelu(self.esimerkkiviitteet[2],"python"),
+            False
+        )

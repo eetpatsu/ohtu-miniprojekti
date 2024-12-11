@@ -20,3 +20,14 @@ class ViiteValitsin:
             return viitteen_tagit
 
         return []
+
+    @staticmethod
+    def tagi_tiedustelu(viite,tiedusteltu_tagi):
+
+        tagit = ViiteValitsin.hae_tagit(viite)
+
+        for tagi in tagit:
+            if tiedusteltu_tagi == tagi:
+                return True
+
+        return False
