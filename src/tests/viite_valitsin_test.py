@@ -3,6 +3,8 @@ from viite_valitsin import ViiteValitsin
 
 class TestViiteValitsin(unittest.TestCase):
 
+    maxDiff = None
+
     esimerkkiviitteet = ["""@article{kadiyala2018applications,
 title={Applications of python to evaluate the performance of decision tree-based boosting algorithms},
 author={Kadiyala, Akhil and Kumar, Ashok},
@@ -30,7 +32,7 @@ publisher={Wiley Online Library}
   pages={273002},
   year={2017},
   publisher={IOP Publishing}
-}@comment{larsen,   fysiikka  , 2017}"""]
+}@comment{larsen,   fysiikka  , 2017,englannin kielinen}"""]
 
     def test_tagien_haku(self):
         self.assertEqual(
@@ -45,7 +47,7 @@ publisher={Wiley Online Library}
 
         self.assertEqual(
             ViiteValitsin.hae_tagit(self.esimerkkiviitteet[2]),
-            ["larsen","fysiikka","2017"]
+            ["larsen","fysiikka","2017","englannin kielinen"]
         )
 
     def test_tagine_olemassaolo_tiedustelu(self):
@@ -70,4 +72,16 @@ publisher={Wiley Online Library}
         self.assertEqual(
             ViiteValitsin.tagi_tiedustelu(self.esimerkkiviitteet[2],"python"),
             False
+        )
+
+    def test_viite_listan_seulonta_1(self):
+        self.assertEqual(
+            ViiteValitsin.tagi_seulo_viitteet(self.esimerkkiviitteet,"java"),
+            []
+        )
+
+    def test_viite_listan_seulonta_2(self): # TODO: Tämä testi on virheellinen. Metodi on keskeneräinen.
+        self.assertEqual(
+            ViiteValitsin.tagi_seulo_viitteet(self.esimerkkiviitteet,"python"),
+            self.esimerkkiviitteet
         )

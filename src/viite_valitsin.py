@@ -31,3 +31,16 @@ class ViiteValitsin:
                 return True
 
         return False
+
+    @staticmethod
+    def tagi_seulo_viitteet(viite_lista,tagi): # TODO: Tämä metodi ei toimi oikein. Loopin logiikka rikki.
+
+        indeksi = 0
+
+        while indeksi<len(viite_lista):
+            if ViiteValitsin.tagi_tiedustelu(viite_lista[indeksi],tagi):
+                indeksi += 1
+            else:
+                viite_lista.pop(indeksi)
+
+        return viite_lista
