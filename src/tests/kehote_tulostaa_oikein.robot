@@ -16,6 +16,6 @@ Testaa Help Komento
 
 *** Keywords ***
 Syotetaan Komento
-    [Arguments]  ${komento}  ${syote}=None
-    Run Keyword  syota_komento  ${komento}  ${syote}
+    [Arguments]  ${syote}
+    Run Keyword  syota_komento  ${syote}
 

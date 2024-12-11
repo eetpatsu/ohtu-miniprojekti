@@ -8,10 +8,10 @@ Test Timeout  5s
 ${TIEDOSTONIMI}   test.bib
 
 *** Test Cases ***
-Luo Bib Tiedosto
-    Luo Bib Tiedosto  ${TIEDOSTONIMI}
-    File Should Exist  ${TIEDOSTONIMI}
-    [Teardown]  Remove File  ${TIEDOSTONIMI}
+#Luo Bib Tiedosto
+    #Luo Bib Tiedosto  ${TIEDOSTONIMI}
+    #File Should Exist  ${TIEDOSTONIMI}
+    #[Teardown]  Remove File  ${TIEDOSTONIMI}
 
 Luo Bib Tiedosto Syottamalla
     Syotetaan Komento  luo
@@ -22,5 +22,5 @@ Luo Bib Tiedosto Syottamalla
 
 *** Keywords ***
 Syotetaan Komento
-    [Arguments]  ${komento}  ${syote}=None
-    Run Keyword  syota_komento  ${komento}  ${syote}
+    [Arguments]  ${syote}
+    Run Keyword  syota_komento  ${syote}

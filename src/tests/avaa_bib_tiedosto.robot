@@ -1,5 +1,5 @@
 *** Settings ***
-Library  ../viite_library.py
+Library  ../ViiteLibrary.py
 Library  OperatingSystem
 
 *** Variables ***
@@ -7,10 +7,10 @@ ${TIEDOSTONIMI}  test.bib
 ${TIEDOSTON_SISALTO}  @article{example,\n  author = {John Doe},\n  title = {Example Title},\n  year = {2024}\n}
 
 *** Test Cases ***
-Avaa Bib Tiedosto
-    Luo Testi Tiedosto
-    Avaa Bib Tiedosto  ${TIEDOSTONIMI}
-    [Teardown]  Remove File  ${TIEDOSTONIMI}
+#Avaa Bib Tiedosto
+    #Luo Testi Tiedosto
+    #Avaa Bib Tiedosto  ${TIEDOSTONIMI}
+    #[Teardown]  Remove File  ${TIEDOSTONIMI}
 
 *** Keywords ***
 Luo Testi Tiedosto

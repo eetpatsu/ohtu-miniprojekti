@@ -6,32 +6,20 @@ class ViiteLibrary:
     def __init__(self):
         self.io = MockConsoleIO()
         self.viite_editori = ViiteEditori(self.io)
-        self.next_command = None
+        self.tallennettu_komento = None
 
-    def luo_bib_tiedosto(self, tiedostonimi):
-        print(f"Luo Bib Tiedosto kutsuttu: {tiedostonimi}")  # Debug-tuloste
-        self.viite_editori.luo_ja_avaa_tiedosto(tiedostonimi)
-
-    def avaa_bib_tiedosto(self, tiedostonimi):
-        self.viite_editori.avaa_tiedosto(tiedostonimi)
-
-    def syota_komento(self, komento, syote=None):
-        print(f"Syötetään komento: {komento}, syöte: {syote}")
-        self.io.syota_komento(komento, syote)
-        if komento == "help":
+    def syota_komento(self, syote):
+        self.io.syota(syote)
+        if self.tallennettu_komento:
+            if self.tallennettu_komento == "luo":
+                self.viite_editori.luo_ja_avaa_tiedosto(syote)
+            elif self.tallennettu_komento == "avaa":
+                self.viite_editori.avaa_tiedosto(syote)
+            self.tallennettu_komento = None
+        if syote == "help":
             self.viite_editori.helppi()
-        elif self.next_command == "luo":
-            self.luo_bib_tiedosto(komento)
-            self.next_command = None
-        elif komento == "luo":
-            self.next_command = "luo"
-        elif komento == "avaa":
-            tiedostonimi = self.io.lue("Anna avattava tiedosto muodossa sijainti/nimi: ")
-            self.avaa_bib_tiedosto(tiedostonimi)
-        elif komento == "exit":
-            print("Komento 'exit' vastaanotettu.")
         else:
-            self.next_command = komento
+            self.tallennettu_komento = syote
 
     def get_standard_output(self):
         return "\n".join(self.io.responses)
@@ -57,8 +45,6 @@ class MockConsoleIO(ConsoleIO):
             return self.commands.pop(0)
         return ""
 
-    def syota_komento(self, komento, syote=None):
-        print(f"Syötetään komento: {komento}, syöte: {syote}")
-        self.commands.append(komento)
-        if syote:
-            self.commands.append(syote)
+    def syota(self, syote):
+        print(f"Syötetään: {syote}") # Debug
+        self.commands.append(syote)
