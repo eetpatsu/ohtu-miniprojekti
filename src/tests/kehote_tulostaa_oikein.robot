@@ -13,10 +13,11 @@ Help Tulostuu Ohjelman Alkuun
     Output Should Contain   ${OHJETEKSTI}
 
 Testaa Help Komento
-    Syotetaan Komento  help
+    Syota Komento  help
     Output Should Contain  ${OHJETEKSTI}
 
 *** Keywords ***
-Syotetaan Komento
+Syota Komento
     [Arguments]  ${komento}  ${syote}=None
     Run Keyword  syota_komento  ${komento}  ${syote}
+

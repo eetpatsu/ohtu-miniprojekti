@@ -180,6 +180,96 @@ muokkaa\t\tmuokkaa valitun viitteen haluttua parametria\n\
         self.assertEqual(tulos, 0)
         self.assertIn("Muokkaus epäonnistui tarkista parametrin tyyppi", self.testieditori.io.messages)
 
+    def test_lisaa_tagi_onnistuneesti(self):
+        """testataan tagin lisäämistä oikeilla arvoilla"""
+        alkuperainen_sisalto = """
+@article{test1,
+  author = {Old Author},
+  title = {Old Title},
+  year = {2020}
+}@comment{tag1}
+"""
+        with open(self.testitiedosto, "w") as f:
+            f.write(alkuperainen_sisalto)
+
+        self.testieditori.aktiivinen_tiedosto = Path(self.testitiedosto)
+        self.testieditori.lisaa_tagi("test1", "tag2")
+
+        with open(self.testitiedosto, "r") as f:
+            sisalto = f.read()
+
+        odotettu_sisalto = """
+@article{test1,
+  author = {Old Author},
+  title = {Old Title},
+  year = {2020}
+}@comment{tag1, tag2}
+"""
+        self.assertEqual(sisalto.strip(), odotettu_sisalto.strip())
+
+    def test_lisaa_tagi_viite_ei_loytynyt(self):
+        """testataan tagin lisäämistä väärällä arvolla"""
+        alkuperainen_sisalto = """
+@article{test1,
+  author = {Old Author},
+  title = {Old Title},
+  year = {2020}
+}@comment{tag1, tag2}
+"""
+        with open(self.testitiedosto, "w") as f:
+            f.write(alkuperainen_sisalto)
+
+        self.testieditori.aktiivinen_tiedosto = Path(self.testitiedosto)
+        result = self.testieditori.lisaa_tagi("testaus", "tagi")
+
+        self.assertEqual(result, -1)
+
+    def test_poista_tagi_onnistuneesti(self):
+        """testataan tagin poistamista oikeilla arvoilla"""
+        alkuperainen_sisalto = """
+@article{test1,
+  author = {Old Author},
+  title = {Old Title},
+  year = {2020}
+}@comment{tag1, tag2, tag3}
+"""
+        with open(self.testitiedosto, "w") as f:
+            f.write(alkuperainen_sisalto)
+
+        self.testieditori.aktiivinen_tiedosto = Path(self.testitiedosto)
+        self.testieditori.poista_tagi("test1", "tag1")
+
+        with open(self.testitiedosto, "r") as f:
+            sisalto = f.read()
+
+        odotettu_sisalto = """
+@article{test1,
+  author = {Old Author},
+  title = {Old Title},
+  year = {2020}
+}@comment{tag2, tag3}
+"""
+
+        self.assertEqual(sisalto.strip(), odotettu_sisalto.strip())
+
+    def test_poista_tagi_viite_ei_loytynyt(self):
+        """testataan tagin poistamista väärillä arvoilla"""
+        alkuperainen_sisalto = """
+@article{test1,
+  author = {Old Author},
+  title = {Old Title},
+  year = {2020},
+  tags = {newTag}
+}
+"""
+        with open(self.testitiedosto, "w") as f:
+            f.write(alkuperainen_sisalto)
+
+        self.testieditori.aktiivinen_tiedosto = Path(self.testitiedosto)
+        result = self.testieditori.poista_tagi("testi", "Tagi")
+
+        self.assertEqual(result, -1)
+
     def tear_down(self):
         if os.path.exists(self.testitiedosto):
             os.remove(self.testitiedosto)
