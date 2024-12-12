@@ -1,4 +1,5 @@
 import os
+import re
 import sys
 from pathlib import Path
 from viite_parseri import ViiteParseri
@@ -184,8 +185,13 @@ muokkaa\t\tmuokkaa valitun viitteen haluttua parametria\n\
             with open(self.aktiivinen_tiedosto, "r", encoding="utf-8") as tiedosto:
                 viite_alku = tiedosto.read()
 
-                tiedoston_viitteet = viite_alku.split('@a')[1:]  # Jokainen viite alkaa '@'
-                viitteet = ["@a" + viite.strip() for viite in tiedoston_viitteet]
+            tiedoston_viitteet = re.split(r"@(a|b|i)", viite_alku)[1:]  # Jokainen viite alkaa '@'
+
+            viitteet = []
+            for i in range(0, len(tiedoston_viitteet), 2):
+                tyyppi = tiedoston_viitteet[i]
+                sisältö = tiedoston_viitteet[i + 1].strip()
+                viitteet.append(f"@{tyyppi}{sisältö}")
 
             muokattava_viite = None
             for viite in viitteet:
