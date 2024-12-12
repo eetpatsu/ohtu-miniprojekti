@@ -1,7 +1,5 @@
 *** Settings ***
 Library   ../ViiteLibrary.py
-Library  OperatingSystem
-Library  String
 
 *** Variables ***
 ${TIEDOSTONIMI}   testi.bib
@@ -10,7 +8,3 @@ ${TIEDOSTONIMI}   testi.bib
 Haetaan Viite Avaimella
     Syota Komento   muokkaa
     Output Should Contain    Anna muokattan viitteen avain
-
-*** Keywords ***
-Luo Testi Tiedosto
-    Create File  ${TIEDOSTONIMI}

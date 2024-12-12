@@ -45,7 +45,7 @@ class ViiteEditori:
                     continue
 
                 case "muokkaa":
-                    viitteen_avain = self.io.lue("Anna muokattan viitteen avain: ")
+                    viitteen_avain = self.io.lue("Anna muokattavan viitteen avain: ")
                     parametrin_tyyppi = self.io.lue("Anna parametrin tyyppi: ")
                     muokattu_parametri = self.io.lue("Anna muokattu parametri: ")
                     self.muokkaa_tiedosto(viitteen_avain, parametrin_tyyppi, muokattu_parametri)

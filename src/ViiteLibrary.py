@@ -1,7 +1,6 @@
 from asyncio.log import logger
 from viite_editori import ViiteEditori
 from console_io import ConsoleIO
-import sys, pdb
 
 class ViiteLibrary:
     def __init__(self):
@@ -20,7 +19,6 @@ class ViiteLibrary:
         if syote == "help":
             self.viite_editori.helppi()
         elif syote == "muokkaa":
-            # Varmistetaan, että viitteen avain pyydetään
             self.io.kirjoita("Anna muokattan viitteen avain:")
         else:
             self.tallennettu_komento = syote
