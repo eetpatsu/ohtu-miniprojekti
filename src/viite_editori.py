@@ -1,4 +1,5 @@
 import os
+import re
 import sys
 from pathlib import Path
 from viite_parseri import ViiteParseri
@@ -139,7 +140,7 @@ muokkaa\t\tmuokkaa valitun viitteen haluttua parametria\n\
             return -1
 
         try:
-            with open(self.aktiivinen_tiedosto, "r", encoding="utf-8") as tiedosto:
+            with open(self.aktiivinen_tiedosto, "r") as tiedosto:
                 sisalto = tiedosto.read()
                 self.io.kirjoita(f"Tiedoston {self.aktiivinen_tiedosto.name} sisältö:\n{sisalto}")
                 return 0
@@ -181,7 +182,7 @@ muokkaa\t\tmuokkaa valitun viitteen haluttua parametria\n\
             return -1
 
         try:
-            with open(self.aktiivinen_tiedosto, "r", encoding="utf-8") as tiedosto:
+            with open(self.aktiivinen_tiedosto, "r") as tiedosto:
                 viite_alku = tiedosto.read()
 
                 tiedoston_viitteet = viite_alku.split('@a')[1:]  # Jokainen viite alkaa '@'
@@ -202,7 +203,7 @@ muokkaa\t\tmuokkaa valitun viitteen haluttua parametria\n\
 
             viitteet = [viite if viite != muokattava_viite else str(parseri) for viite in viitteet]
 
-            with open(self.aktiivinen_tiedosto, "w", encoding="utf-8") as tiedosto:
+            with open(self.aktiivinen_tiedosto, "w") as tiedosto:
                 tiedosto.write("\n\n".join(viitteet))
 
             if tulos >= 0:
@@ -222,17 +223,24 @@ muokkaa\t\tmuokkaa valitun viitteen haluttua parametria\n\
             return -1
 
         try:
-            with open(self.aktiivinen_tiedosto, "r", encoding="utf-8") as tiedosto:
+            with open(self.aktiivinen_tiedosto, "r") as tiedosto:
                 viite_alku = tiedosto.read()
 
-                tiedoston_viitteet = viite_alku.split('@a')[1:]
-                viitteet = ["@a" + viite.strip() for viite in tiedoston_viitteet]
+            tiedoston_viitteet = re.split(r"@(a|b|i)", viite_alku)[1:]  # Jokainen alkaa '@'
+
+            viitteet = []
+            for i in range(0, len(tiedoston_viitteet), 2):
+                tyyppi = tiedoston_viitteet[i]
+                sisältö = tiedoston_viitteet[i + 1].strip()
+                viitteet.append(f"@{tyyppi}{sisältö}")
 
             muokattava_viite = None
             for viite in viitteet:
                 if viitteen_avain in viite:
                     muokattava_viite = viite
                     break
+
+            print(f"Viitteet, ennen kirjoittamista: {muokattava_viite}")
 
             if not muokattava_viite:
                 self.io.kirjoita(f"Viitettä avaimella '{viitteen_avain}' ei löytynyt.")
@@ -243,7 +251,7 @@ muokkaa\t\tmuokkaa valitun viitteen haluttua parametria\n\
 
             viitteet = [viite if viite != muokattava_viite else str(parseri) for viite in viitteet]
 
-            with open(self.aktiivinen_tiedosto, "w", encoding="utf-8") as tiedosto:
+            with open(self.aktiivinen_tiedosto, "w") as tiedosto:
                 tiedosto.write("\n\n".join(viitteet))
             return 1
 
@@ -261,8 +269,13 @@ muokkaa\t\tmuokkaa valitun viitteen haluttua parametria\n\
             with open(self.aktiivinen_tiedosto, "r", encoding="utf-8") as tiedosto:
                 viite_alku = tiedosto.read()
 
-                tiedoston_viitteet = viite_alku.split('@a')[1:]
-                viitteet = ["@a" + viite.strip() for viite in tiedoston_viitteet]
+            tiedoston_viitteet = re.split(r"@(a|b|i)", viite_alku)[1:]  # Jokainen viite alkaa '@'
+
+            viitteet = []
+            for i in range(0, len(tiedoston_viitteet), 2):
+                tyyppi = tiedoston_viitteet[i]
+                sisältö = tiedoston_viitteet[i + 1].strip()
+                viitteet.append(f"@{tyyppi}{sisältö}")
 
             muokattava_viite = None
             for viite in viitteet:
@@ -280,7 +293,7 @@ muokkaa\t\tmuokkaa valitun viitteen haluttua parametria\n\
 
             viitteet = [viite if viite != muokattava_viite else str(parseri) for viite in viitteet]
 
-            with open(self.aktiivinen_tiedosto, "w", encoding="utf-8") as tiedosto:
+            with open(self.aktiivinen_tiedosto, "w") as tiedosto:
                 tiedosto.write("\n\n".join(viitteet))
             return 1
 
