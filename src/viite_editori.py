@@ -245,8 +245,6 @@ muokkaa\t\tmuokkaa valitun viitteen haluttua parametria\n\
                     muokattava_viite = viite
                     break
 
-            print(f"Viitteet, ennen kirjoittamista: {muokattava_viite}")
-
             if not muokattava_viite:
                 self.io.kirjoita(f"Viitettä avaimella '{viitteen_avain}' ei löytynyt.")
                 return -1
