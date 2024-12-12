@@ -18,8 +18,14 @@ class ViiteLibrary:
             self.tallennettu_komento = None
         if syote == "help":
             self.viite_editori.helppi()
+        elif syote == "muokkaa":
+            self.io.kirjoita("Anna muokattan viitteen avain:")
         else:
             self.tallennettu_komento = syote
+
+    def nayta_alkutekstit(self):
+        self.viite_editori.helppi()
+        self.get_standard_output()
 
     def get_standard_output(self):
         return "\n".join(self.io.responses)

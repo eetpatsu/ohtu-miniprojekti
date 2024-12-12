@@ -46,7 +46,7 @@ class ViiteEditori:
                     continue
 
                 case "muokkaa":
-                    viitteen_avain = self.io.lue("Anna muokattan viitteen avain: ")
+                    viitteen_avain = self.io.lue("Anna muokattavan viitteen avain: ")
                     parametrin_tyyppi = self.io.lue("Anna parametrin tyyppi: ")
                     muokattu_parametri = self.io.lue("Anna muokattu parametri: ")
                     self.muokkaa_tiedosto(viitteen_avain, parametrin_tyyppi, muokattu_parametri)
@@ -185,8 +185,13 @@ muokkaa\t\tmuokkaa valitun viitteen haluttua parametria\n\
             with open(self.aktiivinen_tiedosto, "r") as tiedosto:
                 viite_alku = tiedosto.read()
 
-                tiedoston_viitteet = viite_alku.split('@a')[1:]  # Jokainen viite alkaa '@'
-                viitteet = ["@a" + viite.strip() for viite in tiedoston_viitteet]
+            tiedoston_viitteet = re.split(r"@(a|b|i)", viite_alku)[1:]  # Jokainen viite alkaa '@'
+
+            viitteet = []
+            for i in range(0, len(tiedoston_viitteet), 2):
+                tyyppi = tiedoston_viitteet[i]
+                sisältö = tiedoston_viitteet[i + 1].strip()
+                viitteet.append(f"@{tyyppi}{sisältö}")
 
             muokattava_viite = None
             for viite in viitteet:
