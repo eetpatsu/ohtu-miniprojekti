@@ -18,6 +18,8 @@ disable=raw-checker-failed,
         missing-module-docstring,
         missing-function-docstring,
         missing-class-docstring,
+        anomalous-backslash-in-string,
+        fixme
 
 [BASIC]
 
