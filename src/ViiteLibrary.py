@@ -33,6 +33,10 @@ class ViiteLibrary:
         else:
             self.next_command = komento
 
+    def nayta_alkutekstit(self):
+        self.viite_editori.helppi()
+        self.get_standard_output()
+
     def get_standard_output(self):
         return "\n".join(self.io.responses)
 
