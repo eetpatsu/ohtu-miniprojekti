@@ -95,7 +95,7 @@ class ViiteParseri:
                 self.viite_teksti += (self.viitteen_tagit[i] + ', ')
 
             self.viite_teksti += self.viitteen_tagit[-1]
-
+            self.viite_teksti += '}'
 
     def muokkaa(self, field, uusi_tieto):
         """"

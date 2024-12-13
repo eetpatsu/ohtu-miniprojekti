@@ -1,6 +1,8 @@
 import unittest
 import os
 from pathlib import Path
+from unittest.mock import patch
+
 from viite_editori import ViiteEditori
 
 class TestViiteEditori(unittest.TestCase):
@@ -36,13 +38,51 @@ class TestViiteEditori(unittest.TestCase):
         self.assertIn("Tapahtui virhe: Tiedostoa "+str(odotettu_polku)+" ei löynyt.",
                       self.testieditori.io.messages)
 
+    def test_parse_argumentti_olemassa_oleva_tiedosto(self):
+        """Testaa, että olemassa oleva tiedosto avataan komentoriviparametrilla."""
+        tiedostonimi = "olemassaoleva.bib"
+        with open(tiedostonimi, "w") as f:
+            f.write("Testitiedoston sisältö")
+
+        with patch("sys.argv", ["viite_editori.py", tiedostonimi]):
+            self.testieditori.parse_argumentti()
+
+        self.assertEqual(str(self.testieditori.aktiivinen_tiedosto), str(Path(tiedostonimi).resolve()))
+        os.remove(tiedostonimi)
+
+    def test_parse_argumentti_uusi_tiedosto(self):
+        """Testaa, että uusi tiedosto luodaan komentoriviparametrilla."""
+        tiedostonimi = "uusi_tiedosto.bib"
+        if os.path.exists(tiedostonimi):
+            os.remove(tiedostonimi)
+
+        with patch("sys.argv", ["viite_editori.py", tiedostonimi]):
+            self.testieditori.parse_argumentti()
+
+        self.assertTrue(os.path.exists(tiedostonimi))
+        self.assertEqual(str(self.testieditori.aktiivinen_tiedosto), str(Path(tiedostonimi).resolve()))
+        os.remove(tiedostonimi)
+
+    def test_parse_argumentti_ilman_parametreja(self):
+        """Testaa, että ohjelma ei yritä avata tai luoda tiedostoja ilman parametreja."""
+        with patch("sys.argv", ["viite_editori.py"]):
+            self.testieditori.parse_argumentti()
+
+        self.assertIsNone(self.testieditori.aktiivinen_tiedosto)
+
     def test_tiedosto_ei_auki(self):
         self.testieditori.aktiivinen_tiedosto = None
         result = self.testieditori.syota_bib_viite()
         self.assertEqual(result, -1)
 
     def test_tulosta_tiedosto_onnistuneesti(self):
-        tiedoston_sisalto = "Testitiedoston sisältö"
+        tiedoston_sisalto = """
+@article{other1,
+  author = {Some Author},
+  title = {Some Title},
+  year = {2021}
+}
+"""
         with open(self.testitiedosto, "w") as f:
             f.write(tiedoston_sisalto)
         self.testieditori.aktiivinen_tiedosto = Path(self.testitiedosto)
@@ -179,6 +219,96 @@ muokkaa\t\tmuokkaa valitun viitteen haluttua parametria\n\
 
         self.assertEqual(tulos, 0)
         self.assertIn("Muokkaus epäonnistui tarkista parametrin tyyppi", self.testieditori.io.messages)
+
+    def test_lisaa_tagi_onnistuneesti(self):
+        """testataan tagin lisäämistä oikeilla arvoilla"""
+        alkuperainen_sisalto = """
+@article{test1,
+  author = {Old Author},
+  title = {Old Title},
+  year = {2020}
+}@comment{tag1}
+"""
+        with open(self.testitiedosto, "w") as f:
+            f.write(alkuperainen_sisalto)
+
+        self.testieditori.aktiivinen_tiedosto = Path(self.testitiedosto)
+        self.testieditori.lisaa_tagi("test1", "tag2")
+
+        with open(self.testitiedosto, "r") as f:
+            sisalto = f.read()
+
+        odotettu_sisalto = """
+@article{test1,
+  author = {Old Author},
+  title = {Old Title},
+  year = {2020}
+}@comment{tag1, tag2}
+"""
+        self.assertEqual(sisalto.strip(), odotettu_sisalto.strip())
+
+    def test_lisaa_tagi_viite_ei_loytynyt(self):
+        """testataan tagin lisäämistä väärällä arvolla"""
+        alkuperainen_sisalto = """
+@article{test1,
+  author = {Old Author},
+  title = {Old Title},
+  year = {2020}
+}@comment{tag1, tag2}
+"""
+        with open(self.testitiedosto, "w") as f:
+            f.write(alkuperainen_sisalto)
+
+        self.testieditori.aktiivinen_tiedosto = Path(self.testitiedosto)
+        result = self.testieditori.lisaa_tagi("testaus", "tagi")
+
+        self.assertEqual(result, -1)
+
+    def test_poista_tagi_onnistuneesti(self):
+        """testataan tagin poistamista oikeilla arvoilla"""
+        alkuperainen_sisalto = """
+@article{test1,
+  author = {Old Author},
+  title = {Old Title},
+  year = {2020}
+}@comment{tag1, tag2, tag3}
+"""
+        with open(self.testitiedosto, "w") as f:
+            f.write(alkuperainen_sisalto)
+
+        self.testieditori.aktiivinen_tiedosto = Path(self.testitiedosto)
+        self.testieditori.poista_tagi("test1", "tag1")
+
+        with open(self.testitiedosto, "r") as f:
+            sisalto = f.read()
+
+        odotettu_sisalto = """
+@article{test1,
+  author = {Old Author},
+  title = {Old Title},
+  year = {2020}
+}@comment{tag2, tag3}
+"""
+
+        self.assertEqual(sisalto.strip(), odotettu_sisalto.strip())
+
+    def test_poista_tagi_viite_ei_loytynyt(self):
+        """testataan tagin poistamista väärillä arvoilla"""
+        alkuperainen_sisalto = """
+@article{test1,
+  author = {Old Author},
+  title = {Old Title},
+  year = {2020},
+  tags = {newTag}
+}
+"""
+        with open(self.testitiedosto, "w") as f:
+            f.write(alkuperainen_sisalto)
+
+        self.testieditori.aktiivinen_tiedosto = Path(self.testitiedosto)
+        result = self.testieditori.poista_tagi("testi", "Tagi")
+
+        self.assertEqual(result, -1)
 
     def tear_down(self):
         if os.path.exists(self.testitiedosto):

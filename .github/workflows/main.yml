@@ -29,4 +29,4 @@ jobs:
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       - name: Lint
-        run: poetry run pylint src
+        run: poetry run pylint --disable=fixme src

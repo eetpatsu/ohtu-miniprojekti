@@ -1,4 +1,5 @@
 import os
+import re
 import sys
 from pathlib import Path
 from viite_parseri import ViiteParseri
@@ -45,11 +46,24 @@ class ViiteEditori:
                     continue
 
                 case "muokkaa":
-                    viitteen_avain = self.io.lue("Anna muokattan viitteen avain: ")
+                    viitteen_avain = self.io.lue("Anna muokattavan viitteen avain: ")
                     parametrin_tyyppi = self.io.lue("Anna parametrin tyyppi: ")
                     muokattu_parametri = self.io.lue("Anna muokattu parametri: ")
                     self.muokkaa_tiedosto(viitteen_avain, parametrin_tyyppi, muokattu_parametri)
                     continue
+
+                case "lisaatagi":
+                    viitteen_avain = self.io.lue("Anna viitteen avain: ")
+                    lisattava_tag = self.io.lue("Anna lisättävä tagi: ")
+                    self.lisaa_tagi(viitteen_avain, lisattava_tag)
+                    continue
+
+                case "poistatagi":
+                    viitteen_avain = self.io.lue("Anna viitteen avain: ")
+                    poistettava_tagi = self.io.lue("Anna poistettava tagi: ")
+                    self.poista_tagi(viitteen_avain, poistettava_tagi)
+                    continue
+
                 case _:
                     if syote == "":
                         continue
@@ -161,7 +175,7 @@ muokkaa\t\tmuokkaa valitun viitteen haluttua parametria\n\
         self.io.kirjoita("Viite lisätty tiedoston loppuun.")
         return 0
 
-    def muokkaa_tiedosto(self, viitteen_avain, parametrin_tyyppi, muokattu_parametri ):
+    def muokkaa_tiedosto(self, viitteen_avain, parametrin_tyyppi, muokattu_parametri):
         '''Muokkaa valitun viitteen haluttua parametriä'''
         if self.aktiivinen_tiedosto is None:
             self.io.kirjoita("Ei avattua tiedostoa. Avaa tiedosto ensin komennolla 'avaa'.")
@@ -171,8 +185,13 @@ muokkaa\t\tmuokkaa valitun viitteen haluttua parametria\n\
             with open(self.aktiivinen_tiedosto, "r") as tiedosto:
                 viite_alku = tiedosto.read()
 
-                tiedoston_viitteet = viite_alku.split('@')[1:]  # Jokainen viite alkaa '@'
-                viitteet = ["@" + viite.strip() for viite in tiedoston_viitteet]
+            tiedoston_viitteet = re.split(r"@(a|b|i)", viite_alku)[1:]  # Jokainen viite alkaa '@'
+
+            viitteet = []
+            for i in range(0, len(tiedoston_viitteet), 2):
+                tyyppi = tiedoston_viitteet[i]
+                sisältö = tiedoston_viitteet[i + 1].strip()
+                viitteet.append(f"@{tyyppi}{sisältö}")
 
             muokattava_viite = None
             for viite in viitteet:
@@ -197,6 +216,89 @@ muokkaa\t\tmuokkaa valitun viitteen haluttua parametria\n\
             else:
                 self.io.kirjoita("Muokkaus epäonnistui tarkista parametrin tyyppi")
             return 0
+
+        except FileNotFoundError:
+            print("Tiedostoa ei löytynyt.")
+            return -1
+
+    def lisaa_tagi(self, viitteen_avain, lisattava_tag):
+        '''Lisätään haluttu tagi'''
+        if self.aktiivinen_tiedosto is None:
+            self.io.kirjoita("Ei avattua tiedostoa. Avaa tiedosto ensin komennolla 'avaa'.")
+            return -1
+
+        try:
+            with open(self.aktiivinen_tiedosto, "r") as tiedosto:
+                viite_alku = tiedosto.read()
+
+            tiedoston_viitteet = re.split(r"@(a|b|i)", viite_alku)[1:]  # Jokainen alkaa '@'
+
+            viitteet = []
+            for i in range(0, len(tiedoston_viitteet), 2):
+                tyyppi = tiedoston_viitteet[i]
+                sisältö = tiedoston_viitteet[i + 1].strip()
+                viitteet.append(f"@{tyyppi}{sisältö}")
+
+            muokattava_viite = None
+            for viite in viitteet:
+                if viitteen_avain in viite:
+                    muokattava_viite = viite
+                    break
+
+            if not muokattava_viite:
+                self.io.kirjoita(f"Viitettä avaimella '{viitteen_avain}' ei löytynyt.")
+                return -1
+
+            parseri = ViiteParseri(muokattava_viite)
+            parseri.tagaa(lisattava_tag)
+
+            viitteet = [viite if viite != muokattava_viite else str(parseri) for viite in viitteet]
+
+            with open(self.aktiivinen_tiedosto, "w") as tiedosto:
+                tiedosto.write("\n\n".join(viitteet))
+            return 1
+
+        except FileNotFoundError:
+            print("Tiedostoa ei löytynyt.")
+            return -1
+
+    def poista_tagi(self, viitteen_avain, poistettava_tagi):
+        '''Poistetaan haluttu tagi'''
+        if self.aktiivinen_tiedosto is None:
+            self.io.kirjoita("Ei avattua tiedostoa. Avaa tiedosto ensin komennolla 'avaa'.")
+            return -1
+
+        try:
+            with open(self.aktiivinen_tiedosto, "r", encoding="utf-8") as tiedosto:
+                viite_alku = tiedosto.read()
+
+            tiedoston_viitteet = re.split(r"@(a|b|i)", viite_alku)[1:]  # Jokainen viite alkaa '@'
+
+            viitteet = []
+            for i in range(0, len(tiedoston_viitteet), 2):
+                tyyppi = tiedoston_viitteet[i]
+                sisältö = tiedoston_viitteet[i + 1].strip()
+                viitteet.append(f"@{tyyppi}{sisältö}")
+
+            muokattava_viite = None
+            for viite in viitteet:
+                if viitteen_avain in viite:
+                    muokattava_viite = viite
+                    break
+
+            if not muokattava_viite:
+                self.io.kirjoita(f"Viitettä avaimella '{viitteen_avain}' ei löytynyt.")
+                return -1
+
+            parseri = ViiteParseri(muokattava_viite)
+
+            parseri.poista_tagi(poistettava_tagi)
+
+            viitteet = [viite if viite != muokattava_viite else str(parseri) for viite in viitteet]
+
+            with open(self.aktiivinen_tiedosto, "w") as tiedosto:
+                tiedosto.write("\n\n".join(viitteet))
+            return 1
 
         except FileNotFoundError:
             print("Tiedostoa ei löytynyt.")
