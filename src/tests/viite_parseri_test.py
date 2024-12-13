@@ -101,3 +101,34 @@ publisher={Wiley Online Library}
     def test_tagien_poisto(self):
         self.testiparserit[2].poista_tagi("fysiikka")
         self.assertEqual(self.testiparserit[2].viitteen_tagit[1],"2017")
+
+    def test_usean_tagin_lisaus(self): # Lisäys, ei listaus. Ääkkösongelmia nimeämisessä.
+        self.testiparserit[0].tagaa("   python     ")
+        self.testiparserit[0].tagaa("enviromentalism")
+        self.assertEqual(self.testiparserit[0].viitteen_tagit[0],"python")
+        self.assertEqual(self.testiparserit[0].viitteen_tagit[1],"enviromentalism")
+
+        self.testiparserit[1].tagaa("overview")
+        self.testiparserit[1].tagaa("engineering journal")
+        self.assertEqual(self.testiparserit[1].viitteen_tagit[0],"overview")
+        self.assertEqual(self.testiparserit[1].viitteen_tagit[1],"engineering journal")
+
+    def test_perattainen_tagin_lisaus_ja_muokkaus(self): # Lisäys, ei listaus. Ääkkösongelmia nimeämisessä.
+        self.testiparserit[0].tagaa("   python     ")
+        self.assertEqual(self.testiparserit[0].viitteen_tagit[0],"python")
+        self.testiparserit[0].muokkaa("author","Kadiyala et al")
+        self.assertEqual(self.testiparserit[0].viitteen_tiedot[1][1],"Kadiyala et al")
+
+    def test_kaikkien_tagien_poisto(self):
+        self.testiparserit[2].poista_tagi("fysiikka")
+        self.testiparserit[2].poista_tagi("2017")
+        self.testiparserit[2].poista_tagi("larsen")
+        self.assertEqual(len(self.testiparserit[2].viitteen_tagit),0)
+
+    def test_kaikkien_tagien_poisto_ja_muokkaus(self):
+        self.testiparserit[2].poista_tagi("fysiikka")
+        self.testiparserit[2].poista_tagi("2017")
+        self.testiparserit[2].poista_tagi("larsen")
+        self.assertEqual(len(self.testiparserit[2].viitteen_tagit),0)
+        self.testiparserit[2].muokkaa("pages","273--275")
+        self.assertEqual(self.testiparserit[2].viitteen_tiedot[5][1],"273--275")

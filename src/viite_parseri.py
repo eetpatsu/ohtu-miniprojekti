@@ -88,7 +88,7 @@ class ViiteParseri:
 
         self.viite_teksti += '\n}'
 
-        if len(self.viitteen_tagit) > 1:
+        if len(self.viitteen_tagit) > 0:
             self.viite_teksti += '@comment{'
 
             for i in range( len(self.viitteen_tagit) - 1 ):
