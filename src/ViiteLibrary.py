@@ -20,6 +20,8 @@ class ViiteLibrary:
             self.viite_editori.helppi()
         elif syote == "muokkaa":
             self.io.kirjoita("Anna muokattan viitteen avain:")
+        elif syote == "tulosta":
+            self.viite_editori.tulosta_tiedosto()
         else:
             self.tallennettu_komento = syote
 
