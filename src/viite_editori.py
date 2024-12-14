@@ -198,20 +198,22 @@ muokkaa\t\tmuokkaa valitun viitteen haluttua parametria\n\
                 sisalto = tiedoston_viitteet[i + 1].strip()
                 viitteet.append(f"@{tyyppi}{sisalto}")
 
-            muokattava_viite = None
+            muokattavat_viitteet = []
             for viite in viitteet:
                 if viitteen_avain in viite:
-                    muokattava_viite = viite
+                    muokattavat_viitteet.append(viite)
                     break
 
-            if not muokattava_viite:
+            if len(muokattavat_viitteet) == 0:
                 self.io.kirjoita(f"Viitettä avaimella '{viitteen_avain}' ei löytynyt.")
                 return -1
 
-            # parseri = ViiteParseri(muokattava_viite)
-            # for parametri in parseri.parametrit:
+            for muokattava_viite in muokattavat_viitteet:
+                parseri = ViiteParseri(muokattava_viite)
+                for param, arvo in parseri.viitteen_tiedot:
+                    self.io.kirjoita(f"Nykyinen {param}: {arvo}")
+                    # Ajetaan self.muokkaa_parametri?
             return 0
-
 
         except FileNotFoundError:
             print("Tiedostoa ei löytynyt.")
