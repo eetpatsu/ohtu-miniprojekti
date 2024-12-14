@@ -52,12 +52,20 @@ publisher={Wiley Online Library}
 
     def test_tagine_olemassaolo_tiedustelu(self):
         self.assertEqual(
-            ViiteValitsin.tagi_tiedustelu(self.esimerkkiviitteet[0],"testitagi"),
+            ViiteValitsin.tagi_tiedustelu(self.esimerkkiviitteet[0],"java"),
+            False
+        )
+        self.assertEqual(
+            ViiteValitsin.tagi_tiedustelu(self.esimerkkiviitteet[0],"englannin kielinen"),
             False
         )
 
         self.assertEqual(
             ViiteValitsin.tagi_tiedustelu(self.esimerkkiviitteet[1],"python"),
+            True
+        )
+        self.assertEqual(
+            ViiteValitsin.tagi_tiedustelu(self.esimerkkiviitteet[1],"englannin kielinen"),
             True
         )
         self.assertEqual(
@@ -70,18 +78,63 @@ publisher={Wiley Online Library}
             True
         )
         self.assertEqual(
+            ViiteValitsin.tagi_tiedustelu(self.esimerkkiviitteet[1],"englannin kielinen"),
+            True
+        )
+        self.assertEqual(
             ViiteValitsin.tagi_tiedustelu(self.esimerkkiviitteet[2],"python"),
             False
         )
+        self.assertEqual(
+            ViiteValitsin.tagi_tiedustelu(self.esimerkkiviitteet[2],"java"),
+            False
+        )
 
-    def test_viite_listan_seulonta_1(self):
+    def test_viite_listan_seulonta_1_1(self):
+        self.assertEqual(
+            len(ViiteValitsin.tagi_seulo_viitteet(self.esimerkkiviitteet,"java")),
+            0
+        )
+
+    def test_viite_listan_seulonta_1_2(self):
         self.assertEqual(
             ViiteValitsin.tagi_seulo_viitteet(self.esimerkkiviitteet,"java"),
             []
         )
 
-    def test_viite_listan_seulonta_2(self): # TODO: Tämä testi on virheellinen. Metodi on keskeneräinen.
+    def test_viite_listan_seulonta_2_1(self):
+        self.assertEqual(
+            len(ViiteValitsin.tagi_seulo_viitteet(self.esimerkkiviitteet,"englannin kielinen")),
+            2
+        )
+
+    def test_viite_listan_seulonta_2_2(self):
+
+        esimerkkiviitteet_kopio = []
+        for i in self.esimerkkiviitteet:
+            esimerkkiviitteet_kopio.append(i)
+        esimerkkiviitteet_kopio.pop(0)
+
+        self.assertEqual(
+            ViiteValitsin.tagi_seulo_viitteet(self.esimerkkiviitteet,"englannin kielinen"),
+            esimerkkiviitteet_kopio
+        )
+
+    def test_viite_listan_seulonta_3_1(self):
+        self.assertEqual(
+            len(ViiteValitsin.tagi_seulo_viitteet(self.esimerkkiviitteet,"python")),
+            1
+        )
+
+    def test_viite_listan_seulonta_3_2(self):
+
+        esimerkkiviitteet_kopio = []
+        for i in self.esimerkkiviitteet:
+            esimerkkiviitteet_kopio.append(i)
+        esimerkkiviitteet_kopio.pop(2)
+        esimerkkiviitteet_kopio.pop(0)
+
         self.assertEqual(
             ViiteValitsin.tagi_seulo_viitteet(self.esimerkkiviitteet,"python"),
-            self.esimerkkiviitteet
+            esimerkkiviitteet_kopio
         )

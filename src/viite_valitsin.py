@@ -33,14 +33,15 @@ class ViiteValitsin:
         return False
 
     @staticmethod
-    def tagi_seulo_viitteet(viite_lista,tagi): # TODO: Tämä metodi ei toimi oikein. Loopin logiikka rikki.
+    def tagi_seulo_viitteet(viite_lista,tagi):
 
-        indeksi = 0
+        viite_lista_kopio = []
 
-        while indeksi<len(viite_lista):
-            if ViiteValitsin.tagi_tiedustelu(viite_lista[indeksi],tagi):
-                indeksi += 1
-            else:
-                viite_lista.pop(indeksi)
+        for i in viite_lista:
+            viite_lista_kopio.append(i)
 
-        return viite_lista
+        for i in range(len(viite_lista_kopio)-1, -1, -1):
+            if not ViiteValitsin.tagi_tiedustelu(viite_lista_kopio[i],tagi):
+                viite_lista_kopio.pop(i)
+
+        return viite_lista_kopio
