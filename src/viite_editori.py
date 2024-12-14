@@ -47,9 +47,14 @@ class ViiteEditori:
 
                 case "muokkaa":
                     viitteen_avain = self.io.lue("Anna muokattavan viitteen avain: ")
+                    self.muokkaa_viite(viitteen_avain)
+                    continue
+
+                case "muokkaaparam":
+                    viitteen_avain = self.io.lue("Anna muokattavan viitteen avain: ")
                     parametrin_tyyppi = self.io.lue("Anna parametrin tyyppi: ")
                     muokattu_parametri = self.io.lue("Anna muokattu parametri: ")
-                    self.muokkaa_tiedosto(viitteen_avain, parametrin_tyyppi, muokattu_parametri)
+                    self.muokkaa_parametri(viitteen_avain, parametrin_tyyppi, muokattu_parametri)
                     continue
 
                 case "lisaatagi":
@@ -175,7 +180,44 @@ muokkaa\t\tmuokkaa valitun viitteen haluttua parametria\n\
         self.io.kirjoita("Viite lisätty tiedoston loppuun.")
         return 0
 
-    def muokkaa_tiedosto(self, viitteen_avain, parametrin_tyyppi, muokattu_parametri):
+    def muokkaa_viite(self, viitteen_avain):
+        '''Muokkaa valitun viitteen parametreja'''
+        if self.aktiivinen_tiedosto is None:
+            self.io.kirjoita("Ei avattua tiedostoa. Avaa tiedosto ensin komennolla 'avaa'.")
+            return -1
+
+        try:
+            with open(self.aktiivinen_tiedosto, "r") as tiedosto:
+                viite_alku = tiedosto.read()
+
+            tiedoston_viitteet = re.split(r"@(a|b|i)", viite_alku)[1:]  # Jokainen viite alkaa '@'
+
+            viitteet = []
+            for i in range(0, len(tiedoston_viitteet), 2):
+                tyyppi = tiedoston_viitteet[i]
+                sisalto = tiedoston_viitteet[i + 1].strip()
+                viitteet.append(f"@{tyyppi}{sisalto}")
+
+            muokattava_viite = None
+            for viite in viitteet:
+                if viitteen_avain in viite:
+                    muokattava_viite = viite
+                    break
+
+            if not muokattava_viite:
+                self.io.kirjoita(f"Viitettä avaimella '{viitteen_avain}' ei löytynyt.")
+                return -1
+
+            # parseri = ViiteParseri(muokattava_viite)
+            # for parametri in parseri.parametrit:
+            return 0
+
+
+        except FileNotFoundError:
+            print("Tiedostoa ei löytynyt.")
+            return -1
+
+    def muokkaa_parametri(self, viitteen_avain, parametrin_tyyppi, muokattu_parametri):
         '''Muokkaa valitun viitteen haluttua parametriä'''
         if self.aktiivinen_tiedosto is None:
             self.io.kirjoita("Ei avattua tiedostoa. Avaa tiedosto ensin komennolla 'avaa'.")
@@ -190,8 +232,8 @@ muokkaa\t\tmuokkaa valitun viitteen haluttua parametria\n\
             viitteet = []
             for i in range(0, len(tiedoston_viitteet), 2):
                 tyyppi = tiedoston_viitteet[i]
-                sisältö = tiedoston_viitteet[i + 1].strip()
-                viitteet.append(f"@{tyyppi}{sisältö}")
+                sisalto = tiedoston_viitteet[i + 1].strip()
+                viitteet.append(f"@{tyyppi}{sisalto}")
 
             muokattava_viite = None
             for viite in viitteet:
@@ -236,8 +278,8 @@ muokkaa\t\tmuokkaa valitun viitteen haluttua parametria\n\
             viitteet = []
             for i in range(0, len(tiedoston_viitteet), 2):
                 tyyppi = tiedoston_viitteet[i]
-                sisältö = tiedoston_viitteet[i + 1].strip()
-                viitteet.append(f"@{tyyppi}{sisältö}")
+                sisalto = tiedoston_viitteet[i + 1].strip()
+                viitteet.append(f"@{tyyppi}{sisalto}")
 
             muokattava_viite = None
             for viite in viitteet:
@@ -277,8 +319,8 @@ muokkaa\t\tmuokkaa valitun viitteen haluttua parametria\n\
             viitteet = []
             for i in range(0, len(tiedoston_viitteet), 2):
                 tyyppi = tiedoston_viitteet[i]
-                sisältö = tiedoston_viitteet[i + 1].strip()
-                viitteet.append(f"@{tyyppi}{sisältö}")
+                sisalto = tiedoston_viitteet[i + 1].strip()
+                viitteet.append(f"@{tyyppi}{sisalto}")
 
             muokattava_viite = None
             for viite in viitteet:

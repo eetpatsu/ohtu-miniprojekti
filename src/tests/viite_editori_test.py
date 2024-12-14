@@ -165,7 +165,7 @@ muokkaa\t\tmuokkaa valitun viitteen haluttua parametria\n\
             f.write(alkuperainen_sisalto)
 
         self.testieditori.aktiivinen_tiedosto = Path(self.testitiedosto)
-        self.testieditori.muokkaa_tiedosto("test1", "author", "New Author")
+        self.testieditori.muokkaa_parametri("test1", "author", "New Author")
 
         with open(self.testitiedosto, "r") as f:
             sisalto = f.read()
@@ -182,7 +182,7 @@ muokkaa\t\tmuokkaa valitun viitteen haluttua parametria\n\
 
     def test_muokkaa_ei_avattua_tiedostoa(self):
         self.testieditori.aktiivinen_tiedosto = None
-        tulos = self.testieditori.muokkaa_tiedosto("test1", "author", "New Author")
+        tulos = self.testieditori.muokkaa_parametri("test1", "author", "New Author")
         self.assertEqual(tulos, -1)
         self.assertIn("Ei avattua tiedostoa. Avaa tiedosto ensin komennolla 'avaa'.", self.testieditori.io.messages)
 
@@ -198,7 +198,7 @@ muokkaa\t\tmuokkaa valitun viitteen haluttua parametria\n\
             f.write(alkuperainen_sisalto)
 
         self.testieditori.aktiivinen_tiedosto = Path(self.testitiedosto)
-        tulos = self.testieditori.muokkaa_tiedosto("test1", "author", "New Author")
+        tulos = self.testieditori.muokkaa_parametri("test1", "author", "New Author")
 
         self.assertEqual(tulos, -1)
         self.assertIn("Viitettä avaimella 'test1' ei löytynyt.", self.testieditori.io.messages)
@@ -215,7 +215,7 @@ muokkaa\t\tmuokkaa valitun viitteen haluttua parametria\n\
             f.write(alkuperainen_sisalto)
 
         self.testieditori.aktiivinen_tiedosto = Path(self.testitiedosto)
-        tulos = self.testieditori.muokkaa_tiedosto("test1", "nonexistent_param", "New Value")
+        tulos = self.testieditori.muokkaa_parametri("test1", "nonexistent_param", "New Value")
 
         self.assertEqual(tulos, 0)
         self.assertIn("Muokkaus epäonnistui tarkista parametrin tyyppi", self.testieditori.io.messages)
