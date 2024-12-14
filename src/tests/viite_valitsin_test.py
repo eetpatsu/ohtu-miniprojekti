@@ -90,6 +90,24 @@ publisher={Wiley Online Library}
             False
         )
 
+
+    def test_tagine_olemassaolo_tiedustelu_tyhjalla_viitteella(self):
+        self.assertEqual(
+            ViiteValitsin.tagi_tiedustelu(self.esimerkkiviitteet[0],""),
+            False
+        )
+
+        self.assertEqual(
+            ViiteValitsin.tagi_tiedustelu(self.esimerkkiviitteet[1],""),
+            False
+        )
+
+        self.assertEqual(
+            ViiteValitsin.tagi_tiedustelu(self.esimerkkiviitteet[2],""),
+            False
+        )
+
+
     def test_viite_listan_seulonta_1_1(self):
         self.assertEqual(
             len(ViiteValitsin.tagi_seulo_viitteet(self.esimerkkiviitteet,"java")),

@@ -24,6 +24,9 @@ class ViiteValitsin:
     @staticmethod
     def tagi_tiedustelu(viite,tiedusteltu_tagi):
 
+        if tiedusteltu_tagi == "":
+            return False
+
         tagit = ViiteValitsin.hae_tagit(viite)
 
         for tagi in tagit:
