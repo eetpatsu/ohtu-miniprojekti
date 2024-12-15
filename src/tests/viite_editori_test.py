@@ -145,7 +145,10 @@ avaa\t\tavaa bib-tiedoston\n\
 luo\t\tluo bib-tiedoston\n\
 tulosta\t\ttulostaa aktiivisen bib-tiedoston sisällön\n\
 syota\t\ttallentaa bib-dataa aktiiviseen bib-tiedostoon\n\
-muokkaa\t\tmuokkaa valitun viitteen haluttua parametria\n\
+muokkaa\t\tmuokkaa valitun viitteen parametreja\n\
+muokkaaparam\tmuokkaa valitun viitteen haluttua parametria\n\
+lisaatagi\tlisää halutun tagin\n\
+poistatagi\tpoistaa halutun tagin\n\
 ",
             self.testieditori.io.messages)
 

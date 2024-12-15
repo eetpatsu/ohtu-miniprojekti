@@ -2,6 +2,7 @@ import os
 import re
 from pathlib import Path
 from viite_parseri import ViiteParseri
+from viite_valitsin import ViiteValitsin
 
 class ViiteEditori:
     def __init__(self, io):
@@ -16,7 +17,10 @@ avaa\t\tavaa bib-tiedoston\n\
 luo\t\tluo bib-tiedoston\n\
 tulosta\t\ttulostaa aktiivisen bib-tiedoston sisällön\n\
 syota\t\ttallentaa bib-dataa aktiiviseen bib-tiedostoon\n\
-muokkaa\t\tmuokkaa valitun viitteen haluttua parametria\n\
+muokkaa\t\tmuokkaa valitun viitteen parametreja\n\
+muokkaaparam\tmuokkaa valitun viitteen haluttua parametria\n\
+lisaatagi\tlisää halutun tagin\n\
+poistatagi\tpoistaa halutun tagin\n\
 ")
         return 0
 
@@ -281,3 +285,53 @@ muokkaa\t\tmuokkaa valitun viitteen haluttua parametria\n\
         except FileNotFoundError:
             print("Tiedostoa ei löytynyt.")
             return -1
+
+    def etsi_tagi(self, etsittava_tagi):
+        '''Etsitään kaikki viitteet missä on etsittävä tagi'''
+        if self.aktiivinen_tiedosto is None:
+            self.io.kirjoita("Ei avattua tiedostoa. Avaa tiedosto ensin komennolla 'avaa'.")
+            return -1
+
+        try:
+            with open(self.aktiivinen_tiedosto, "r", encoding="utf-8") as tiedosto:
+                viite_alku = tiedosto.read()
+
+            tiedoston_viitteet = re.split(r"@(a|b|i)", viite_alku)[1:]
+
+            viitteet = []
+            for i in range(0, len(tiedoston_viitteet), 2):
+                tyyppi = tiedoston_viitteet[i]
+                sisalto = tiedoston_viitteet[i + 1].strip()
+                viitteet.append(f"@{tyyppi}{sisalto}")
+
+            valikoitu_viite_lista = ViiteValitsin.tagi_seulo_viitteet(viitteet, etsittava_tagi)
+
+            parsitut_viitteet = []
+            for viite in valikoitu_viite_lista:
+                parseri = ViiteParseri(viite)
+                parsitut_viitteet.append(self.muodosta_luettava_viite(parseri))
+
+            # Muodostetaan luettava lista ja tulostetaan
+            valmis_lista = "\n\n".join(parsitut_viitteet)
+            print(" ")
+            self.io.kirjoita(valmis_lista)
+
+            return 1
+        except FileNotFoundError:
+            print("Tiedostoa ei löytynyt.")
+            return -1
+
+    def muodosta_luettava_viite(self, parseri):
+        """auttaa etsi_tagi toimintoa tulostamaan halutut viitteet helposti luettavassa muodossa"""
+        viite_rivit = [
+            f"Tyyppi: {parseri.viitteen_tyyppi}",
+            f"Avain: {parseri.viitteen_avain}",
+            "Tiedot:"
+        ]
+        for kentta, arvo in parseri.viitteen_tiedot:
+            viite_rivit.append(f"  {kentta}: {arvo}")
+
+        if parseri.viitteen_tagit:
+            viite_rivit.append("Tagit: " + ", ".join(parseri.viitteen_tagit))
+
+        return "\n".join(viite_rivit)
