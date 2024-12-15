@@ -1,6 +1,5 @@
 import os
 import re
-import sys
 from pathlib import Path
 from viite_parseri import ViiteParseri
 
@@ -8,71 +7,6 @@ class ViiteEditori:
     def __init__(self, io):
         self.io = io
         self.aktiivinen_tiedosto = None
-
-    def run(self):
-        '''Käynnistää sovelluksen ja kysyy komennon.'''
-        tiedostonimi = None
-        self.parse_argumentti()
-        self.helppi()
-        while True:
-            # Luetaan käyttäjältä syötettä, kunnes annetaan exit-komento
-            syote_raaka = self.io.lue("Syötä komento. (Listaa komennot syöttämällä help.) > ")
-            # strip poistaa whitespacen, joten ylimääräiset välilyönnit eivät haittaa
-            syote = syote_raaka.strip()
-            match syote:
-                case "help":
-                    self.helppi()
-                    continue
-
-                case "exit":
-                    break
-
-                case "avaa":
-                    tiedostonimi = self.io.lue("Anna avattava tiedosto muodossa sijainti/nimi: ")
-                    self.avaa_tiedosto(tiedostonimi)
-                    continue
-
-                case "luo":
-                    tiedostonimi = self.io.lue("Anna luotava tiedoston polku/nimi (suhteessa työhakemistoon): ")
-                    self.luo_ja_avaa_tiedosto(tiedostonimi)
-                    continue
-
-                case "tulosta":
-                    self.tulosta_tiedosto()
-                    continue
-
-                case "syota":
-                    self.syota_bib_viite()
-                    continue
-
-                case "muokkaa":
-                    viitteen_avain = self.io.lue("Anna muokattavan viitteen avain: ")
-                    self.muokkaa_viite(viitteen_avain)
-                    continue
-
-                case "muokkaaparam":
-                    viitteen_avain = self.io.lue("Anna muokattavan viitteen avain: ")
-                    parametrin_tyyppi = self.io.lue("Anna parametrin tyyppi: ")
-                    muokattu_parametri = self.io.lue("Anna muokattu parametri: ")
-                    self.muokkaa_parametri(viitteen_avain, parametrin_tyyppi, muokattu_parametri)
-                    continue
-
-                case "lisaatagi":
-                    viitteen_avain = self.io.lue("Anna viitteen avain: ")
-                    lisattava_tag = self.io.lue("Anna lisättävä tagi: ")
-                    self.lisaa_tagi(viitteen_avain, lisattava_tag)
-                    continue
-
-                case "poistatagi":
-                    viitteen_avain = self.io.lue("Anna viitteen avain: ")
-                    poistettava_tagi = self.io.lue("Anna poistettava tagi: ")
-                    self.poista_tagi(viitteen_avain, poistettava_tagi)
-                    continue
-
-                case _:
-                    if syote == "":
-                        continue
-                    self.io.kirjoita("Tuntematon komento \""+syote+"\"")
 
     def helppi(self):
         self.io.kirjoita("\nKomennot:\n\
@@ -97,9 +31,9 @@ muokkaa\t\tmuokkaa valitun viitteen haluttua parametria\n\
         tiedostonimi_polku = Path(tiedostonimi)
         return tyohakemisto_polku / tiedostonimi_polku
 
-    def parse_argumentti(self):
-        if len(sys.argv) > 1:
-            tiedostonimi = sys.argv[1]
+    def parse_argumentti(self, argumentit):
+        if len(argumentit) > 1:
+            tiedostonimi = argumentit[1]
             polku = self.muuta_bibiksi_ja_absoluuttiseksi(tiedostonimi)
             if os.path.isfile(polku):
                 self.avaa_tiedosto(str(polku))

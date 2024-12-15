@@ -1,7 +1,6 @@
 import unittest
 import os
 from pathlib import Path
-from unittest.mock import patch
 
 from viite_editori import ViiteEditori
 
@@ -44,8 +43,7 @@ class TestViiteEditori(unittest.TestCase):
         with open(tiedostonimi, "w") as f:
             f.write("Testitiedoston sisältö")
 
-        with patch("sys.argv", ["viite_editori.py", tiedostonimi]):
-            self.testieditori.parse_argumentti()
+        self.testieditori.parse_argumentti(["viite_editori.py", tiedostonimi])
 
         self.assertEqual(str(self.testieditori.aktiivinen_tiedosto), str(Path(tiedostonimi).resolve()))
         os.remove(tiedostonimi)
@@ -56,8 +54,7 @@ class TestViiteEditori(unittest.TestCase):
         if os.path.exists(tiedostonimi):
             os.remove(tiedostonimi)
 
-        with patch("sys.argv", ["viite_editori.py", tiedostonimi]):
-            self.testieditori.parse_argumentti()
+        self.testieditori.parse_argumentti(["viite_editori.py", tiedostonimi])
 
         self.assertTrue(os.path.exists(tiedostonimi))
         self.assertEqual(str(self.testieditori.aktiivinen_tiedosto), str(Path(tiedostonimi).resolve()))
@@ -65,8 +62,7 @@ class TestViiteEditori(unittest.TestCase):
 
     def test_parse_argumentti_ilman_parametreja(self):
         """Testaa, että ohjelma ei yritä avata tai luoda tiedostoja ilman parametreja."""
-        with patch("sys.argv", ["viite_editori.py"]):
-            self.testieditori.parse_argumentti()
+        self.testieditori.parse_argumentti(["viite_editori.py"])
 
         self.assertIsNone(self.testieditori.aktiivinen_tiedosto)
 
