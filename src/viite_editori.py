@@ -128,13 +128,7 @@ poistatagi\tpoistaa halutun tagin\n\
             with open(self.aktiivinen_tiedosto, "r") as tiedosto:
                 viite_alku = tiedosto.read()
 
-            tiedoston_viitteet = re.split(r"@(a|b|i)", viite_alku)[1:]  # Jokainen viite alkaa '@'
-
-            viitteet = []
-            for i in range(0, len(tiedoston_viitteet), 2):
-                tyyppi = tiedoston_viitteet[i]
-                sisalto = tiedoston_viitteet[i + 1].strip()
-                viitteet.append(f"@{tyyppi}{sisalto}")
+            viitteet = self.etsi_viitteet(viite_alku)
 
             muokattavat_viitteet = []
             for viite in viitteet:
@@ -167,22 +161,9 @@ poistatagi\tpoistaa halutun tagin\n\
             with open(self.aktiivinen_tiedosto, "r") as tiedosto:
                 viite_alku = tiedosto.read()
 
-            tiedoston_viitteet = re.split(r"@(a|b|i)", viite_alku)[1:]  # Jokainen viite alkaa '@'
-
-            viitteet = []
-            for i in range(0, len(tiedoston_viitteet), 2):
-                tyyppi = tiedoston_viitteet[i]
-                sisalto = tiedoston_viitteet[i + 1].strip()
-                viitteet.append(f"@{tyyppi}{sisalto}")
-
-            muokattava_viite = None
-            for viite in viitteet:
-                if viitteen_avain in viite:
-                    muokattava_viite = viite
-                    break
-
+            viitteet = self.etsi_viitteet(viite_alku)
+            muokattava_viite = self.etsi_viite(viitteet, viitteen_avain)
             if not muokattava_viite:
-                self.io.kirjoita(f"Viitettä avaimella '{viitteen_avain}' ei löytynyt.")
                 return -1
 
             parseri = ViiteParseri(muokattava_viite)
@@ -213,22 +194,9 @@ poistatagi\tpoistaa halutun tagin\n\
             with open(self.aktiivinen_tiedosto, "r") as tiedosto:
                 viite_alku = tiedosto.read()
 
-            tiedoston_viitteet = re.split(r"@(a|b|i)", viite_alku)[1:]  # Jokainen alkaa '@'
-
-            viitteet = []
-            for i in range(0, len(tiedoston_viitteet), 2):
-                tyyppi = tiedoston_viitteet[i]
-                sisalto = tiedoston_viitteet[i + 1].strip()
-                viitteet.append(f"@{tyyppi}{sisalto}")
-
-            muokattava_viite = None
-            for viite in viitteet:
-                if viitteen_avain in viite:
-                    muokattava_viite = viite
-                    break
-
+            viitteet = self.etsi_viitteet(viite_alku)
+            muokattava_viite = self.etsi_viite(viitteet, viitteen_avain)
             if not muokattava_viite:
-                self.io.kirjoita(f"Viitettä avaimella '{viitteen_avain}' ei löytynyt.")
                 return -1
 
             parseri = ViiteParseri(muokattava_viite)
@@ -254,22 +222,9 @@ poistatagi\tpoistaa halutun tagin\n\
             with open(self.aktiivinen_tiedosto, "r", encoding="utf-8") as tiedosto:
                 viite_alku = tiedosto.read()
 
-            tiedoston_viitteet = re.split(r"@(a|b|i)", viite_alku)[1:]  # Jokainen viite alkaa '@'
-
-            viitteet = []
-            for i in range(0, len(tiedoston_viitteet), 2):
-                tyyppi = tiedoston_viitteet[i]
-                sisalto = tiedoston_viitteet[i + 1].strip()
-                viitteet.append(f"@{tyyppi}{sisalto}")
-
-            muokattava_viite = None
-            for viite in viitteet:
-                if viitteen_avain in viite:
-                    muokattava_viite = viite
-                    break
-
+            viitteet = self.etsi_viitteet(viite_alku)
+            muokattava_viite = self.etsi_viite(viitteet, viitteen_avain)
             if not muokattava_viite:
-                self.io.kirjoita(f"Viitettä avaimella '{viitteen_avain}' ei löytynyt.")
                 return -1
 
             parseri = ViiteParseri(muokattava_viite)
@@ -296,13 +251,7 @@ poistatagi\tpoistaa halutun tagin\n\
             with open(self.aktiivinen_tiedosto, "r", encoding="utf-8") as tiedosto:
                 viite_alku = tiedosto.read()
 
-            tiedoston_viitteet = re.split(r"@(a|b|i)", viite_alku)[1:]
-
-            viitteet = []
-            for i in range(0, len(tiedoston_viitteet), 2):
-                tyyppi = tiedoston_viitteet[i]
-                sisalto = tiedoston_viitteet[i + 1].strip()
-                viitteet.append(f"@{tyyppi}{sisalto}")
+            viitteet = self.etsi_viitteet(viite_alku)
 
             valikoitu_viite_lista = ViiteValitsin.tagi_seulo_viitteet(viitteet, etsittava_tagi)
 
@@ -335,3 +284,24 @@ poistatagi\tpoistaa halutun tagin\n\
             viite_rivit.append("Tagit: " + ", ".join(parseri.viitteen_tagit))
 
         return "\n".join(viite_rivit)
+
+    def etsi_viitteet(self, viite_alku):
+        """Etsitään ja palautetaan tiedoston viitteet"""
+        tiedoston_viitteet = re.split(r"@(a|b|i)", viite_alku)[1:]
+        viitteet = []
+        for i in range(0, len(tiedoston_viitteet), 2):
+            tyyppi = tiedoston_viitteet[i]
+            sisalto = tiedoston_viitteet[i + 1].strip()
+            viitteet.append(f"@{tyyppi}{sisalto}")
+        return viitteet
+
+    def etsi_viite(self, viitteet, viitteen_avain):
+        """Etsitään ja palautetaan avainta vastaava viite"""
+        avaimen_viite = None
+        for viite in viitteet:
+            if viitteen_avain in viite:
+                avaimen_viite = viite
+                return avaimen_viite
+
+        self.io.kirjoita(f"Viitettä avaimella '{viitteen_avain}' ei löytynyt.")
+        return avaimen_viite
