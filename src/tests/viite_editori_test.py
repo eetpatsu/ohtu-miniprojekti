@@ -9,6 +9,7 @@ class TestViiteEditori(unittest.TestCase):
     def setUp(self):
         self.testieditori = ViiteEditori(DummyConsoleIO())
         self.testitiedosto = "testi.bib"
+        self.tiedostonimi_ilman_paatetta = "tiedosto_ilman_paatetta"
 
     def test_avaa_tiedosto_onnistuneesti(self):
         with open(self.testitiedosto, "w") as f:
@@ -17,17 +18,17 @@ class TestViiteEditori(unittest.TestCase):
         self.assertEqual(str(self.testieditori.aktiivinen_tiedosto), str(Path(self.testitiedosto).resolve()))
 
     def test_tiedosto_lisataan_paatteella(self):
-        tiedostonimi_ilman_paatetta = "tiedosto_ilman_paatetta"
-        with open(tiedostonimi_ilman_paatetta + ".bib", "w") as f:
+        with open(self.tiedostonimi_ilman_paatetta + ".bib", "w") as f:
             f.write("Sisältöä")
-        self.testieditori.avaa_tiedosto(tiedostonimi_ilman_paatetta)
-        odotettu_polku = Path(tiedostonimi_ilman_paatetta + ".bib").resolve()
+        self.testieditori.avaa_tiedosto(self.tiedostonimi_ilman_paatetta)
+        odotettu_polku = Path(self.tiedostonimi_ilman_paatetta + ".bib").resolve()
         self.assertEqual(self.testieditori.aktiivinen_tiedosto, odotettu_polku)
 
     def test_avaa_tiedosto_ilman_paatetta_luodaan_polku(self):
-        tiedostonimi_ilman_paatetta = "tiedosto_ilman_paatetta"
-        self.testieditori.avaa_tiedosto(tiedostonimi_ilman_paatetta)
-        odotettu_polkumuoto = os.path.join(os.getcwd(), tiedostonimi_ilman_paatetta + ".bib")
+        with open(self.tiedostonimi_ilman_paatetta + ".bib", "w") as f:
+            f.write("Sisältöä")
+        self.testieditori.avaa_tiedosto(self.tiedostonimi_ilman_paatetta)
+        odotettu_polkumuoto = os.path.join(os.getcwd(), self.tiedostonimi_ilman_paatetta + ".bib")
         self.assertEqual(str(self.testieditori.aktiivinen_tiedosto), odotettu_polkumuoto)
 
     def test_avaa_tiedosto_ei_olemassa(self):
@@ -135,6 +136,10 @@ class TestViiteEditori(unittest.TestCase):
     def tearDown(self):
         if os.path.exists("temptiedosto.bib"):
             os.remove("temptiedosto.bib")
+        if os.path.exists(self.testitiedosto):
+            os.remove(self.testitiedosto)
+        if os.path.exists(self.tiedostonimi_ilman_paatetta + ".bib"):
+            os.remove(self.tiedostonimi_ilman_paatetta + ".bib")
 
     def test_helppi(self):
         self.assertEqual(self.testieditori.helppi(), 0)
