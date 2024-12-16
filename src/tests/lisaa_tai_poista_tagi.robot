@@ -13,10 +13,11 @@ Lisaa Tagi
     Kaynnista Sovellus Argumenteilla  ${TIEDOSTONIMI}
     Syota Komennot  lisaatagi  CBH91  testitagi
     Syota Komento  tulosta
-    Tulosteen Tulisi Sisaltaa  testitagi}
+    Tulosteen Tulisi Sisaltaa  @comment{testitagi}
     [Teardown]  Remove File  ${TIEDOSTONIMI}
 
 Tagin Lisays Avaamatta Tiedostoa
     Kaynnista Sovellus
-    Syota Komennot   lisaatagi  CBH91  testitagi
+    Syota Komennot  lisaatagi  CBH91  testitagi
     Tulosteen Tulisi Sisaltaa  Ei avattua tiedostoa. Avaa tiedosto ensin komennolla 'avaa'.
+    [Teardown]  Remove File  ${TIEDOSTONIMI}
