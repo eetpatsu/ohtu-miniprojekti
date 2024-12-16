@@ -25,12 +25,18 @@ Haetaan Viite Avaimella
 
 Avain Ei Kelpaa
     Kaynnista Sovellus Argumenteilla  ${TIEDOSTONIMI}
-    Syota Data  Akuankka
-    Syota Data  year
-    Syota Data  0000
-    Syota Komento  muokkaaparam
+    Syota Komennot  muokkaaparam  Akuankka
     Tulosteen Tulisi Sisaltaa  Anna muokattavan viitteen avain:
     Tulosteen Tulisi Sisaltaa  Anna parametrin tyyppi:
     Tulosteen Tulisi Sisaltaa  Anna muokattu parametri:
     Tulosteen Tulisi Sisaltaa  Viitettä avaimella 'Akuankka' ei löytynyt.
+    [Teardown]  Remove File  ${TIEDOSTONIMI}
+
+Parametrin Tyyppi Ei Kelpaa
+    Kaynnista Sovellus Argumenteilla  ${TIEDOSTONIMI}
+    Syota Komennot  muokkaaparam  CBH91  yaer
+    Tulosteen Tulisi Sisaltaa  Anna muokattavan viitteen avain:
+    Tulosteen Tulisi Sisaltaa  Anna parametrin tyyppi:
+    Tulosteen Tulisi Sisaltaa  Anna muokattu parametri:
+    Tulosteen Tulisi Sisaltaa  Muokkaus epäonnistui tarkista parametrin tyyppi
     [Teardown]  Remove File  ${TIEDOSTONIMI}
