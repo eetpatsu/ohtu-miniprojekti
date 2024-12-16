@@ -225,6 +225,94 @@ etsitagi\tetsi viitteitä tagin perusteella\n\
         self.assertEqual(tulos, 0)
         self.assertIn("Muokkaus epäonnistui tarkista parametrin tyyppi", self.testieditori.io.messages)
 
+    def test_muokkaa_kokonainen_viite_onnistuneesti(self):
+        alkuperainen_sisalto = """
+@article{test1,
+  author = {Old Author},
+  title = {Old Title},
+  year = {2020}
+}
+"""
+
+        DummyConsoleIO.data = [
+            "lorem",
+            "ipsum",
+            "0000"
+        ]
+        with open(self.testitiedosto, "w") as f:
+            f.write(alkuperainen_sisalto)
+
+        self.testieditori.aktiivinen_tiedosto = Path(self.testitiedosto)
+        self.testieditori.muokkaa_viite("test1")
+
+        with open(self.testitiedosto, "r") as f:
+            sisalto = f.read()
+
+        odotettu_sisalto = """
+@article{test1,
+  author = {lorem},
+  title  = {ipsum},
+  year   = {0000}
+}
+"""
+        self.assertEqual(sisalto.strip(), odotettu_sisalto.strip())
+        self.assertIn("Muokkaus onnistui", self.testieditori.io.messages)
+
+    def test_muokkaa_kokonainen_viite_ei_avattua_tiedostoa(self):
+        self.testieditori.aktiivinen_tiedosto = None
+        tulos = self.testieditori.muokkaa_viite("test1")
+        self.assertEqual(tulos, -1)
+        self.assertIn("Ei avattua tiedostoa. Avaa tiedosto ensin komennolla 'avaa'.", self.testieditori.io.messages)
+
+    def test_muokkaa_kokonainen_viite_avaimella_ei_loytynyt(self):
+        alkuperainen_sisalto = """
+@article{other1,
+  author = {Some Author},
+  title = {Some Title},
+  year = {2021}
+}
+"""
+        with open(self.testitiedosto, "w") as f:
+            f.write(alkuperainen_sisalto)
+
+        self.testieditori.aktiivinen_tiedosto = Path(self.testitiedosto)
+        tulos = self.testieditori.muokkaa_viite("test1")
+
+        self.assertEqual(tulos, -1)
+        self.assertIn("Viitettä avaimella 'test1' ei löytynyt.", self.testieditori.io.messages)
+
+    def test_viite_jaa_muokkaamatta_(self):
+        alkuperainen_sisalto = """
+@article{test1,
+  author = {Old Author},
+  title = {Old Title},
+  year = {2020}
+}
+"""
+
+        DummyConsoleIO.data = [
+            "",
+            "",
+            ""
+        ]
+        with open(self.testitiedosto, "w") as f:
+            f.write(alkuperainen_sisalto)
+
+        self.testieditori.aktiivinen_tiedosto = Path(self.testitiedosto)
+        self.testieditori.muokkaa_viite("test1")
+
+        with open(self.testitiedosto, "r") as f:
+            sisalto = f.read()
+
+        odotettu_sisalto = """
+@article{test1,
+  author = {Old Author},
+  title = {Old Title},
+  year = {2020}
+}
+"""
+        self.assertEqual(sisalto.strip(), odotettu_sisalto.strip())
+
     def test_lisaa_tagi_onnistuneesti(self):
         """testataan tagin lisäämistä oikeilla arvoilla"""
         alkuperainen_sisalto = """
