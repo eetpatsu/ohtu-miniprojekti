@@ -41,6 +41,7 @@ class Komentolukija:
 
             case "muokkaa":
                 viitteen_avain = self.io.lue("Anna muokattavan viitteen avain: ")
+                self.viite_editori.muokkaa_viite(viitteen_avain)
 
             case "muokkaaparam":
                 viitteen_avain = self.io.lue("Anna muokattavan viitteen avain: ")
