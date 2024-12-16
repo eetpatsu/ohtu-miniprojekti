@@ -41,7 +41,7 @@ Parametrin Tyyppi Ei Kelpaa
     Tulosteen Tulisi Sisaltaa  Muokkaus epäonnistui tarkista parametrin tyyppi
     [Teardown]  Remove File  ${TIEDOSTONIMI}
 
-Muokataan Viite Avaimella
+Muokataan Koko Viite Avaimella
     Kaynnista Sovellus Argumenteilla  ${TIEDOSTONIMI}
     Syota Data  CBH91
     Syota Data  Lorem
@@ -65,4 +65,28 @@ Muokataan Viite Avaimella
     Tulosteen Tulisi Sisaltaa  year = {2000}
     Tulosteen Tulisi Sisaltaa  volume = {10}
     Tulosteen Tulisi Sisaltaa  pages = {20--25}
+    [Teardown]  Remove File  ${TIEDOSTONIMI}
+
+Ei Muokata Mitaan
+    Kaynnista Sovellus Argumenteilla  ${TIEDOSTONIMI}
+    Syota Data  CBH91
+    Syota Data  ENTER
+    Syota Data  ENTER
+    Syota Data  ENTER
+    Syota Data  ENTER
+    Syota Data  ENTER
+    Syota Data  ENTER
+    Syota Komento  muokkaa
+    Tulosteen Tulisi Sisaltaa  Anna muokattavan viitteen avain:
+    Tulosteen Tulisi Sisaltaa  Parametrin author nykyinen arvo on: Allan Collins and John Seely Brown and Ann Holum
+    Tulosteen Tulisi Sisaltaa  Anna uusi arvo parametriin author
+    Tulosteen Tulisi Sisaltaa  Parametrin pages nykyinen arvo on: 38--46
+    Tulosteen Tulisi Sisaltaa  Anna uusi arvo parametriin pages
+    Syota Komento  tulosta
+    Tulosteen Tulisi Sisaltaa  author = {Allan Collins and John Seely Brown and Ann Holum}
+    Tulosteen Tulisi Sisaltaa  title = {Cognitive apprenticeship: making thinking visible}
+    Tulosteen Tulisi Sisaltaa  journal = {American Educator}
+    Tulosteen Tulisi Sisaltaa  year = {1991}
+    Tulosteen Tulisi Sisaltaa  volume = {6}
+    Tulosteen Tulisi Sisaltaa  pages = {38--46}
     [Teardown]  Remove File  ${TIEDOSTONIMI}
