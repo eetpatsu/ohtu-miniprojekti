@@ -1,0 +1,1483 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.1.1 (Python 3.13.0 on win32)" generated="2024-12-16T19:54:54.976470" rpa="false" schemaversion="5">
+<suite id="s1" name="Tests" source="C:\Users\Sutinen\ohtu-miniprojekti\src\tests">
+<suite id="s1-s1" name="Kehote Tulostaa Oikein" source="C:\Users\Sutinen\ohtu-miniprojekti\src\tests\kehote_tulostaa_oikein.robot">
+<test id="s1-s1-t1" name="Help Tulostuu Ohjelman Alkuun" line="14">
+<kw name="Kaynnista Sovellus" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.030140" level="INFO">Komennot:
+help		tulostaa tämän viestin
+exit		poistuu ohjelmasta
+avaa		avaa bib-tiedoston
+luo		luo bib-tiedoston
+tulosta		tulostaa aktiivisen bib-tiedoston sisällön
+syota		tallentaa bib-dataa aktiiviseen bib-tiedostoon
+muokkaa		muokkaa valitun viitteen parametreja
+muokkaaparam	muokkaa valitun viitteen haluttua parametria
+lisaatagi	lisää halutun tagin
+poistatagi	poistaa halutun tagin
+etsitagi	etsi viitteitä tagin perusteella</msg>
+<doc>Kutsuu samoja funktioita kuin sovellus käynnistettäessä. Ei kuitenkaan oikeasti käynnistä mitään.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.028915" elapsed="0.001320"/>
+</kw>
+<kw name="Tulosteen Tulisi Sisaltaa" owner="KomentolukijaLibrary">
+<arg>${OHJETEKSTI}</arg>
+<doc>Tarkistaa löytyykö tulosteesta (mistään) annettua merkkijonoa. Yhden välilyönnin tilalla sallitaan enemmänkin tilaa.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.030649" elapsed="0.001314"/>
+</kw>
+<timeout value="5 seconds"/>
+<status status="PASS" start="2024-12-16T19:54:55.027977" elapsed="0.004371"/>
+</test>
+<test id="s1-s1-t2" name="Testaa Help Komento" line="18">
+<kw name="Kaynnista Sovellus" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.034830" level="INFO">Komennot:
+help		tulostaa tämän viestin
+exit		poistuu ohjelmasta
+avaa		avaa bib-tiedoston
+luo		luo bib-tiedoston
+tulosta		tulostaa aktiivisen bib-tiedoston sisällön
+syota		tallentaa bib-dataa aktiiviseen bib-tiedostoon
+muokkaa		muokkaa valitun viitteen parametreja
+muokkaaparam	muokkaa valitun viitteen haluttua parametria
+lisaatagi	lisää halutun tagin
+poistatagi	poistaa halutun tagin
+etsitagi	etsi viitteitä tagin perusteella</msg>
+<doc>Kutsuu samoja funktioita kuin sovellus käynnistettäessä. Ei kuitenkaan oikeasti käynnistä mitään.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.034038" elapsed="0.000855"/>
+</kw>
+<kw name="Syota Komento" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.035905" level="INFO">Komennot:
+help		tulostaa tämän viestin
+exit		poistuu ohjelmasta
+avaa		avaa bib-tiedoston
+luo		luo bib-tiedoston
+tulosta		tulostaa aktiivisen bib-tiedoston sisällön
+syota		tallentaa bib-dataa aktiiviseen bib-tiedostoon
+muokkaa		muokkaa valitun viitteen parametreja
+muokkaaparam	muokkaa valitun viitteen haluttua parametria
+lisaatagi	lisää halutun tagin
+poistatagi	poistaa halutun tagin
+etsitagi	etsi viitteitä tagin perusteella</msg>
+<arg>help</arg>
+<doc>Laittaa sovelluksen käsittelemään annetun komennon. 
+Jos komennon seurauksena kysytään käyttäjältä lisää parametreja,
+ne täytyy syöttää ennen funktion kutsumista. (Katso resource.robot "Syota Komennot")</doc>
+<status status="PASS" start="2024-12-16T19:54:55.035289" elapsed="0.000672"/>
+</kw>
+<kw name="Tulosteen Tulisi Sisaltaa" owner="KomentolukijaLibrary">
+<arg>${OHJETEKSTI}</arg>
+<doc>Tarkistaa löytyykö tulosteesta (mistään) annettua merkkijonoa. Yhden välilyönnin tilalla sallitaan enemmänkin tilaa.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.036316" elapsed="0.000534"/>
+</kw>
+<timeout value="5 seconds"/>
+<status status="PASS" start="2024-12-16T19:54:55.033527" elapsed="0.003677"/>
+</test>
+<status status="PASS" start="2024-12-16T19:54:55.010198" elapsed="0.027833"/>
+</suite>
+<suite id="s1-s2" name="Lisaa Tai Poista Tagi" source="C:\Users\Sutinen\ohtu-miniprojekti\src\tests\lisaa_tai_poista_tagi.robot">
+<test id="s1-s2-t1" name="Lisaa Tagi" line="12">
+<kw name="Luo Testitiedosto" owner="resource" type="SETUP">
+<kw name="Create File" owner="OperatingSystem">
+<msg time="2024-12-16T19:54:55.045357" level="INFO" html="true">Created file '&lt;a href="file://C:\Users\Sutinen\ohtu-miniprojekti\testi.bib"&gt;C:\Users\Sutinen\ohtu-miniprojekti\testi.bib&lt;/a&gt;'.</msg>
+<arg>${tiedostonimi}</arg>
+<arg>@article{CBH91,\nauthor = {Allan Collins and John Seely Brown and Ann Holum},\ntitle = {Cognitive apprenticeship: making thinking visible},\njournal = {American Educator},\nyear = {1991},\nvolume = {6},\npages = {38--46}\n}\n\n@book{Martin09,\nauthor = {Martin, Robert},\ntitle = {Clean Code: A Handbook of Agile Software Craftsmanship},\nyear = {1888},\npublisher = {Prentice Hall}\n}@comment{testi,tunniste2,ohjelmointi}</arg>
+<doc>Creates a file with the given content and encoding.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.044421" elapsed="0.001007"/>
+</kw>
+<arg>${TIEDOSTONIMI}</arg>
+<status status="PASS" start="2024-12-16T19:54:55.044161" elapsed="0.001358"/>
+</kw>
+<kw name="Kaynnista Sovellus Argumenteilla" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.047112" level="INFO">Avattiin tiedosto: C:\Users\Sutinen\ohtu-miniprojekti\testi.bib
+
+Komennot:
+help		tulostaa tämän viestin
+exit		poistuu ohjelmasta
+avaa		avaa bib-tiedoston
+luo		luo bib-tiedoston
+tulosta		tulostaa aktiivisen bib-tiedoston sisällön
+syota		tallentaa bib-dataa aktiiviseen bib-tiedostoon
+muokkaa		muokkaa valitun viitteen parametreja
+muokkaaparam	muokkaa valitun viitteen haluttua parametria
+lisaatagi	lisää halutun tagin
+poistatagi	poistaa halutun tagin
+etsitagi	etsi viitteitä tagin perusteella</msg>
+<arg>${TIEDOSTONIMI}</arg>
+<doc>Sama kuin edellinen, mutta tekee samat asiat kuin sovellus käynnistettäessä samoilla argumenteilla.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.045782" elapsed="0.001395"/>
+</kw>
+<kw name="Syota Komennot" owner="resource">
+<for flavor="IN">
+<iter>
+<kw name="Syota Data" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.048096" level="INFO">Syötetään: CBH91</msg>
+<arg>${komento}</arg>
+<doc>Syöttää käyttäjän antamaa dataa valmiiksi. Ohjelma lukee näitä sitä mukaa kun io:n funktiota "lue" kutsutaan.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.047977" elapsed="0.000157"/>
+</kw>
+<var name="${komento}">CBH91</var>
+<status status="PASS" start="2024-12-16T19:54:55.047868" elapsed="0.000318"/>
+</iter>
+<iter>
+<kw name="Syota Data" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.048438" level="INFO">Syötetään: testitagi</msg>
+<arg>${komento}</arg>
+<doc>Syöttää käyttäjän antamaa dataa valmiiksi. Ohjelma lukee näitä sitä mukaa kun io:n funktiota "lue" kutsutaan.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.048344" elapsed="0.000132"/>
+</kw>
+<var name="${komento}">testitagi</var>
+<status status="PASS" start="2024-12-16T19:54:55.048286" elapsed="0.000222"/>
+</iter>
+<var>${komento}</var>
+<value>@{komennot}</value>
+<status status="PASS" start="2024-12-16T19:54:55.047744" elapsed="0.000793"/>
+</for>
+<kw name="Syota Komento" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.049968" level="INFO">Luetaan komento: CBH91
+Luetaan komento: testitagi</msg>
+<arg>${komento1}</arg>
+<doc>Laittaa sovelluksen käsittelemään annetun komennon. 
+Jos komennon seurauksena kysytään käyttäjältä lisää parametreja,
+ne täytyy syöttää ennen funktion kutsumista. (Katso resource.robot "Syota Komennot")</doc>
+<status status="PASS" start="2024-12-16T19:54:55.048623" elapsed="0.001435"/>
+</kw>
+<arg>lisaatagi</arg>
+<arg>CBH91</arg>
+<arg>testitagi</arg>
+<status status="PASS" start="2024-12-16T19:54:55.047514" elapsed="0.002648"/>
+</kw>
+<kw name="Syota Komento" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.051923" level="INFO">Tiedoston testi.bib sisältö:
+@article{CBH91,
+  author  = {Allan Collins and John Seely Brown and Ann Holum},
+  title   = {Cognitive apprenticeship: making thinking visible},
+  journal = {American Educator},
+  year    = {1991},
+  volume  = {6},
+  pages   = {38--46}
+}@comment{testitagi}
+
+@book{Martin09,
+author = {Martin, Robert},
+title = {Clean Code: A Handbook of Agile Software Craftsmanship},
+year = {1888},
+publisher = {Prentice Hall}
+}@comment{testi,tunniste2,ohjelmointi}</msg>
+<arg>tulosta</arg>
+<doc>Laittaa sovelluksen käsittelemään annetun komennon. 
+Jos komennon seurauksena kysytään käyttäjältä lisää parametreja,
+ne täytyy syöttää ennen funktion kutsumista. (Katso resource.robot "Syota Komennot")</doc>
+<status status="PASS" start="2024-12-16T19:54:55.050558" elapsed="0.001609"/>
+</kw>
+<kw name="Tulosteen Tulisi Sisaltaa" owner="KomentolukijaLibrary">
+<arg>@comment{testitagi}</arg>
+<doc>Tarkistaa löytyykö tulosteesta (mistään) annettua merkkijonoa. Yhden välilyönnin tilalla sallitaan enemmänkin tilaa.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.052452" elapsed="0.000188"/>
+</kw>
+<kw name="Remove File" owner="OperatingSystem" type="TEARDOWN">
+<msg time="2024-12-16T19:54:55.053330" level="INFO" html="true">Removed file '&lt;a href="file://C:\Users\Sutinen\ohtu-miniprojekti\testi.bib"&gt;C:\Users\Sutinen\ohtu-miniprojekti\testi.bib&lt;/a&gt;'.</msg>
+<arg>${TIEDOSTONIMI}</arg>
+<doc>Removes a file with the given path.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.052937" elapsed="0.000459"/>
+</kw>
+<status status="PASS" start="2024-12-16T19:54:55.043704" elapsed="0.009908"/>
+</test>
+<test id="s1-s2-t2" name="Tagin Lisays Avaamatta Tiedostoa" line="19">
+<kw name="Luo Testitiedosto" owner="resource" type="SETUP">
+<kw name="Create File" owner="OperatingSystem">
+<msg time="2024-12-16T19:54:55.056363" level="INFO" html="true">Created file '&lt;a href="file://C:\Users\Sutinen\ohtu-miniprojekti\testi.bib"&gt;C:\Users\Sutinen\ohtu-miniprojekti\testi.bib&lt;/a&gt;'.</msg>
+<arg>${tiedostonimi}</arg>
+<arg>@article{CBH91,\nauthor = {Allan Collins and John Seely Brown and Ann Holum},\ntitle = {Cognitive apprenticeship: making thinking visible},\njournal = {American Educator},\nyear = {1991},\nvolume = {6},\npages = {38--46}\n}\n\n@book{Martin09,\nauthor = {Martin, Robert},\ntitle = {Clean Code: A Handbook of Agile Software Craftsmanship},\nyear = {1888},\npublisher = {Prentice Hall}\n}@comment{testi,tunniste2,ohjelmointi}</arg>
+<doc>Creates a file with the given content and encoding.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.055470" elapsed="0.001019"/>
+</kw>
+<arg>${TIEDOSTONIMI}</arg>
+<status status="PASS" start="2024-12-16T19:54:55.055124" elapsed="0.001459"/>
+</kw>
+<kw name="Kaynnista Sovellus" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.057006" level="INFO">Komennot:
+help		tulostaa tämän viestin
+exit		poistuu ohjelmasta
+avaa		avaa bib-tiedoston
+luo		luo bib-tiedoston
+tulosta		tulostaa aktiivisen bib-tiedoston sisällön
+syota		tallentaa bib-dataa aktiiviseen bib-tiedostoon
+muokkaa		muokkaa valitun viitteen parametreja
+muokkaaparam	muokkaa valitun viitteen haluttua parametria
+lisaatagi	lisää halutun tagin
+poistatagi	poistaa halutun tagin
+etsitagi	etsi viitteitä tagin perusteella</msg>
+<doc>Kutsuu samoja funktioita kuin sovellus käynnistettäessä. Ei kuitenkaan oikeasti käynnistä mitään.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.056882" elapsed="0.000170"/>
+</kw>
+<kw name="Syota Komennot" owner="resource">
+<for flavor="IN">
+<iter>
+<kw name="Syota Data" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.058244" level="INFO">Syötetään: CBH91</msg>
+<arg>${komento}</arg>
+<doc>Syöttää käyttäjän antamaa dataa valmiiksi. Ohjelma lukee näitä sitä mukaa kun io:n funktiota "lue" kutsutaan.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.058097" elapsed="0.000205"/>
+</kw>
+<var name="${komento}">CBH91</var>
+<status status="PASS" start="2024-12-16T19:54:55.057995" elapsed="0.000347"/>
+</iter>
+<iter>
+<kw name="Syota Data" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.058652" level="INFO">Syötetään: testitagi</msg>
+<arg>${komento}</arg>
+<doc>Syöttää käyttäjän antamaa dataa valmiiksi. Ohjelma lukee näitä sitä mukaa kun io:n funktiota "lue" kutsutaan.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.058501" elapsed="0.000191"/>
+</kw>
+<var name="${komento}">testitagi</var>
+<status status="PASS" start="2024-12-16T19:54:55.058432" elapsed="0.000294"/>
+</iter>
+<var>${komento}</var>
+<value>@{komennot}</value>
+<status status="PASS" start="2024-12-16T19:54:55.057815" elapsed="0.000940"/>
+</for>
+<kw name="Syota Komento" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.058975" level="INFO">Luetaan komento: CBH91
+Luetaan komento: testitagi
+Ei avattua tiedostoa. Avaa tiedosto ensin komennolla 'avaa'.</msg>
+<arg>${komento1}</arg>
+<doc>Laittaa sovelluksen käsittelemään annetun komennon. 
+Jos komennon seurauksena kysytään käyttäjältä lisää parametreja,
+ne täytyy syöttää ennen funktion kutsumista. (Katso resource.robot "Syota Komennot")</doc>
+<status status="PASS" start="2024-12-16T19:54:55.058852" elapsed="0.000160"/>
+</kw>
+<arg>lisaatagi</arg>
+<arg>CBH91</arg>
+<arg>testitagi</arg>
+<status status="PASS" start="2024-12-16T19:54:55.057440" elapsed="0.001627"/>
+</kw>
+<kw name="Tulosteen Tulisi Sisaltaa" owner="KomentolukijaLibrary">
+<arg>Ei avattua tiedostoa. Avaa tiedosto ensin komennolla 'avaa'.</arg>
+<doc>Tarkistaa löytyykö tulosteesta (mistään) annettua merkkijonoa. Yhden välilyönnin tilalla sallitaan enemmänkin tilaa.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.059329" elapsed="0.000309"/>
+</kw>
+<kw name="Remove File" owner="OperatingSystem" type="TEARDOWN">
+<msg time="2024-12-16T19:54:55.060405" level="INFO" html="true">Removed file '&lt;a href="file://C:\Users\Sutinen\ohtu-miniprojekti\testi.bib"&gt;C:\Users\Sutinen\ohtu-miniprojekti\testi.bib&lt;/a&gt;'.</msg>
+<arg>${TIEDOSTONIMI}</arg>
+<doc>Removes a file with the given path.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.059939" elapsed="0.000552"/>
+</kw>
+<status status="PASS" start="2024-12-16T19:54:55.054484" elapsed="0.006205"/>
+</test>
+<test id="s1-s2-t3" name="Poista Tagi" line="25">
+<kw name="Luo Testitiedosto" owner="resource" type="SETUP">
+<kw name="Create File" owner="OperatingSystem">
+<msg time="2024-12-16T19:54:55.063369" level="INFO" html="true">Created file '&lt;a href="file://C:\Users\Sutinen\ohtu-miniprojekti\testi.bib"&gt;C:\Users\Sutinen\ohtu-miniprojekti\testi.bib&lt;/a&gt;'.</msg>
+<arg>${tiedostonimi}</arg>
+<arg>@article{CBH91,\nauthor = {Allan Collins and John Seely Brown and Ann Holum},\ntitle = {Cognitive apprenticeship: making thinking visible},\njournal = {American Educator},\nyear = {1991},\nvolume = {6},\npages = {38--46}\n}\n\n@book{Martin09,\nauthor = {Martin, Robert},\ntitle = {Clean Code: A Handbook of Agile Software Craftsmanship},\nyear = {1888},\npublisher = {Prentice Hall}\n}@comment{testi,tunniste2,ohjelmointi}</arg>
+<doc>Creates a file with the given content and encoding.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.062358" elapsed="0.001154"/>
+</kw>
+<arg>${TIEDOSTONIMI}</arg>
+<status status="PASS" start="2024-12-16T19:54:55.061938" elapsed="0.001702"/>
+</kw>
+<kw name="Kaynnista Sovellus Argumenteilla" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.065532" level="INFO">Avattiin tiedosto: C:\Users\Sutinen\ohtu-miniprojekti\testi.bib
+
+Komennot:
+help		tulostaa tämän viestin
+exit		poistuu ohjelmasta
+avaa		avaa bib-tiedoston
+luo		luo bib-tiedoston
+tulosta		tulostaa aktiivisen bib-tiedoston sisällön
+syota		tallentaa bib-dataa aktiiviseen bib-tiedostoon
+muokkaa		muokkaa valitun viitteen parametreja
+muokkaaparam	muokkaa valitun viitteen haluttua parametria
+lisaatagi	lisää halutun tagin
+poistatagi	poistaa halutun tagin
+etsitagi	etsi viitteitä tagin perusteella</msg>
+<arg>${TIEDOSTONIMI}</arg>
+<doc>Sama kuin edellinen, mutta tekee samat asiat kuin sovellus käynnistettäessä samoilla argumenteilla.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.064031" elapsed="0.001597"/>
+</kw>
+<kw name="Syota Komennot" owner="resource">
+<for flavor="IN">
+<iter>
+<kw name="Syota Data" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.066608" level="INFO">Syötetään: CBH91</msg>
+<arg>${komento}</arg>
+<doc>Syöttää käyttäjän antamaa dataa valmiiksi. Ohjelma lukee näitä sitä mukaa kun io:n funktiota "lue" kutsutaan.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.066489" elapsed="0.000160"/>
+</kw>
+<var name="${komento}">CBH91</var>
+<status status="PASS" start="2024-12-16T19:54:55.066413" elapsed="0.000380"/>
+</iter>
+<iter>
+<kw name="Syota Data" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.067079" level="INFO">Syötetään: eka</msg>
+<arg>${komento}</arg>
+<doc>Syöttää käyttäjän antamaa dataa valmiiksi. Ohjelma lukee näitä sitä mukaa kun io:n funktiota "lue" kutsutaan.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.066960" elapsed="0.000156"/>
+</kw>
+<var name="${komento}">eka</var>
+<status status="PASS" start="2024-12-16T19:54:55.066893" elapsed="0.000256"/>
+</iter>
+<var>${komento}</var>
+<value>@{komennot}</value>
+<status status="PASS" start="2024-12-16T19:54:55.066304" elapsed="0.000873"/>
+</for>
+<kw name="Syota Komento" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.068133" level="INFO">Luetaan komento: CBH91
+Luetaan komento: eka</msg>
+<arg>${komento1}</arg>
+<doc>Laittaa sovelluksen käsittelemään annetun komennon. 
+Jos komennon seurauksena kysytään käyttäjältä lisää parametreja,
+ne täytyy syöttää ennen funktion kutsumista. (Katso resource.robot "Syota Komennot")</doc>
+<status status="PASS" start="2024-12-16T19:54:55.067258" elapsed="0.000974"/>
+</kw>
+<arg>lisaatagi</arg>
+<arg>CBH91</arg>
+<arg>eka</arg>
+<status status="PASS" start="2024-12-16T19:54:55.066047" elapsed="0.002265"/>
+</kw>
+<kw name="Syota Komento" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.069837" level="INFO">Tiedoston testi.bib sisältö:
+@article{CBH91,
+  author  = {Allan Collins and John Seely Brown and Ann Holum},
+  title   = {Cognitive apprenticeship: making thinking visible},
+  journal = {American Educator},
+  year    = {1991},
+  volume  = {6},
+  pages   = {38--46}
+}@comment{eka}
+
+@book{Martin09,
+author = {Martin, Robert},
+title = {Clean Code: A Handbook of Agile Software Craftsmanship},
+year = {1888},
+publisher = {Prentice Hall}
+}@comment{testi,tunniste2,ohjelmointi}</msg>
+<arg>tulosta</arg>
+<doc>Laittaa sovelluksen käsittelemään annetun komennon. 
+Jos komennon seurauksena kysytään käyttäjältä lisää parametreja,
+ne täytyy syöttää ennen funktion kutsumista. (Katso resource.robot "Syota Komennot")</doc>
+<status status="PASS" start="2024-12-16T19:54:55.068628" elapsed="0.001280"/>
+</kw>
+<kw name="Tulosteen Tulisi Sisaltaa" owner="KomentolukijaLibrary">
+<arg>@comment{eka}</arg>
+<doc>Tarkistaa löytyykö tulosteesta (mistään) annettua merkkijonoa. Yhden välilyönnin tilalla sallitaan enemmänkin tilaa.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.070223" elapsed="0.000207"/>
+</kw>
+<kw name="Syota Komennot" owner="resource">
+<for flavor="IN">
+<iter>
+<kw name="Syota Data" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.071229" level="INFO">Syötetään: CBH91</msg>
+<arg>${komento}</arg>
+<doc>Syöttää käyttäjän antamaa dataa valmiiksi. Ohjelma lukee näitä sitä mukaa kun io:n funktiota "lue" kutsutaan.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.071123" elapsed="0.000144"/>
+</kw>
+<var name="${komento}">CBH91</var>
+<status status="PASS" start="2024-12-16T19:54:55.071048" elapsed="0.000252"/>
+</iter>
+<iter>
+<kw name="Syota Data" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.071526" level="INFO">Syötetään: toka</msg>
+<arg>${komento}</arg>
+<doc>Syöttää käyttäjän antamaa dataa valmiiksi. Ohjelma lukee näitä sitä mukaa kun io:n funktiota "lue" kutsutaan.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.071428" elapsed="0.000132"/>
+</kw>
+<var name="${komento}">toka</var>
+<status status="PASS" start="2024-12-16T19:54:55.071372" elapsed="0.000219"/>
+</iter>
+<var>${komento}</var>
+<value>@{komennot}</value>
+<status status="PASS" start="2024-12-16T19:54:55.070935" elapsed="0.000696"/>
+</for>
+<kw name="Syota Komento" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.072527" level="INFO">Luetaan komento: CBH91
+Luetaan komento: toka</msg>
+<arg>${komento1}</arg>
+<doc>Laittaa sovelluksen käsittelemään annetun komennon. 
+Jos komennon seurauksena kysytään käyttäjältä lisää parametreja,
+ne täytyy syöttää ennen funktion kutsumista. (Katso resource.robot "Syota Komennot")</doc>
+<status status="PASS" start="2024-12-16T19:54:55.071708" elapsed="0.000870"/>
+</kw>
+<arg>lisaatagi</arg>
+<arg>CBH91</arg>
+<arg>toka</arg>
+<status status="PASS" start="2024-12-16T19:54:55.070734" elapsed="0.001913"/>
+</kw>
+<kw name="Syota Komento" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.074142" level="INFO">Tiedoston testi.bib sisältö:
+@article{CBH91,
+  author  = {Allan Collins and John Seely Brown and Ann Holum},
+  title   = {Cognitive apprenticeship: making thinking visible},
+  journal = {American Educator},
+  year    = {1991},
+  volume  = {6},
+  pages   = {38--46}
+}@comment{eka, toka}
+
+@book{Martin09,
+author = {Martin, Robert},
+title = {Clean Code: A Handbook of Agile Software Craftsmanship},
+year = {1888},
+publisher = {Prentice Hall}
+}@comment{testi,tunniste2,ohjelmointi}</msg>
+<arg>tulosta</arg>
+<doc>Laittaa sovelluksen käsittelemään annetun komennon. 
+Jos komennon seurauksena kysytään käyttäjältä lisää parametreja,
+ne täytyy syöttää ennen funktion kutsumista. (Katso resource.robot "Syota Komennot")</doc>
+<status status="PASS" start="2024-12-16T19:54:55.072910" elapsed="0.001307"/>
+</kw>
+<kw name="Tulosteen Tulisi Sisaltaa" owner="KomentolukijaLibrary">
+<arg>@comment{eka, toka}</arg>
+<doc>Tarkistaa löytyykö tulosteesta (mistään) annettua merkkijonoa. Yhden välilyönnin tilalla sallitaan enemmänkin tilaa.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.074532" elapsed="0.000217"/>
+</kw>
+<kw name="Syota Komennot" owner="resource">
+<for flavor="IN">
+<iter>
+<kw name="Syota Data" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.075555" level="INFO">Syötetään: CBH91</msg>
+<arg>${komento}</arg>
+<doc>Syöttää käyttäjän antamaa dataa valmiiksi. Ohjelma lukee näitä sitä mukaa kun io:n funktiota "lue" kutsutaan.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.075456" elapsed="0.000137"/>
+</kw>
+<var name="${komento}">CBH91</var>
+<status status="PASS" start="2024-12-16T19:54:55.075393" elapsed="0.000232"/>
+</iter>
+<iter>
+<kw name="Syota Data" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.075865" level="INFO">Syötetään: toka</msg>
+<arg>${komento}</arg>
+<doc>Syöttää käyttäjän antamaa dataa valmiiksi. Ohjelma lukee näitä sitä mukaa kun io:n funktiota "lue" kutsutaan.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.075768" elapsed="0.000133"/>
+</kw>
+<var name="${komento}">toka</var>
+<status status="PASS" start="2024-12-16T19:54:55.075710" elapsed="0.000223"/>
+</iter>
+<var>${komento}</var>
+<value>@{komennot}</value>
+<status status="PASS" start="2024-12-16T19:54:55.075289" elapsed="0.000671"/>
+</for>
+<kw name="Syota Komento" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.076913" level="INFO">Luetaan komento: CBH91
+Luetaan komento: toka</msg>
+<arg>${komento1}</arg>
+<doc>Laittaa sovelluksen käsittelemään annetun komennon. 
+Jos komennon seurauksena kysytään käyttäjältä lisää parametreja,
+ne täytyy syöttää ennen funktion kutsumista. (Katso resource.robot "Syota Komennot")</doc>
+<status status="PASS" start="2024-12-16T19:54:55.076040" elapsed="0.000925"/>
+</kw>
+<arg>poistatagi</arg>
+<arg>CBH91</arg>
+<arg>toka</arg>
+<status status="PASS" start="2024-12-16T19:54:55.075081" elapsed="0.001951"/>
+</kw>
+<kw name="Syota Komento" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.078752" level="INFO">Tiedoston testi.bib sisältö:
+@article{CBH91,
+  author  = {Allan Collins and John Seely Brown and Ann Holum},
+  title   = {Cognitive apprenticeship: making thinking visible},
+  journal = {American Educator},
+  year    = {1991},
+  volume  = {6},
+  pages   = {38--46}
+}@comment{eka}
+
+@book{Martin09,
+author = {Martin, Robert},
+title = {Clean Code: A Handbook of Agile Software Craftsmanship},
+year = {1888},
+publisher = {Prentice Hall}
+}@comment{testi,tunniste2,ohjelmointi}</msg>
+<arg>tulosta</arg>
+<doc>Laittaa sovelluksen käsittelemään annetun komennon. 
+Jos komennon seurauksena kysytään käyttäjältä lisää parametreja,
+ne täytyy syöttää ennen funktion kutsumista. (Katso resource.robot "Syota Komennot")</doc>
+<status status="PASS" start="2024-12-16T19:54:55.077584" elapsed="0.001299"/>
+</kw>
+<kw name="Tulosteen Tulisi Sisaltaa" owner="KomentolukijaLibrary">
+<arg>@comment{eka}</arg>
+<doc>Tarkistaa löytyykö tulosteesta (mistään) annettua merkkijonoa. Yhden välilyönnin tilalla sallitaan enemmänkin tilaa.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.079201" elapsed="0.000151"/>
+</kw>
+<kw name="Remove File" owner="OperatingSystem" type="TEARDOWN">
+<msg time="2024-12-16T19:54:55.080127" level="INFO" html="true">Removed file '&lt;a href="file://C:\Users\Sutinen\ohtu-miniprojekti\testi.bib"&gt;C:\Users\Sutinen\ohtu-miniprojekti\testi.bib&lt;/a&gt;'.</msg>
+<arg>${TIEDOSTONIMI}</arg>
+<doc>Removes a file with the given path.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.079686" elapsed="0.000527"/>
+</kw>
+<status status="PASS" start="2024-12-16T19:54:55.061387" elapsed="0.019029"/>
+</test>
+<status status="PASS" start="2024-12-16T19:54:55.038814" elapsed="0.042408"/>
+</suite>
+<suite id="s1-s3" name="Luo Tai Avaa Bib Tiedosto" source="C:\Users\Sutinen\ohtu-miniprojekti\src\tests\luo_tai_avaa_bib_tiedosto.robot">
+<test id="s1-s3-t1" name="Luo Bib Tiedosto" line="11">
+<kw name="Kaynnista Sovellus" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.085729" level="INFO">Komennot:
+help		tulostaa tämän viestin
+exit		poistuu ohjelmasta
+avaa		avaa bib-tiedoston
+luo		luo bib-tiedoston
+tulosta		tulostaa aktiivisen bib-tiedoston sisällön
+syota		tallentaa bib-dataa aktiiviseen bib-tiedostoon
+muokkaa		muokkaa valitun viitteen parametreja
+muokkaaparam	muokkaa valitun viitteen haluttua parametria
+lisaatagi	lisää halutun tagin
+poistatagi	poistaa halutun tagin
+etsitagi	etsi viitteitä tagin perusteella</msg>
+<doc>Kutsuu samoja funktioita kuin sovellus käynnistettäessä. Ei kuitenkaan oikeasti käynnistä mitään.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.085629" elapsed="0.000150"/>
+</kw>
+<kw name="Syota Komennot" owner="resource">
+<for flavor="IN">
+<iter>
+<kw name="Syota Data" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.086528" level="INFO">Syötetään: testi.bib</msg>
+<arg>${komento}</arg>
+<doc>Syöttää käyttäjän antamaa dataa valmiiksi. Ohjelma lukee näitä sitä mukaa kun io:n funktiota "lue" kutsutaan.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.086431" elapsed="0.000133"/>
+</kw>
+<var name="${komento}">testi.bib</var>
+<status status="PASS" start="2024-12-16T19:54:55.086369" elapsed="0.000229"/>
+</iter>
+<var>${komento}</var>
+<value>@{komennot}</value>
+<status status="PASS" start="2024-12-16T19:54:55.086268" elapsed="0.000358"/>
+</for>
+<kw name="Syota Komento" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.087251" level="INFO">Luetaan komento: testi.bib
+Luodaan tiedosto sijaintiin: C:\Users\Sutinen\ohtu-miniprojekti\testi.bib</msg>
+<arg>${komento1}</arg>
+<doc>Laittaa sovelluksen käsittelemään annetun komennon. 
+Jos komennon seurauksena kysytään käyttäjältä lisää parametreja,
+ne täytyy syöttää ennen funktion kutsumista. (Katso resource.robot "Syota Komennot")</doc>
+<status status="PASS" start="2024-12-16T19:54:55.086701" elapsed="0.000599"/>
+</kw>
+<arg>luo</arg>
+<arg>${TIEDOSTONIMI}</arg>
+<status status="PASS" start="2024-12-16T19:54:55.086052" elapsed="0.001324"/>
+</kw>
+<kw name="File Should Exist" owner="OperatingSystem">
+<msg time="2024-12-16T19:54:55.087730" level="INFO" html="true">File '&lt;a href="file://C:\Users\Sutinen\ohtu-miniprojekti\testi.bib"&gt;C:\Users\Sutinen\ohtu-miniprojekti\testi.bib&lt;/a&gt;' exists.</msg>
+<arg>${TIEDOSTONIMI}</arg>
+<doc>Fails unless the given ``path`` points to an existing file.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.087564" elapsed="0.000224"/>
+</kw>
+<kw name="Remove File" owner="OperatingSystem" type="TEARDOWN">
+<msg time="2024-12-16T19:54:55.088495" level="INFO" html="true">Removed file '&lt;a href="file://C:\Users\Sutinen\ohtu-miniprojekti\testi.bib"&gt;C:\Users\Sutinen\ohtu-miniprojekti\testi.bib&lt;/a&gt;'.</msg>
+<arg>${TIEDOSTONIMI}</arg>
+<doc>Removes a file with the given path.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.088128" elapsed="0.000452"/>
+</kw>
+<status status="PASS" start="2024-12-16T19:54:55.085254" elapsed="0.003459"/>
+</test>
+<test id="s1-s3-t2" name="Yritä Luoda Tiedosto Joka On Jo Olemassa" line="16">
+<kw name="Luo Testitiedosto" owner="resource">
+<kw name="Create File" owner="OperatingSystem">
+<msg time="2024-12-16T19:54:55.091573" level="INFO" html="true">Created file '&lt;a href="file://C:\Users\Sutinen\ohtu-miniprojekti\testi.bib"&gt;C:\Users\Sutinen\ohtu-miniprojekti\testi.bib&lt;/a&gt;'.</msg>
+<arg>${tiedostonimi}</arg>
+<arg>@article{CBH91,\nauthor = {Allan Collins and John Seely Brown and Ann Holum},\ntitle = {Cognitive apprenticeship: making thinking visible},\njournal = {American Educator},\nyear = {1991},\nvolume = {6},\npages = {38--46}\n}\n\n@book{Martin09,\nauthor = {Martin, Robert},\ntitle = {Clean Code: A Handbook of Agile Software Craftsmanship},\nyear = {1888},\npublisher = {Prentice Hall}\n}@comment{testi,tunniste2,ohjelmointi}</arg>
+<doc>Creates a file with the given content and encoding.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.090738" elapsed="0.000921"/>
+</kw>
+<arg>${TIEDOSTONIMI}</arg>
+<status status="PASS" start="2024-12-16T19:54:55.089997" elapsed="0.001758"/>
+</kw>
+<kw name="File Should Exist" owner="OperatingSystem">
+<msg time="2024-12-16T19:54:55.092257" level="INFO" html="true">File '&lt;a href="file://C:\Users\Sutinen\ohtu-miniprojekti\testi.bib"&gt;C:\Users\Sutinen\ohtu-miniprojekti\testi.bib&lt;/a&gt;' exists.</msg>
+<arg>${TIEDOSTONIMI}</arg>
+<doc>Fails unless the given ``path`` points to an existing file.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.092008" elapsed="0.000306"/>
+</kw>
+<kw name="Kaynnista Sovellus" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.092652" level="INFO">Komennot:
+help		tulostaa tämän viestin
+exit		poistuu ohjelmasta
+avaa		avaa bib-tiedoston
+luo		luo bib-tiedoston
+tulosta		tulostaa aktiivisen bib-tiedoston sisällön
+syota		tallentaa bib-dataa aktiiviseen bib-tiedostoon
+muokkaa		muokkaa valitun viitteen parametreja
+muokkaaparam	muokkaa valitun viitteen haluttua parametria
+lisaatagi	lisää halutun tagin
+poistatagi	poistaa halutun tagin
+etsitagi	etsi viitteitä tagin perusteella</msg>
+<doc>Kutsuu samoja funktioita kuin sovellus käynnistettäessä. Ei kuitenkaan oikeasti käynnistä mitään.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.092551" elapsed="0.000150"/>
+</kw>
+<kw name="Syota Komennot" owner="resource">
+<for flavor="IN">
+<iter>
+<kw name="Syota Data" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.093501" level="INFO">Syötetään: testi.bib</msg>
+<arg>${komento}</arg>
+<doc>Syöttää käyttäjän antamaa dataa valmiiksi. Ohjelma lukee näitä sitä mukaa kun io:n funktiota "lue" kutsutaan.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.093385" elapsed="0.000155"/>
+</kw>
+<var name="${komento}">testi.bib</var>
+<status status="PASS" start="2024-12-16T19:54:55.093319" elapsed="0.000257"/>
+</iter>
+<var>${komento}</var>
+<value>@{komennot}</value>
+<status status="PASS" start="2024-12-16T19:54:55.093213" elapsed="0.000393"/>
+</for>
+<kw name="Syota Komento" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.094001" level="INFO">Luetaan komento: testi.bib
+Tapahtui virhe: Tiedosto C:\Users\Sutinen\ohtu-miniprojekti\testi.bib on jo olemassa.</msg>
+<arg>${komento1}</arg>
+<doc>Laittaa sovelluksen käsittelemään annetun komennon. 
+Jos komennon seurauksena kysytään käyttäjältä lisää parametreja,
+ne täytyy syöttää ennen funktion kutsumista. (Katso resource.robot "Syota Komennot")</doc>
+<status status="PASS" start="2024-12-16T19:54:55.093687" elapsed="0.000356"/>
+</kw>
+<arg>luo</arg>
+<arg>${TIEDOSTONIMI}</arg>
+<status status="PASS" start="2024-12-16T19:54:55.092970" elapsed="0.001215"/>
+</kw>
+<kw name="Tulosteen Tulisi Sisaltaa" owner="KomentolukijaLibrary">
+<arg>Tapahtui virhe:</arg>
+<doc>Tarkistaa löytyykö tulosteesta (mistään) annettua merkkijonoa. Yhden välilyönnin tilalla sallitaan enemmänkin tilaa.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.094404" elapsed="0.000171"/>
+</kw>
+<kw name="Remove File" owner="OperatingSystem" type="TEARDOWN">
+<msg time="2024-12-16T19:54:55.095212" level="INFO" html="true">Removed file '&lt;a href="file://C:\Users\Sutinen\ohtu-miniprojekti\testi.bib"&gt;C:\Users\Sutinen\ohtu-miniprojekti\testi.bib&lt;/a&gt;'.</msg>
+<arg>${TIEDOSTONIMI}</arg>
+<doc>Removes a file with the given path.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.094836" elapsed="0.000446"/>
+</kw>
+<status status="PASS" start="2024-12-16T19:54:55.089511" elapsed="0.005939"/>
+</test>
+<test id="s1-s3-t3" name="Avaa Bib Tiedosto" line="23">
+<kw name="Luo Testitiedosto" owner="resource">
+<kw name="Create File" owner="OperatingSystem">
+<msg time="2024-12-16T19:54:55.097548" level="INFO" html="true">Created file '&lt;a href="file://C:\Users\Sutinen\ohtu-miniprojekti\testi.bib"&gt;C:\Users\Sutinen\ohtu-miniprojekti\testi.bib&lt;/a&gt;'.</msg>
+<arg>${tiedostonimi}</arg>
+<arg>@article{CBH91,\nauthor = {Allan Collins and John Seely Brown and Ann Holum},\ntitle = {Cognitive apprenticeship: making thinking visible},\njournal = {American Educator},\nyear = {1991},\nvolume = {6},\npages = {38--46}\n}\n\n@book{Martin09,\nauthor = {Martin, Robert},\ntitle = {Clean Code: A Handbook of Agile Software Craftsmanship},\nyear = {1888},\npublisher = {Prentice Hall}\n}@comment{testi,tunniste2,ohjelmointi}</arg>
+<doc>Creates a file with the given content and encoding.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.096763" elapsed="0.000863"/>
+</kw>
+<arg>${TIEDOSTONIMI}</arg>
+<status status="PASS" start="2024-12-16T19:54:55.096496" elapsed="0.001244"/>
+</kw>
+<kw name="Kaynnista Sovellus" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.098186" level="INFO">Komennot:
+help		tulostaa tämän viestin
+exit		poistuu ohjelmasta
+avaa		avaa bib-tiedoston
+luo		luo bib-tiedoston
+tulosta		tulostaa aktiivisen bib-tiedoston sisällön
+syota		tallentaa bib-dataa aktiiviseen bib-tiedostoon
+muokkaa		muokkaa valitun viitteen parametreja
+muokkaaparam	muokkaa valitun viitteen haluttua parametria
+lisaatagi	lisää halutun tagin
+poistatagi	poistaa halutun tagin
+etsitagi	etsi viitteitä tagin perusteella</msg>
+<doc>Kutsuu samoja funktioita kuin sovellus käynnistettäessä. Ei kuitenkaan oikeasti käynnistä mitään.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.098069" elapsed="0.000165"/>
+</kw>
+<kw name="Syota Komennot" owner="resource">
+<for flavor="IN">
+<iter>
+<kw name="Syota Data" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.099111" level="INFO">Syötetään: testi.bib</msg>
+<arg>${komento}</arg>
+<doc>Syöttää käyttäjän antamaa dataa valmiiksi. Ohjelma lukee näitä sitä mukaa kun io:n funktiota "lue" kutsutaan.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.098991" elapsed="0.000160"/>
+</kw>
+<var name="${komento}">testi.bib</var>
+<status status="PASS" start="2024-12-16T19:54:55.098923" elapsed="0.000263"/>
+</iter>
+<var>${komento}</var>
+<value>@{komennot}</value>
+<status status="PASS" start="2024-12-16T19:54:55.098819" elapsed="0.000396"/>
+</for>
+<kw name="Syota Komento" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.100449" level="INFO">Luetaan komento: testi.bib
+Avattiin tiedosto: C:\Users\Sutinen\ohtu-miniprojekti\testi.bib</msg>
+<arg>${komento1}</arg>
+<doc>Laittaa sovelluksen käsittelemään annetun komennon. 
+Jos komennon seurauksena kysytään käyttäjältä lisää parametreja,
+ne täytyy syöttää ennen funktion kutsumista. (Katso resource.robot "Syota Komennot")</doc>
+<status status="PASS" start="2024-12-16T19:54:55.099292" elapsed="0.001215"/>
+</kw>
+<arg>avaa</arg>
+<arg>${TIEDOSTONIMI}</arg>
+<status status="PASS" start="2024-12-16T19:54:55.098578" elapsed="0.002002"/>
+</kw>
+<kw name="Tulosteen Tulisi Sisaltaa" owner="KomentolukijaLibrary">
+<arg>Avattiin tiedosto:</arg>
+<doc>Tarkistaa löytyykö tulosteesta (mistään) annettua merkkijonoa. Yhden välilyönnin tilalla sallitaan enemmänkin tilaa.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.100839" elapsed="0.000202"/>
+</kw>
+<kw name="Tulosteen Tulisi Sisaltaa" owner="KomentolukijaLibrary">
+<arg>${TIEDOSTONIMI}</arg>
+<doc>Tarkistaa löytyykö tulosteesta (mistään) annettua merkkijonoa. Yhden välilyönnin tilalla sallitaan enemmänkin tilaa.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.101246" elapsed="0.000169"/>
+</kw>
+<kw name="Remove File" owner="OperatingSystem" type="TEARDOWN">
+<msg time="2024-12-16T19:54:55.102050" level="INFO" html="true">Removed file '&lt;a href="file://C:\Users\Sutinen\ohtu-miniprojekti\testi.bib"&gt;C:\Users\Sutinen\ohtu-miniprojekti\testi.bib&lt;/a&gt;'.</msg>
+<arg>${TIEDOSTONIMI}</arg>
+<doc>Removes a file with the given path.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.101676" elapsed="0.000429"/>
+</kw>
+<status status="PASS" start="2024-12-16T19:54:55.096133" elapsed="0.006176"/>
+</test>
+<test id="s1-s3-t4" name="Yrita Avata Tiedosto Jota Ei Ole Olemassa" line="30">
+<kw name="Kaynnista Sovellus" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.103466" level="INFO">Komennot:
+help		tulostaa tämän viestin
+exit		poistuu ohjelmasta
+avaa		avaa bib-tiedoston
+luo		luo bib-tiedoston
+tulosta		tulostaa aktiivisen bib-tiedoston sisällön
+syota		tallentaa bib-dataa aktiiviseen bib-tiedostoon
+muokkaa		muokkaa valitun viitteen parametreja
+muokkaaparam	muokkaa valitun viitteen haluttua parametria
+lisaatagi	lisää halutun tagin
+poistatagi	poistaa halutun tagin
+etsitagi	etsi viitteitä tagin perusteella</msg>
+<doc>Kutsuu samoja funktioita kuin sovellus käynnistettäessä. Ei kuitenkaan oikeasti käynnistä mitään.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.103363" elapsed="0.000149"/>
+</kw>
+<kw name="Syota Komennot" owner="resource">
+<for flavor="IN">
+<iter>
+<kw name="Syota Data" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.104282" level="INFO">Syötetään: testi.bib</msg>
+<arg>${komento}</arg>
+<doc>Syöttää käyttäjän antamaa dataa valmiiksi. Ohjelma lukee näitä sitä mukaa kun io:n funktiota "lue" kutsutaan.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.104179" elapsed="0.000140"/>
+</kw>
+<var name="${komento}">testi.bib</var>
+<status status="PASS" start="2024-12-16T19:54:55.104114" elapsed="0.000240"/>
+</iter>
+<var>${komento}</var>
+<value>@{komennot}</value>
+<status status="PASS" start="2024-12-16T19:54:55.104009" elapsed="0.000376"/>
+</for>
+<kw name="Syota Komento" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.104696" level="INFO">Luetaan komento: testi.bib
+Tapahtui virhe: Tiedostoa C:\Users\Sutinen\ohtu-miniprojekti\testi.bib ei löynyt.</msg>
+<arg>${komento1}</arg>
+<doc>Laittaa sovelluksen käsittelemään annetun komennon. 
+Jos komennon seurauksena kysytään käyttäjältä lisää parametreja,
+ne täytyy syöttää ennen funktion kutsumista. (Katso resource.robot "Syota Komennot")</doc>
+<status status="PASS" start="2024-12-16T19:54:55.104468" elapsed="0.000269"/>
+</kw>
+<arg>avaa</arg>
+<arg>${TIEDOSTONIMI}</arg>
+<status status="PASS" start="2024-12-16T19:54:55.103776" elapsed="0.001029"/>
+</kw>
+<kw name="Tulosteen Tulisi Sisaltaa" owner="KomentolukijaLibrary">
+<arg>Tapahtui virhe:</arg>
+<doc>Tarkistaa löytyykö tulosteesta (mistään) annettua merkkijonoa. Yhden välilyönnin tilalla sallitaan enemmänkin tilaa.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.105184" elapsed="0.000166"/>
+</kw>
+<kw name="Remove File" owner="OperatingSystem" type="TEARDOWN">
+<msg time="2024-12-16T19:54:55.105873" level="INFO" html="true">File '&lt;a href="file://C:\Users\Sutinen\ohtu-miniprojekti\testi.bib"&gt;C:\Users\Sutinen\ohtu-miniprojekti\testi.bib&lt;/a&gt;' does not exist.</msg>
+<arg>${TIEDOSTONIMI}</arg>
+<doc>Removes a file with the given path.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.105664" elapsed="0.000309"/>
+</kw>
+<status status="PASS" start="2024-12-16T19:54:55.103003" elapsed="0.003136"/>
+</test>
+<status status="PASS" start="2024-12-16T19:54:55.082142" elapsed="0.024695"/>
+</suite>
+<suite id="s1-s4" name="Muokkaa Viitetta" source="C:\Users\Sutinen\ohtu-miniprojekti\src\tests\muokkaa_viitetta.robot">
+<test id="s1-s4-t1" name="Haetaan Viite Avaimella" line="12">
+<kw name="Luo Testitiedosto" owner="resource" type="SETUP">
+<kw name="Create File" owner="OperatingSystem">
+<msg time="2024-12-16T19:54:55.112071" level="INFO" html="true">Created file '&lt;a href="file://C:\Users\Sutinen\ohtu-miniprojekti\testi.bib"&gt;C:\Users\Sutinen\ohtu-miniprojekti\testi.bib&lt;/a&gt;'.</msg>
+<arg>${tiedostonimi}</arg>
+<arg>@article{CBH91,\nauthor = {Allan Collins and John Seely Brown and Ann Holum},\ntitle = {Cognitive apprenticeship: making thinking visible},\njournal = {American Educator},\nyear = {1991},\nvolume = {6},\npages = {38--46}\n}\n\n@book{Martin09,\nauthor = {Martin, Robert},\ntitle = {Clean Code: A Handbook of Agile Software Craftsmanship},\nyear = {1888},\npublisher = {Prentice Hall}\n}@comment{testi,tunniste2,ohjelmointi}</arg>
+<doc>Creates a file with the given content and encoding.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.111253" elapsed="0.000901"/>
+</kw>
+<arg>${TIEDOSTONIMI}</arg>
+<status status="PASS" start="2024-12-16T19:54:55.111004" elapsed="0.001247"/>
+</kw>
+<kw name="Kaynnista Sovellus Argumenteilla" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.114089" level="INFO">Avattiin tiedosto: C:\Users\Sutinen\ohtu-miniprojekti\testi.bib
+
+Komennot:
+help		tulostaa tämän viestin
+exit		poistuu ohjelmasta
+avaa		avaa bib-tiedoston
+luo		luo bib-tiedoston
+tulosta		tulostaa aktiivisen bib-tiedoston sisällön
+syota		tallentaa bib-dataa aktiiviseen bib-tiedostoon
+muokkaa		muokkaa valitun viitteen parametreja
+muokkaaparam	muokkaa valitun viitteen haluttua parametria
+lisaatagi	lisää halutun tagin
+poistatagi	poistaa halutun tagin
+etsitagi	etsi viitteitä tagin perusteella</msg>
+<arg>${TIEDOSTONIMI}</arg>
+<doc>Sama kuin edellinen, mutta tekee samat asiat kuin sovellus käynnistettäessä samoilla argumenteilla.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.112576" elapsed="0.001590"/>
+</kw>
+<kw name="Syota Data" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.114573" level="INFO">Syötetään: CBH91</msg>
+<arg>CBH91</arg>
+<doc>Syöttää käyttäjän antamaa dataa valmiiksi. Ohjelma lukee näitä sitä mukaa kun io:n funktiota "lue" kutsutaan.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.114437" elapsed="0.000174"/>
+</kw>
+<kw name="Syota Data" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.114880" level="INFO">Syötetään: year</msg>
+<arg>year</arg>
+<doc>Syöttää käyttäjän antamaa dataa valmiiksi. Ohjelma lukee näitä sitä mukaa kun io:n funktiota "lue" kutsutaan.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.114800" elapsed="0.000114"/>
+</kw>
+<kw name="Syota Data" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.115155" level="INFO">Syötetään: 0000</msg>
+<arg>0000</arg>
+<doc>Syöttää käyttäjän antamaa dataa valmiiksi. Ohjelma lukee näitä sitä mukaa kun io:n funktiota "lue" kutsutaan.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.115078" elapsed="0.000112"/>
+</kw>
+<kw name="Syota Komento" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.116199" level="INFO">Luetaan komento: CBH91
+Luetaan komento: year
+Luetaan komento: 0000
+Muokkaus onnistui</msg>
+<arg>muokkaaparam</arg>
+<doc>Laittaa sovelluksen käsittelemään annetun komennon. 
+Jos komennon seurauksena kysytään käyttäjältä lisää parametreja,
+ne täytyy syöttää ennen funktion kutsumista. (Katso resource.robot "Syota Komennot")</doc>
+<status status="PASS" start="2024-12-16T19:54:55.115387" elapsed="0.000875"/>
+</kw>
+<kw name="Tulosteen Tulisi Sisaltaa" owner="KomentolukijaLibrary">
+<arg>Anna muokattavan viitteen avain:</arg>
+<doc>Tarkistaa löytyykö tulosteesta (mistään) annettua merkkijonoa. Yhden välilyönnin tilalla sallitaan enemmänkin tilaa.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.116496" elapsed="0.000264"/>
+</kw>
+<kw name="Tulosteen Tulisi Sisaltaa" owner="KomentolukijaLibrary">
+<arg>Anna parametrin tyyppi:</arg>
+<doc>Tarkistaa löytyykö tulosteesta (mistään) annettua merkkijonoa. Yhden välilyönnin tilalla sallitaan enemmänkin tilaa.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.117008" elapsed="0.000205"/>
+</kw>
+<kw name="Tulosteen Tulisi Sisaltaa" owner="KomentolukijaLibrary">
+<arg>Anna muokattu parametri:</arg>
+<doc>Tarkistaa löytyykö tulosteesta (mistään) annettua merkkijonoa. Yhden välilyönnin tilalla sallitaan enemmänkin tilaa.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.117424" elapsed="0.000171"/>
+</kw>
+<kw name="Tulosteen Tulisi Sisaltaa" owner="KomentolukijaLibrary">
+<arg>Muokkaus onnistui</arg>
+<doc>Tarkistaa löytyykö tulosteesta (mistään) annettua merkkijonoa. Yhden välilyönnin tilalla sallitaan enemmänkin tilaa.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.117992" elapsed="0.000151"/>
+</kw>
+<kw name="Syota Komento" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.119383" level="INFO">Tiedoston testi.bib sisältö:
+@article{CBH91,
+  author  = {Allan Collins and John Seely Brown and Ann Holum},
+  title   = {Cognitive apprenticeship: making thinking visible},
+  journal = {American Educator},
+  year    = {0000},
+  volume  = {6},
+  pages   = {38--46}
+}
+
+@book{Martin09,
+author = {Martin, Robert},
+title = {Clean Code: A Handbook of Agile Software Craftsmanship},
+year = {1888},
+publisher = {Prentice Hall}
+}@comment{testi,tunniste2,ohjelmointi}</msg>
+<arg>tulosta</arg>
+<doc>Laittaa sovelluksen käsittelemään annetun komennon. 
+Jos komennon seurauksena kysytään käyttäjältä lisää parametreja,
+ne täytyy syöttää ennen funktion kutsumista. (Katso resource.robot "Syota Komennot")</doc>
+<status status="PASS" start="2024-12-16T19:54:55.118340" elapsed="0.001107"/>
+</kw>
+<kw name="Tulosteen Tulisi Sisaltaa" owner="KomentolukijaLibrary">
+<arg>year = {0000}</arg>
+<doc>Tarkistaa löytyykö tulosteesta (mistään) annettua merkkijonoa. Yhden välilyönnin tilalla sallitaan enemmänkin tilaa.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.119666" elapsed="0.000194"/>
+</kw>
+<kw name="Remove File" owner="OperatingSystem" type="TEARDOWN">
+<msg time="2024-12-16T19:54:55.120659" level="INFO" html="true">Removed file '&lt;a href="file://C:\Users\Sutinen\ohtu-miniprojekti\testi.bib"&gt;C:\Users\Sutinen\ohtu-miniprojekti\testi.bib&lt;/a&gt;'.</msg>
+<arg>${TIEDOSTONIMI}</arg>
+<doc>Removes a file with the given path.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.120148" elapsed="0.000603"/>
+</kw>
+<status status="PASS" start="2024-12-16T19:54:55.110568" elapsed="0.010364"/>
+</test>
+<test id="s1-s4-t2" name="Avain Ei Kelpaa" line="26">
+<kw name="Luo Testitiedosto" owner="resource" type="SETUP">
+<kw name="Create File" owner="OperatingSystem">
+<msg time="2024-12-16T19:54:55.123255" level="INFO" html="true">Created file '&lt;a href="file://C:\Users\Sutinen\ohtu-miniprojekti\testi.bib"&gt;C:\Users\Sutinen\ohtu-miniprojekti\testi.bib&lt;/a&gt;'.</msg>
+<arg>${tiedostonimi}</arg>
+<arg>@article{CBH91,\nauthor = {Allan Collins and John Seely Brown and Ann Holum},\ntitle = {Cognitive apprenticeship: making thinking visible},\njournal = {American Educator},\nyear = {1991},\nvolume = {6},\npages = {38--46}\n}\n\n@book{Martin09,\nauthor = {Martin, Robert},\ntitle = {Clean Code: A Handbook of Agile Software Craftsmanship},\nyear = {1888},\npublisher = {Prentice Hall}\n}@comment{testi,tunniste2,ohjelmointi}</arg>
+<doc>Creates a file with the given content and encoding.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.122234" elapsed="0.001115"/>
+</kw>
+<arg>${TIEDOSTONIMI}</arg>
+<status status="PASS" start="2024-12-16T19:54:55.121988" elapsed="0.001463"/>
+</kw>
+<kw name="Kaynnista Sovellus Argumenteilla" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.125048" level="INFO">Avattiin tiedosto: C:\Users\Sutinen\ohtu-miniprojekti\testi.bib
+
+Komennot:
+help		tulostaa tämän viestin
+exit		poistuu ohjelmasta
+avaa		avaa bib-tiedoston
+luo		luo bib-tiedoston
+tulosta		tulostaa aktiivisen bib-tiedoston sisällön
+syota		tallentaa bib-dataa aktiiviseen bib-tiedostoon
+muokkaa		muokkaa valitun viitteen parametreja
+muokkaaparam	muokkaa valitun viitteen haluttua parametria
+lisaatagi	lisää halutun tagin
+poistatagi	poistaa halutun tagin
+etsitagi	etsi viitteitä tagin perusteella</msg>
+<arg>${TIEDOSTONIMI}</arg>
+<doc>Sama kuin edellinen, mutta tekee samat asiat kuin sovellus käynnistettäessä samoilla argumenteilla.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.123845" elapsed="0.001287"/>
+</kw>
+<kw name="Syota Komennot" owner="resource">
+<for flavor="IN">
+<iter>
+<kw name="Syota Data" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.125963" level="INFO">Syötetään: Akuankka</msg>
+<arg>${komento}</arg>
+<doc>Syöttää käyttäjän antamaa dataa valmiiksi. Ohjelma lukee näitä sitä mukaa kun io:n funktiota "lue" kutsutaan.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.125861" elapsed="0.000143"/>
+</kw>
+<var name="${komento}">Akuankka</var>
+<status status="PASS" start="2024-12-16T19:54:55.125792" elapsed="0.000247"/>
+</iter>
+<var>${komento}</var>
+<value>@{komennot}</value>
+<status status="PASS" start="2024-12-16T19:54:55.125687" elapsed="0.000382"/>
+</for>
+<kw name="Syota Komento" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.126442" level="INFO">Luetaan komento: Akuankka
+Viitettä avaimella 'Akuankka' ei löytynyt.</msg>
+<arg>${komento1}</arg>
+<doc>Laittaa sovelluksen käsittelemään annetun komennon. 
+Jos komennon seurauksena kysytään käyttäjältä lisää parametreja,
+ne täytyy syöttää ennen funktion kutsumista. (Katso resource.robot "Syota Komennot")</doc>
+<status status="PASS" start="2024-12-16T19:54:55.126145" elapsed="0.000340"/>
+</kw>
+<arg>muokkaaparam</arg>
+<arg>Akuankka</arg>
+<status status="PASS" start="2024-12-16T19:54:55.125468" elapsed="0.001075"/>
+</kw>
+<kw name="Tulosteen Tulisi Sisaltaa" owner="KomentolukijaLibrary">
+<arg>Anna muokattavan viitteen avain:</arg>
+<doc>Tarkistaa löytyykö tulosteesta (mistään) annettua merkkijonoa. Yhden välilyönnin tilalla sallitaan enemmänkin tilaa.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.126771" elapsed="0.000104"/>
+</kw>
+<kw name="Tulosteen Tulisi Sisaltaa" owner="KomentolukijaLibrary">
+<arg>Anna parametrin tyyppi:</arg>
+<doc>Tarkistaa löytyykö tulosteesta (mistään) annettua merkkijonoa. Yhden välilyönnin tilalla sallitaan enemmänkin tilaa.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.127076" elapsed="0.000094"/>
+</kw>
+<kw name="Tulosteen Tulisi Sisaltaa" owner="KomentolukijaLibrary">
+<arg>Anna muokattu parametri:</arg>
+<doc>Tarkistaa löytyykö tulosteesta (mistään) annettua merkkijonoa. Yhden välilyönnin tilalla sallitaan enemmänkin tilaa.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.127367" elapsed="0.000091"/>
+</kw>
+<kw name="Tulosteen Tulisi Sisaltaa" owner="KomentolukijaLibrary">
+<arg>Viitettä avaimella 'Akuankka' ei löytynyt.</arg>
+<doc>Tarkistaa löytyykö tulosteesta (mistään) annettua merkkijonoa. Yhden välilyönnin tilalla sallitaan enemmänkin tilaa.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.127653" elapsed="0.000235"/>
+</kw>
+<kw name="Remove File" owner="OperatingSystem" type="TEARDOWN">
+<msg time="2024-12-16T19:54:55.128526" level="INFO" html="true">Removed file '&lt;a href="file://C:\Users\Sutinen\ohtu-miniprojekti\testi.bib"&gt;C:\Users\Sutinen\ohtu-miniprojekti\testi.bib&lt;/a&gt;'.</msg>
+<arg>${TIEDOSTONIMI}</arg>
+<doc>Removes a file with the given path.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.128153" elapsed="0.000426"/>
+</kw>
+<status status="PASS" start="2024-12-16T19:54:55.121588" elapsed="0.007116"/>
+</test>
+<test id="s1-s4-t3" name="Parametrin Tyyppi Ei Kelpaa" line="35">
+<kw name="Luo Testitiedosto" owner="resource" type="SETUP">
+<kw name="Create File" owner="OperatingSystem">
+<msg time="2024-12-16T19:54:55.130806" level="INFO" html="true">Created file '&lt;a href="file://C:\Users\Sutinen\ohtu-miniprojekti\testi.bib"&gt;C:\Users\Sutinen\ohtu-miniprojekti\testi.bib&lt;/a&gt;'.</msg>
+<arg>${tiedostonimi}</arg>
+<arg>@article{CBH91,\nauthor = {Allan Collins and John Seely Brown and Ann Holum},\ntitle = {Cognitive apprenticeship: making thinking visible},\njournal = {American Educator},\nyear = {1991},\nvolume = {6},\npages = {38--46}\n}\n\n@book{Martin09,\nauthor = {Martin, Robert},\ntitle = {Clean Code: A Handbook of Agile Software Craftsmanship},\nyear = {1888},\npublisher = {Prentice Hall}\n}@comment{testi,tunniste2,ohjelmointi}</arg>
+<doc>Creates a file with the given content and encoding.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.130013" elapsed="0.000883"/>
+</kw>
+<arg>${TIEDOSTONIMI}</arg>
+<status status="PASS" start="2024-12-16T19:54:55.129748" elapsed="0.001223"/>
+</kw>
+<kw name="Kaynnista Sovellus Argumenteilla" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.132599" level="INFO">Avattiin tiedosto: C:\Users\Sutinen\ohtu-miniprojekti\testi.bib
+
+Komennot:
+help		tulostaa tämän viestin
+exit		poistuu ohjelmasta
+avaa		avaa bib-tiedoston
+luo		luo bib-tiedoston
+tulosta		tulostaa aktiivisen bib-tiedoston sisällön
+syota		tallentaa bib-dataa aktiiviseen bib-tiedostoon
+muokkaa		muokkaa valitun viitteen parametreja
+muokkaaparam	muokkaa valitun viitteen haluttua parametria
+lisaatagi	lisää halutun tagin
+poistatagi	poistaa halutun tagin
+etsitagi	etsi viitteitä tagin perusteella</msg>
+<arg>${TIEDOSTONIMI}</arg>
+<doc>Sama kuin edellinen, mutta tekee samat asiat kuin sovellus käynnistettäessä samoilla argumenteilla.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.131308" elapsed="0.001360"/>
+</kw>
+<kw name="Syota Komennot" owner="resource">
+<for flavor="IN">
+<iter>
+<kw name="Syota Data" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.133522" level="INFO">Syötetään: CBH91</msg>
+<arg>${komento}</arg>
+<doc>Syöttää käyttäjän antamaa dataa valmiiksi. Ohjelma lukee näitä sitä mukaa kun io:n funktiota "lue" kutsutaan.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.133412" elapsed="0.000148"/>
+</kw>
+<var name="${komento}">CBH91</var>
+<status status="PASS" start="2024-12-16T19:54:55.133340" elapsed="0.000254"/>
+</iter>
+<iter>
+<kw name="Syota Data" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.133828" level="INFO">Syötetään: yaer</msg>
+<arg>${komento}</arg>
+<doc>Syöttää käyttäjän antamaa dataa valmiiksi. Ohjelma lukee näitä sitä mukaa kun io:n funktiota "lue" kutsutaan.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.133733" elapsed="0.000137"/>
+</kw>
+<var name="${komento}">yaer</var>
+<status status="PASS" start="2024-12-16T19:54:55.133675" elapsed="0.000227"/>
+</iter>
+<var>${komento}</var>
+<value>@{komennot}</value>
+<status status="PASS" start="2024-12-16T19:54:55.133233" elapsed="0.000696"/>
+</for>
+<kw name="Syota Komento" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.134689" level="INFO">Luetaan komento: CBH91
+Luetaan komento: yaer
+Muokkaus epäonnistui tarkista parametrin tyyppi</msg>
+<arg>${komento1}</arg>
+<doc>Laittaa sovelluksen käsittelemään annetun komennon. 
+Jos komennon seurauksena kysytään käyttäjältä lisää parametreja,
+ne täytyy syöttää ennen funktion kutsumista. (Katso resource.robot "Syota Komennot")</doc>
+<status status="PASS" start="2024-12-16T19:54:55.134003" elapsed="0.000752"/>
+</kw>
+<arg>muokkaaparam</arg>
+<arg>CBH91</arg>
+<arg>yaer</arg>
+<status status="PASS" start="2024-12-16T19:54:55.133002" elapsed="0.001822"/>
+</kw>
+<kw name="Tulosteen Tulisi Sisaltaa" owner="KomentolukijaLibrary">
+<arg>Anna muokattavan viitteen avain:</arg>
+<doc>Tarkistaa löytyykö tulosteesta (mistään) annettua merkkijonoa. Yhden välilyönnin tilalla sallitaan enemmänkin tilaa.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.135060" elapsed="0.000118"/>
+</kw>
+<kw name="Tulosteen Tulisi Sisaltaa" owner="KomentolukijaLibrary">
+<arg>Anna parametrin tyyppi:</arg>
+<doc>Tarkistaa löytyykö tulosteesta (mistään) annettua merkkijonoa. Yhden välilyönnin tilalla sallitaan enemmänkin tilaa.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.135439" elapsed="0.000115"/>
+</kw>
+<kw name="Tulosteen Tulisi Sisaltaa" owner="KomentolukijaLibrary">
+<arg>Anna muokattu parametri:</arg>
+<doc>Tarkistaa löytyykö tulosteesta (mistään) annettua merkkijonoa. Yhden välilyönnin tilalla sallitaan enemmänkin tilaa.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.135757" elapsed="0.000094"/>
+</kw>
+<kw name="Tulosteen Tulisi Sisaltaa" owner="KomentolukijaLibrary">
+<arg>Muokkaus epäonnistui tarkista parametrin tyyppi</arg>
+<doc>Tarkistaa löytyykö tulosteesta (mistään) annettua merkkijonoa. Yhden välilyönnin tilalla sallitaan enemmänkin tilaa.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.136042" elapsed="0.000227"/>
+</kw>
+<kw name="Remove File" owner="OperatingSystem" type="TEARDOWN">
+<msg time="2024-12-16T19:54:55.137060" level="INFO" html="true">Removed file '&lt;a href="file://C:\Users\Sutinen\ohtu-miniprojekti\testi.bib"&gt;C:\Users\Sutinen\ohtu-miniprojekti\testi.bib&lt;/a&gt;'.</msg>
+<arg>${TIEDOSTONIMI}</arg>
+<doc>Removes a file with the given path.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.136640" elapsed="0.000499"/>
+</kw>
+<status status="PASS" start="2024-12-16T19:54:55.129376" elapsed="0.007913"/>
+</test>
+<test id="s1-s4-t4" name="Muokataan Koko Viite Avaimella" line="44">
+<kw name="Luo Testitiedosto" owner="resource" type="SETUP">
+<kw name="Create File" owner="OperatingSystem">
+<msg time="2024-12-16T19:54:55.139339" level="INFO" html="true">Created file '&lt;a href="file://C:\Users\Sutinen\ohtu-miniprojekti\testi.bib"&gt;C:\Users\Sutinen\ohtu-miniprojekti\testi.bib&lt;/a&gt;'.</msg>
+<arg>${tiedostonimi}</arg>
+<arg>@article{CBH91,\nauthor = {Allan Collins and John Seely Brown and Ann Holum},\ntitle = {Cognitive apprenticeship: making thinking visible},\njournal = {American Educator},\nyear = {1991},\nvolume = {6},\npages = {38--46}\n}\n\n@book{Martin09,\nauthor = {Martin, Robert},\ntitle = {Clean Code: A Handbook of Agile Software Craftsmanship},\nyear = {1888},\npublisher = {Prentice Hall}\n}@comment{testi,tunniste2,ohjelmointi}</arg>
+<doc>Creates a file with the given content and encoding.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.138547" elapsed="0.000900"/>
+</kw>
+<arg>${TIEDOSTONIMI}</arg>
+<status status="PASS" start="2024-12-16T19:54:55.138274" elapsed="0.001279"/>
+</kw>
+<kw name="Kaynnista Sovellus Argumenteilla" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.141222" level="INFO">Avattiin tiedosto: C:\Users\Sutinen\ohtu-miniprojekti\testi.bib
+
+Komennot:
+help		tulostaa tämän viestin
+exit		poistuu ohjelmasta
+avaa		avaa bib-tiedoston
+luo		luo bib-tiedoston
+tulosta		tulostaa aktiivisen bib-tiedoston sisällön
+syota		tallentaa bib-dataa aktiiviseen bib-tiedostoon
+muokkaa		muokkaa valitun viitteen parametreja
+muokkaaparam	muokkaa valitun viitteen haluttua parametria
+lisaatagi	lisää halutun tagin
+poistatagi	poistaa halutun tagin
+etsitagi	etsi viitteitä tagin perusteella</msg>
+<arg>${TIEDOSTONIMI}</arg>
+<doc>Sama kuin edellinen, mutta tekee samat asiat kuin sovellus käynnistettäessä samoilla argumenteilla.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.139883" elapsed="0.001411"/>
+</kw>
+<kw name="Syota Data" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.141669" level="INFO">Syötetään: CBH91</msg>
+<arg>CBH91</arg>
+<doc>Syöttää käyttäjän antamaa dataa valmiiksi. Ohjelma lukee näitä sitä mukaa kun io:n funktiota "lue" kutsutaan.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.141554" elapsed="0.000152"/>
+</kw>
+<kw name="Syota Data" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.141990" level="INFO">Syötetään: Lorem</msg>
+<arg>Lorem</arg>
+<doc>Syöttää käyttäjän antamaa dataa valmiiksi. Ohjelma lukee näitä sitä mukaa kun io:n funktiota "lue" kutsutaan.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.141911" elapsed="0.000114"/>
+</kw>
+<kw name="Syota Data" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.142296" level="INFO">Syötetään: Ipsum</msg>
+<arg>Ipsum</arg>
+<doc>Syöttää käyttäjän antamaa dataa valmiiksi. Ohjelma lukee näitä sitä mukaa kun io:n funktiota "lue" kutsutaan.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.142220" elapsed="0.000111"/>
+</kw>
+<kw name="Syota Data" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.142599" level="INFO">Syötetään: Dolor</msg>
+<arg>Dolor</arg>
+<doc>Syöttää käyttäjän antamaa dataa valmiiksi. Ohjelma lukee näitä sitä mukaa kun io:n funktiota "lue" kutsutaan.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.142523" elapsed="0.000109"/>
+</kw>
+<kw name="Syota Data" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.142910" level="INFO">Syötetään: 2000</msg>
+<arg>2000</arg>
+<doc>Syöttää käyttäjän antamaa dataa valmiiksi. Ohjelma lukee näitä sitä mukaa kun io:n funktiota "lue" kutsutaan.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.142823" elapsed="0.000121"/>
+</kw>
+<kw name="Syota Data" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.143210" level="INFO">Syötetään: 10</msg>
+<arg>10</arg>
+<doc>Syöttää käyttäjän antamaa dataa valmiiksi. Ohjelma lukee näitä sitä mukaa kun io:n funktiota "lue" kutsutaan.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.143136" elapsed="0.000107"/>
+</kw>
+<kw name="Syota Data" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.143518" level="INFO">Syötetään: 20--25</msg>
+<arg>20--25</arg>
+<doc>Syöttää käyttäjän antamaa dataa valmiiksi. Ohjelma lukee näitä sitä mukaa kun io:n funktiota "lue" kutsutaan.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.143443" elapsed="0.000108"/>
+</kw>
+<kw name="Syota Komento" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.144625" level="INFO">Luetaan komento: CBH91
+Parametrin author nykyinen arvo on: Allan Collins and John Seely Brown and Ann Holum
+Luetaan komento: Lorem
+Muokkaus onnistui
+Parametrin title nykyinen arvo on: Cognitive apprenticeship: making thinking visible
+Luetaan komento: Ipsum
+Muokkaus onnistui
+Parametrin journal nykyinen arvo on: American Educator
+Luetaan komento: Dolor
+Muokkaus onnistui
+Parametrin year nykyinen arvo on: 1991
+Luetaan komento: 2000
+Muokkaus onnistui
+Parametrin volume nykyinen arvo on: 6
+Luetaan komento: 10
+Muokkaus onnistui
+Parametrin pages nykyinen arvo on: 38--46
+Luetaan komento: 20--25
+Muokkaus onnistui</msg>
+<arg>muokkaa</arg>
+<doc>Laittaa sovelluksen käsittelemään annetun komennon. 
+Jos komennon seurauksena kysytään käyttäjältä lisää parametreja,
+ne täytyy syöttää ennen funktion kutsumista. (Katso resource.robot "Syota Komennot")</doc>
+<status status="PASS" start="2024-12-16T19:54:55.143934" elapsed="0.000765"/>
+</kw>
+<kw name="Tulosteen Tulisi Sisaltaa" owner="KomentolukijaLibrary">
+<arg>Anna muokattavan viitteen avain:</arg>
+<doc>Tarkistaa löytyykö tulosteesta (mistään) annettua merkkijonoa. Yhden välilyönnin tilalla sallitaan enemmänkin tilaa.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.144942" elapsed="0.000121"/>
+</kw>
+<kw name="Tulosteen Tulisi Sisaltaa" owner="KomentolukijaLibrary">
+<arg>Parametrin author nykyinen arvo on: Allan Collins and John Seely Brown and Ann Holum</arg>
+<doc>Tarkistaa löytyykö tulosteesta (mistään) annettua merkkijonoa. Yhden välilyönnin tilalla sallitaan enemmänkin tilaa.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.145286" elapsed="0.000327"/>
+</kw>
+<kw name="Tulosteen Tulisi Sisaltaa" owner="KomentolukijaLibrary">
+<arg>Anna uusi arvo parametriin author</arg>
+<doc>Tarkistaa löytyykö tulosteesta (mistään) annettua merkkijonoa. Yhden välilyönnin tilalla sallitaan enemmänkin tilaa.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.145825" elapsed="0.000226"/>
+</kw>
+<kw name="Tulosteen Tulisi Sisaltaa" owner="KomentolukijaLibrary">
+<arg>Muokkaus onnistui</arg>
+<doc>Tarkistaa löytyykö tulosteesta (mistään) annettua merkkijonoa. Yhden välilyönnin tilalla sallitaan enemmänkin tilaa.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.146293" elapsed="0.000100"/>
+</kw>
+<kw name="Tulosteen Tulisi Sisaltaa" owner="KomentolukijaLibrary">
+<arg>Parametrin pages nykyinen arvo on: 38--46</arg>
+<doc>Tarkistaa löytyykö tulosteesta (mistään) annettua merkkijonoa. Yhden välilyönnin tilalla sallitaan enemmänkin tilaa.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.146609" elapsed="0.002797"/>
+</kw>
+<kw name="Tulosteen Tulisi Sisaltaa" owner="KomentolukijaLibrary">
+<arg>Anna uusi arvo parametriin pages</arg>
+<doc>Tarkistaa löytyykö tulosteesta (mistään) annettua merkkijonoa. Yhden välilyönnin tilalla sallitaan enemmänkin tilaa.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.149702" elapsed="0.000240"/>
+</kw>
+<kw name="Tulosteen Tulisi Sisaltaa" owner="KomentolukijaLibrary">
+<arg>Muokkaus onnistui</arg>
+<doc>Tarkistaa löytyykö tulosteesta (mistään) annettua merkkijonoa. Yhden välilyönnin tilalla sallitaan enemmänkin tilaa.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.150164" elapsed="0.000123"/>
+</kw>
+<kw name="Syota Komento" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.151883" level="INFO">Tiedoston testi.bib sisältö:
+@article{CBH91,
+  author  = {Lorem},
+  title   = {Ipsum},
+  journal = {Dolor},
+  year    = {2000},
+  volume  = {10},
+  pages   = {20--25}
+}
+
+@book{Martin09,
+author = {Martin, Robert},
+title = {Clean Code: A Handbook of Agile Software Craftsmanship},
+year = {1888},
+publisher = {Prentice Hall}
+}@comment{testi,tunniste2,ohjelmointi}</msg>
+<arg>tulosta</arg>
+<doc>Laittaa sovelluksen käsittelemään annetun komennon. 
+Jos komennon seurauksena kysytään käyttäjältä lisää parametreja,
+ne täytyy syöttää ennen funktion kutsumista. (Katso resource.robot "Syota Komennot")</doc>
+<status status="PASS" start="2024-12-16T19:54:55.150734" elapsed="0.001225"/>
+</kw>
+<kw name="Tulosteen Tulisi Sisaltaa" owner="KomentolukijaLibrary">
+<arg>author = {Lorem}</arg>
+<doc>Tarkistaa löytyykö tulosteesta (mistään) annettua merkkijonoa. Yhden välilyönnin tilalla sallitaan enemmänkin tilaa.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.152394" elapsed="0.000230"/>
+</kw>
+<kw name="Tulosteen Tulisi Sisaltaa" owner="KomentolukijaLibrary">
+<arg>title = {Ipsum}</arg>
+<doc>Tarkistaa löytyykö tulosteesta (mistään) annettua merkkijonoa. Yhden välilyönnin tilalla sallitaan enemmänkin tilaa.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.152924" elapsed="0.000188"/>
+</kw>
+<kw name="Tulosteen Tulisi Sisaltaa" owner="KomentolukijaLibrary">
+<arg>journal = {Dolor}</arg>
+<doc>Tarkistaa löytyykö tulosteesta (mistään) annettua merkkijonoa. Yhden välilyönnin tilalla sallitaan enemmänkin tilaa.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.153378" elapsed="0.000190"/>
+</kw>
+<kw name="Tulosteen Tulisi Sisaltaa" owner="KomentolukijaLibrary">
+<arg>year = {2000}</arg>
+<doc>Tarkistaa löytyykö tulosteesta (mistään) annettua merkkijonoa. Yhden välilyönnin tilalla sallitaan enemmänkin tilaa.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.153838" elapsed="0.000186"/>
+</kw>
+<kw name="Tulosteen Tulisi Sisaltaa" owner="KomentolukijaLibrary">
+<arg>volume = {10}</arg>
+<doc>Tarkistaa löytyykö tulosteesta (mistään) annettua merkkijonoa. Yhden välilyönnin tilalla sallitaan enemmänkin tilaa.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.154236" elapsed="0.000181"/>
+</kw>
+<kw name="Tulosteen Tulisi Sisaltaa" owner="KomentolukijaLibrary">
+<arg>pages = {20--25}</arg>
+<doc>Tarkistaa löytyykö tulosteesta (mistään) annettua merkkijonoa. Yhden välilyönnin tilalla sallitaan enemmänkin tilaa.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.154614" elapsed="0.000177"/>
+</kw>
+<kw name="Remove File" owner="OperatingSystem" type="TEARDOWN">
+<msg time="2024-12-16T19:54:55.155480" level="INFO" html="true">Removed file '&lt;a href="file://C:\Users\Sutinen\ohtu-miniprojekti\testi.bib"&gt;C:\Users\Sutinen\ohtu-miniprojekti\testi.bib&lt;/a&gt;'.</msg>
+<arg>${TIEDOSTONIMI}</arg>
+<doc>Removes a file with the given path.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.155064" elapsed="0.000493"/>
+</kw>
+<status status="PASS" start="2024-12-16T19:54:55.137899" elapsed="0.017919"/>
+</test>
+<test id="s1-s4-t5" name="Ei Muokata Mitaan" line="70">
+<kw name="Luo Testitiedosto" owner="resource" type="SETUP">
+<kw name="Create File" owner="OperatingSystem">
+<msg time="2024-12-16T19:54:55.158104" level="INFO" html="true">Created file '&lt;a href="file://C:\Users\Sutinen\ohtu-miniprojekti\testi.bib"&gt;C:\Users\Sutinen\ohtu-miniprojekti\testi.bib&lt;/a&gt;'.</msg>
+<arg>${tiedostonimi}</arg>
+<arg>@article{CBH91,\nauthor = {Allan Collins and John Seely Brown and Ann Holum},\ntitle = {Cognitive apprenticeship: making thinking visible},\njournal = {American Educator},\nyear = {1991},\nvolume = {6},\npages = {38--46}\n}\n\n@book{Martin09,\nauthor = {Martin, Robert},\ntitle = {Clean Code: A Handbook of Agile Software Craftsmanship},\nyear = {1888},\npublisher = {Prentice Hall}\n}@comment{testi,tunniste2,ohjelmointi}</arg>
+<doc>Creates a file with the given content and encoding.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.157130" elapsed="0.001087"/>
+</kw>
+<arg>${TIEDOSTONIMI}</arg>
+<status status="PASS" start="2024-12-16T19:54:55.156892" elapsed="0.001472"/>
+</kw>
+<kw name="Kaynnista Sovellus Argumenteilla" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.159780" level="INFO">Avattiin tiedosto: C:\Users\Sutinen\ohtu-miniprojekti\testi.bib
+
+Komennot:
+help		tulostaa tämän viestin
+exit		poistuu ohjelmasta
+avaa		avaa bib-tiedoston
+luo		luo bib-tiedoston
+tulosta		tulostaa aktiivisen bib-tiedoston sisällön
+syota		tallentaa bib-dataa aktiiviseen bib-tiedostoon
+muokkaa		muokkaa valitun viitteen parametreja
+muokkaaparam	muokkaa valitun viitteen haluttua parametria
+lisaatagi	lisää halutun tagin
+poistatagi	poistaa halutun tagin
+etsitagi	etsi viitteitä tagin perusteella</msg>
+<arg>${TIEDOSTONIMI}</arg>
+<doc>Sama kuin edellinen, mutta tekee samat asiat kuin sovellus käynnistettäessä samoilla argumenteilla.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.158624" elapsed="0.001217"/>
+</kw>
+<kw name="Syota Data" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.160173" level="INFO">Syötetään: CBH91</msg>
+<arg>CBH91</arg>
+<doc>Syöttää käyttäjän antamaa dataa valmiiksi. Ohjelma lukee näitä sitä mukaa kun io:n funktiota "lue" kutsutaan.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.160081" elapsed="0.000126"/>
+</kw>
+<kw name="Syota Data" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.160481" level="INFO">Syötetään:</msg>
+<arg>ENTER</arg>
+<doc>Syöttää käyttäjän antamaa dataa valmiiksi. Ohjelma lukee näitä sitä mukaa kun io:n funktiota "lue" kutsutaan.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.160405" elapsed="0.000109"/>
+</kw>
+<kw name="Syota Data" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.160792" level="INFO">Syötetään:</msg>
+<arg>ENTER</arg>
+<doc>Syöttää käyttäjän antamaa dataa valmiiksi. Ohjelma lukee näitä sitä mukaa kun io:n funktiota "lue" kutsutaan.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.160718" elapsed="0.000107"/>
+</kw>
+<kw name="Syota Data" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.161087" level="INFO">Syötetään:</msg>
+<arg>ENTER</arg>
+<doc>Syöttää käyttäjän antamaa dataa valmiiksi. Ohjelma lukee näitä sitä mukaa kun io:n funktiota "lue" kutsutaan.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.161013" elapsed="0.000106"/>
+</kw>
+<kw name="Syota Data" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.161381" level="INFO">Syötetään:</msg>
+<arg>ENTER</arg>
+<doc>Syöttää käyttäjän antamaa dataa valmiiksi. Ohjelma lukee näitä sitä mukaa kun io:n funktiota "lue" kutsutaan.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.161308" elapsed="0.000150"/>
+</kw>
+<kw name="Syota Data" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.161725" level="INFO">Syötetään:</msg>
+<arg>ENTER</arg>
+<doc>Syöttää käyttäjän antamaa dataa valmiiksi. Ohjelma lukee näitä sitä mukaa kun io:n funktiota "lue" kutsutaan.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.161651" elapsed="0.000106"/>
+</kw>
+<kw name="Syota Data" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.162030" level="INFO">Syötetään:</msg>
+<arg>ENTER</arg>
+<doc>Syöttää käyttäjän antamaa dataa valmiiksi. Ohjelma lukee näitä sitä mukaa kun io:n funktiota "lue" kutsutaan.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.161943" elapsed="0.000119"/>
+</kw>
+<kw name="Syota Komento" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.162724" level="INFO">Luetaan komento: CBH91
+Parametrin author nykyinen arvo on: Allan Collins and John Seely Brown and Ann Holum
+Luetaan komento: 
+Parametrin title nykyinen arvo on: Cognitive apprenticeship: making thinking visible
+Luetaan komento: 
+Parametrin journal nykyinen arvo on: American Educator
+Luetaan komento: 
+Parametrin year nykyinen arvo on: 1991
+Luetaan komento: 
+Parametrin volume nykyinen arvo on: 6
+Luetaan komento: 
+Parametrin pages nykyinen arvo on: 38--46
+Luetaan komento:</msg>
+<arg>muokkaa</arg>
+<doc>Laittaa sovelluksen käsittelemään annetun komennon. 
+Jos komennon seurauksena kysytään käyttäjältä lisää parametreja,
+ne täytyy syöttää ennen funktion kutsumista. (Katso resource.robot "Syota Komennot")</doc>
+<status status="PASS" start="2024-12-16T19:54:55.162439" elapsed="0.000329"/>
+</kw>
+<kw name="Tulosteen Tulisi Sisaltaa" owner="KomentolukijaLibrary">
+<arg>Anna muokattavan viitteen avain:</arg>
+<doc>Tarkistaa löytyykö tulosteesta (mistään) annettua merkkijonoa. Yhden välilyönnin tilalla sallitaan enemmänkin tilaa.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.162958" elapsed="0.000098"/>
+</kw>
+<kw name="Tulosteen Tulisi Sisaltaa" owner="KomentolukijaLibrary">
+<arg>Parametrin author nykyinen arvo on: Allan Collins and John Seely Brown and Ann Holum</arg>
+<doc>Tarkistaa löytyykö tulosteesta (mistään) annettua merkkijonoa. Yhden välilyönnin tilalla sallitaan enemmänkin tilaa.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.163240" elapsed="0.000093"/>
+</kw>
+<kw name="Tulosteen Tulisi Sisaltaa" owner="KomentolukijaLibrary">
+<arg>Anna uusi arvo parametriin author</arg>
+<doc>Tarkistaa löytyykö tulosteesta (mistään) annettua merkkijonoa. Yhden välilyönnin tilalla sallitaan enemmänkin tilaa.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.163513" elapsed="0.000094"/>
+</kw>
+<kw name="Tulosteen Tulisi Sisaltaa" owner="KomentolukijaLibrary">
+<arg>Parametrin pages nykyinen arvo on: 38--46</arg>
+<doc>Tarkistaa löytyykö tulosteesta (mistään) annettua merkkijonoa. Yhden välilyönnin tilalla sallitaan enemmänkin tilaa.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.163788" elapsed="0.000092"/>
+</kw>
+<kw name="Tulosteen Tulisi Sisaltaa" owner="KomentolukijaLibrary">
+<arg>Anna uusi arvo parametriin pages</arg>
+<doc>Tarkistaa löytyykö tulosteesta (mistään) annettua merkkijonoa. Yhden välilyönnin tilalla sallitaan enemmänkin tilaa.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.164059" elapsed="0.000105"/>
+</kw>
+<kw name="Syota Komento" owner="KomentolukijaLibrary">
+<msg time="2024-12-16T19:54:55.164565" level="INFO">Tiedoston testi.bib sisältö:
+@article{CBH91,
+author = {Allan Collins and John Seely Brown and Ann Holum},
+title = {Cognitive apprenticeship: making thinking visible},
+journal = {American Educator},
+year = {1991},
+volume = {6},
+pages = {38--46}
+}
+
+@book{Martin09,
+author = {Martin, Robert},
+title = {Clean Code: A Handbook of Agile Software Craftsmanship},
+year = {1888},
+publisher = {Prentice Hall}
+}@comment{testi,tunniste2,ohjelmointi}</msg>
+<arg>tulosta</arg>
+<doc>Laittaa sovelluksen käsittelemään annetun komennon. 
+Jos komennon seurauksena kysytään käyttäjältä lisää parametreja,
+ne täytyy syöttää ennen funktion kutsumista. (Katso resource.robot "Syota Komennot")</doc>
+<status status="PASS" start="2024-12-16T19:54:55.164344" elapsed="0.000268"/>
+</kw>
+<kw name="Tulosteen Tulisi Sisaltaa" owner="KomentolukijaLibrary">
+<arg>author = {Allan Collins and John Seely Brown and Ann Holum}</arg>
+<doc>Tarkistaa löytyykö tulosteesta (mistään) annettua merkkijonoa. Yhden välilyönnin tilalla sallitaan enemmänkin tilaa.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.164802" elapsed="0.000299"/>
+</kw>
+<kw name="Tulosteen Tulisi Sisaltaa" owner="KomentolukijaLibrary">
+<arg>title = {Cognitive apprenticeship: making thinking visible}</arg>
+<doc>Tarkistaa löytyykö tulosteesta (mistään) annettua merkkijonoa. Yhden välilyönnin tilalla sallitaan enemmänkin tilaa.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.165462" elapsed="0.000260"/>
+</kw>
+<kw name="Tulosteen Tulisi Sisaltaa" owner="KomentolukijaLibrary">
+<arg>journal = {American Educator}</arg>
+<doc>Tarkistaa löytyykö tulosteesta (mistään) annettua merkkijonoa. Yhden välilyönnin tilalla sallitaan enemmänkin tilaa.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.165911" elapsed="0.000196"/>
+</kw>
+<kw name="Tulosteen Tulisi Sisaltaa" owner="KomentolukijaLibrary">
+<arg>year = {1991}</arg>
+<doc>Tarkistaa löytyykö tulosteesta (mistään) annettua merkkijonoa. Yhden välilyönnin tilalla sallitaan enemmänkin tilaa.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.166295" elapsed="0.000175"/>
+</kw>
+<kw name="Tulosteen Tulisi Sisaltaa" owner="KomentolukijaLibrary">
+<arg>volume = {6}</arg>
+<doc>Tarkistaa löytyykö tulosteesta (mistään) annettua merkkijonoa. Yhden välilyönnin tilalla sallitaan enemmänkin tilaa.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.166654" elapsed="0.000176"/>
+</kw>
+<kw name="Tulosteen Tulisi Sisaltaa" owner="KomentolukijaLibrary">
+<arg>pages = {38--46}</arg>
+<doc>Tarkistaa löytyykö tulosteesta (mistään) annettua merkkijonoa. Yhden välilyönnin tilalla sallitaan enemmänkin tilaa.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.167009" elapsed="0.000178"/>
+</kw>
+<kw name="Remove File" owner="OperatingSystem" type="TEARDOWN">
+<msg time="2024-12-16T19:54:55.167869" level="INFO" html="true">Removed file '&lt;a href="file://C:\Users\Sutinen\ohtu-miniprojekti\testi.bib"&gt;C:\Users\Sutinen\ohtu-miniprojekti\testi.bib&lt;/a&gt;'.</msg>
+<arg>${TIEDOSTONIMI}</arg>
+<doc>Removes a file with the given path.</doc>
+<status status="PASS" start="2024-12-16T19:54:55.167453" elapsed="0.000498"/>
+</kw>
+<status status="PASS" start="2024-12-16T19:54:55.156543" elapsed="0.011595"/>
+</test>
+<status status="PASS" start="2024-12-16T19:54:55.107612" elapsed="0.061235"/>
+</suite>
+<status status="PASS" start="2024-12-16T19:54:54.978188" elapsed="0.191464"/>
+</suite>
+<statistics>
+<total>
+<stat pass="14" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="14" fail="0" skip="0" id="s1" name="Tests">Tests</stat>
+<stat pass="2" fail="0" skip="0" id="s1-s1" name="Kehote Tulostaa Oikein">Tests.Kehote Tulostaa Oikein</stat>
+<stat pass="3" fail="0" skip="0" id="s1-s2" name="Lisaa Tai Poista Tagi">Tests.Lisaa Tai Poista Tagi</stat>
+<stat pass="4" fail="0" skip="0" id="s1-s3" name="Luo Tai Avaa Bib Tiedosto">Tests.Luo Tai Avaa Bib Tiedosto</stat>
+<stat pass="5" fail="0" skip="0" id="s1-s4" name="Muokkaa Viitetta">Tests.Muokkaa Viitetta</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
