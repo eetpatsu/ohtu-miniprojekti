@@ -315,6 +315,36 @@ etsitagi\tetsi viitteitä tagin perusteella\n\
 
         self.assertEqual(result, -1)
 
+    def test_etsi_tagi_onnistuneesti(self):
+        """Testaa tagin etsintää onnistuneesti."""
+        tiedoston_sisalto = """
+@article{test1,
+  author = {Author One},
+  title = {Title One},
+  year = {2022},
+  tags = {tag1, tag2}
+}
+@article{test2,
+  author = {Author Two},
+  title = {Title Two},
+  year = {2023},
+  tags = {tag2, tag3}
+}
+"""
+        with open(self.testitiedosto, "w") as f:
+            f.write(tiedoston_sisalto)
+
+        self.testieditori.aktiivinen_tiedosto = Path(self.testitiedosto)
+        result = self.testieditori.etsi_tagi("tag1")
+        self.assertEqual(result, 1)
+
+    def test_etsi_tagi_ei_avaa_tiedostoa(self):
+        """Testaa, että metodi ei toimi ilman avattua tiedostoa."""
+        self.testieditori.aktiivinen_tiedosto = None
+        result = self.testieditori.etsi_tagi("tag1")
+        self.assertEqual(result, -1)
+        self.assertIn("Ei avattua tiedostoa. Avaa tiedosto ensin komennolla 'avaa'.", self.testieditori.io.messages)
+
     def tear_down(self):
         if os.path.exists(self.testitiedosto):
             os.remove(self.testitiedosto)
