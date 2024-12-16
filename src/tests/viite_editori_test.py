@@ -177,8 +177,8 @@ poistatagi\tpoistaa halutun tagin\n\
         odotettu_sisalto = """
 @article{test1,
   author = {New Author},
-  title = {Old Title},
-  year = {2020}
+  title  = {Old Title},
+  year   = {2020}
 }
 """
         self.assertEqual(sisalto.strip(), odotettu_sisalto.strip())
@@ -245,8 +245,8 @@ poistatagi\tpoistaa halutun tagin\n\
         odotettu_sisalto = """
 @article{test1,
   author = {Old Author},
-  title = {Old Title},
-  year = {2020}
+  title  = {Old Title},
+  year   = {2020}
 }@comment{tag1, tag2}
 """
         self.assertEqual(sisalto.strip(), odotettu_sisalto.strip())
@@ -289,8 +289,8 @@ poistatagi\tpoistaa halutun tagin\n\
         odotettu_sisalto = """
 @article{test1,
   author = {Old Author},
-  title = {Old Title},
-  year = {2020}
+  title  = {Old Title},
+  year   = {2020}
 }@comment{tag2, tag3}
 """
 

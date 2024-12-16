@@ -69,9 +69,9 @@ class ViiteParseri:
         suurin_pituus = 0
 
         for k in self.viitteen_tiedot:
-            suurin_pituus = max(suurin_pituus, len(k))
+            suurin_pituus = max(suurin_pituus, len(k[0]))
 
-        def whitespace_fuller (kentta):
+        def whitespace_filler (kentta):
             whitespace_pituus = suurin_pituus - len(kentta)
             whitespace = ''
             while whitespace_pituus > 0:
@@ -82,7 +82,7 @@ class ViiteParseri:
         for k in self.viitteen_tiedot:
             self.viite_teksti += (',\n  '
                                   + k[0]
-                                  + whitespace_fuller(k[0])
+                                  + whitespace_filler(k[0])
                                   + ' = {'
                                   + k[1] + '}')
 
