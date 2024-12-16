@@ -25,7 +25,7 @@ publisher={Wiley Online Library}
 }@comment{python,katselmus,englannin kielinen}""",
 """@article{larsen2017atomic,
   title={The atomic simulation environment—a Python library for working with atoms},
-  author={Larsen, Ask Hjorth and Mortensen, Jens J{\o}rgen and Blomqvist, Jakob and Castelli, Ivano E and Christensen, Rune and Du{\l}ak, Marcin and Friis, Jesper and Groves, Michael N and Hammer, Bj{\o}rk and Hargus, Cory and others},
+  author={Larsen, Ask Hjorth and Mortensen, Jens Jorgen and Blomqvist, Jakob and Castelli, Ivano E and Christensen, Rune and Dulak, Marcin and Friis, Jesper and Groves, Michael N and Hammer, Bjork and Hargus, Cory and others},
   journal={Journal of Physics: Condensed Matter},
   volume={29},
   number={27},
