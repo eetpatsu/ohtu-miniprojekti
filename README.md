@@ -8,6 +8,7 @@ yksikkötestit. Toiminnallisuus on esitetty asiakkaalle ja asiakas on sen hyväk
   
 - Linkki backlogeihin: https://docs.google.com/spreadsheets/d/1OICdx9NOKYG2s7hhRJc7OWvsG8d-jwwOwvamELjMztY/edit?usp=sharing
 - Linkki CI-palveluun: https://github.com/eetupsutinen/ohtu-miniprojekti/actions
+- Linkki retrospektiivin muistioon: https://github.com/eetupsutinen/ohtu-miniprojekti/blob/main/retro.md
 - Ohjelma on lisensoitu [MIT-lisenssillä](https://raw.githubusercontent.com/eetupsutinen/ohtu-miniprojekti/refs/heads/main/LICENSE).
 
 **Asennus- ja käyttöohje:**
