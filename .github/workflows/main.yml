@@ -30,7 +30,9 @@ jobs:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       - name: Lint
         run: poetry run pylint --disable=fixme src
+      - name: Create results directory
+        run: mkdir -p results
       - name: Robot Framework
-        run: poetry run robot --outputdir . src/tests/
+        run: poetry run robot --outputdir results src/tests/
       - name: Check if report exists
-        run: ls .
+        run: ls results
