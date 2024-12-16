@@ -31,4 +31,4 @@ jobs:
       - name: Lint
         run: poetry run pylint --disable=fixme src
       - name: Robot Framework
-        run: poetry run robot src/tests/
+        run: poetry run robot --outputdir . src/tests/

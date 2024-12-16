@@ -21,6 +21,7 @@ muokkaa\t\tmuokkaa valitun viitteen parametreja\n\
 muokkaaparam\tmuokkaa valitun viitteen haluttua parametria\n\
 lisaatagi\tlisää halutun tagin\n\
 poistatagi\tpoistaa halutun tagin\n\
+etsitagi\tetsi viitteitä tagin perusteella\n\
 ")
         return 0
 
