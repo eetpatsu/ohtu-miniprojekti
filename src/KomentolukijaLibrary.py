@@ -26,6 +26,8 @@ class KomentolukijaLibrary:
 
     def syota_data(self, data):
         '''Syöttää käyttäjän antamaa dataa valmiiksi. Ohjelma lukee näitä sitä mukaa kun io:n funktiota "lue" kutsutaan.'''
+        if data == "ENTER": # Jos syötetään "ENTER", ohjelma käyttäytyy kuin käyttäjä olisi painanut enter ilman inputtia
+            data = ""
         self._io.syota(data)
 
     def tulosteen_tulisi_sisaltaa(self, teksti):
