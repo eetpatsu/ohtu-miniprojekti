@@ -1,37 +1,33 @@
 *** Settings ***
 Resource  resource.robot
-Library  ../ViiteLibrary.py
+Library  ../KomentolukijaLibrary.py
 Library  OperatingSystem
-Library  String  # Tarvitaan tulosteen tarkistamiseen
+Test Teardown  Remove File  ${TIEDOSTONIMI}
 
 *** Variables ***
-${TIEDOSTONIMI}  test.bib
+${TIEDOSTONIMI}  testi.bib
 
 *** Test Cases ***
 Luo Bib Tiedosto
-    Syota Komento  luo
-    Syota Komento  ${TIEDOSTONIMI}
+    Kaynnista Sovellus
+    Syota Komennot  luo  ${TIEDOSTONIMI}
     File Should Exist  ${TIEDOSTONIMI}
-    [Teardown]  Remove File  ${TIEDOSTONIMI}
 
 Yritä Luoda Tiedosto Joka On Jo Olemassa
-    Syota Komento  luo
-    Syota Komento  ${TIEDOSTONIMI}
+    Luo Testitiedosto  ${TIEDOSTONIMI}
     File Should Exist  ${TIEDOSTONIMI}
-    Syota Komento  luo
-    Syota Komento  ${TIEDOSTONIMI}
-    Output Should Contain  Tapahtui virhe:
-    [Teardown]  Remove File  ${TIEDOSTONIMI}
+    Kaynnista Sovellus
+    Syota Komennot  luo  ${TIEDOSTONIMI}
+    Tulosteen Tulisi Sisaltaa  Tapahtui virhe:
 
 Avaa Bib Tiedosto
-    Luo Testitiedosto
-    Syota Komento  avaa
-    Syota Komento  ${TIEDOSTONIMI}
-    Output Should Contain  Avattiin tiedosto:
-    Output Should Contain  ${TIEDOSTONIMI}
-    [Teardown]  Remove File  ${TIEDOSTONIMI}
+    Luo Testitiedosto  ${TIEDOSTONIMI}
+    Kaynnista Sovellus
+    Syota Komennot  avaa  ${TIEDOSTONIMI}
+    Tulosteen Tulisi Sisaltaa  Avattiin tiedosto:
+    Tulosteen Tulisi Sisaltaa  ${TIEDOSTONIMI}
 
 Yrita Avata Tiedosto Jota Ei Ole Olemassa
-    Syota Komento  avaa
-    Syota Komento  ${TIEDOSTONIMI}
-    Output Should Contain  Tapahtui virhe:
+    Kaynnista Sovellus
+    Syota Komennot  avaa  ${TIEDOSTONIMI}
+    Tulosteen Tulisi Sisaltaa  Tapahtui virhe:

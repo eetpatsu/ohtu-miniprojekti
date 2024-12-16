@@ -1,5 +1,5 @@
 *** Settings ***
-Library   ../ViiteLibrary.py
+Library   ../KomentolukijaLibrary.py
 Library  OperatingSystem
 Library  String
 Test Timeout  5s
@@ -7,14 +7,15 @@ Test Timeout  5s
 *** Variables ***
 ${TIEDOSTONIMI}   test.bib
 
-${OHJETEKSTI}     \nKomennot:\n\help\t\ttulostaa tämän viestin\n\exit\t\tpoistuu ohjelmasta\n\avaa\t\tavaa bib-tiedoston\n\luo\t\tluo bib-tiedoston\ntulosta\t\ttulostaa aktiivisen bib-tiedoston sisällön\n\syota\t\ttallentaa bib-dataa aktiiviseen bib-tiedostoon\n\muokkaa\t\tmuokkaa valitun viitteen parametreja\n\muokkaaparam\tmuokkaa valitun viitteen haluttua parametria\n\lisaatagi\tlisää halutun tagin\n\poistatagi\tpoistaa halutun tagin\n\
+${OHJETEKSTI}     \nKomennot:\nhelp\t\ttulostaa tämän viestin\nexit\t\tpoistuu ohjelmasta\navaa\t\tavaa bib-tiedoston\nluo\t\tluo bib-tiedoston\ntulosta\t\ttulostaa aktiivisen bib-tiedoston sisällön\nsyota\t\ttallentaa bib-dataa aktiiviseen bib-tiedostoon\nmuokkaa\t\tmuokkaa valitun viitteen parametreja\nmuokkaaparam\tmuokkaa valitun viitteen haluttua parametria\nlisaatagi\tlisää halutun tagin\npoistatagi\tpoistaa halutun tagin\n
 
 
 *** Test Cases ***
 Help Tulostuu Ohjelman Alkuun
-    Nayta Alkutekstit
-    Output Should Contain   ${OHJETEKSTI}
+    Kaynnista Sovellus
+    Tulosteen Tulisi Sisaltaa  ${OHJETEKSTI}
 
 Testaa Help Komento
+    Kaynnista Sovellus
     Syota Komento  help
-    Output Should Contain  ${OHJETEKSTI}
+    Tulosteen Tulisi Sisaltaa  ${OHJETEKSTI}

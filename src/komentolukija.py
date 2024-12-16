@@ -21,7 +21,6 @@ class Komentolukija:
         match syote:
             case "help":
                 self.viite_editori.helppi()
-                return 0
 
             case "exit":
                 return -1
@@ -29,46 +28,38 @@ class Komentolukija:
             case "avaa":
                 tiedostonimi = self.io.lue("Anna avattava tiedosto muodossa sijainti/nimi: ")
                 self.viite_editori.avaa_tiedosto(tiedostonimi)
-                return 0
 
             case "luo":
                 tiedostonimi = self.io.lue("Anna luotava tiedoston polku/nimi (suhteessa työhakemistoon): ")
                 self.viite_editori.luo_ja_avaa_tiedosto(tiedostonimi)
-                return 0
 
             case "tulosta":
                 self.viite_editori.tulosta_tiedosto()
-                return 0
 
             case "syota":
                 self.viite_editori.syota_bib_viite()
-                return 0
 
             case "muokkaa":
                 viitteen_avain = self.io.lue("Anna muokattavan viitteen avain: ")
-                self.viite_editori.muokkaa_viite(viitteen_avain)
-                return 0
 
             case "muokkaaparam":
                 viitteen_avain = self.io.lue("Anna muokattavan viitteen avain: ")
                 parametrin_tyyppi = self.io.lue("Anna parametrin tyyppi: ")
                 muokattu_parametri = self.io.lue("Anna muokattu parametri: ")
                 self.viite_editori.muokkaa_parametri(viitteen_avain, parametrin_tyyppi, muokattu_parametri)
-                return 0
 
             case "lisaatagi":
                 viitteen_avain = self.io.lue("Anna viitteen avain: ")
                 lisattava_tag = self.io.lue("Anna lisättävä tagi: ")
                 self.viite_editori.lisaa_tagi(viitteen_avain, lisattava_tag)
-                return 0
 
             case "poistatagi":
                 viitteen_avain = self.io.lue("Anna viitteen avain: ")
                 poistettava_tagi = self.io.lue("Anna poistettava tagi: ")
                 self.viite_editori.poista_tagi(viitteen_avain, poistettava_tagi)
-                return 0
 
             case _:
                 if syote == "":
                     self.io.kirjoita("Tuntematon komento \""+syote+"\"")
-                    return 0
+
+        return 0
