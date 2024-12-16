@@ -9,9 +9,14 @@ Test Teardown  Poista Testitiedosto  ${TIEDOSTONIMI}
 ${TIEDOSTONIMI}   testi.bib
 
 *** Test Cases ***
-Haetaan Viite Avaimella
+Lisaa Tagi
     Kaynnista Sovellus Argumenteilla  ${TIEDOSTONIMI}
     Syota Komennot  lisaatagi  CBH91  testitagi
     Syota Komento  tulosta
     Tulosteen Tulisi Sisaltaa  testitagi}
     [Teardown]  Remove File  ${TIEDOSTONIMI}
+
+Tagin Lisays Avaamatta Tiedostoa
+    Kaynnista Sovellus
+    Syota Komennot   lisaatagi  CBH91  testitagi
+    Tulosteen Tulisi Sisaltaa  Ei avattua tiedostoa. Avaa tiedosto ensin komennolla 'avaa'.
