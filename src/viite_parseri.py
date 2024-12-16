@@ -133,8 +133,6 @@ class ViiteParseri:
 
         self.viitteen_tagit.append(tagi.strip())
 
-        self.update()
-
 
     def poista_tagi(self,tagi):
         """"
@@ -155,10 +153,9 @@ class ViiteParseri:
 
             self.viitteen_tagit.remove(tagi)
 
-        self.update()
-
         return olemassa
 
 
     def __str__(self):
+        self.update()
         return self.viite_teksti
