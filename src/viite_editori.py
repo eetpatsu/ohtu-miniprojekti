@@ -129,22 +129,28 @@ poistatagi\tpoistaa halutun tagin\n\
                 viite_alku = tiedosto.read()
 
             viitteet = self.etsi_viitteet(viite_alku)
-
-            muokattavat_viitteet = []
-            for viite in viitteet:
-                if viitteen_avain in viite:
-                    muokattavat_viitteet.append(viite)
-                    break
-
-            if len(muokattavat_viitteet) == 0:
-                self.io.kirjoita(f"Viitettä avaimella '{viitteen_avain}' ei löytynyt.")
+            muokattava_viite = self.etsi_viite(viitteet, viitteen_avain)
+            if not muokattava_viite:
                 return -1
 
-            for muokattava_viite in muokattavat_viitteet:
-                parseri = ViiteParseri(muokattava_viite)
-                for param, arvo in parseri.viitteen_tiedot:
-                    self.io.kirjoita(f"Nykyinen {param}: {arvo}")
-                    # Ajetaan self.muokkaa_parametri?
+            parseri = ViiteParseri(muokattava_viite)
+            muokattu = False
+            for param, arvo in parseri.viitteen_tiedot:
+                self.io.kirjoita(f"Parametrin {param} nykyinen arvo on: {arvo}")
+                uusi_arvo = self.io.lue(f"Anna uusi arvo parametriin {param} (tyhjä jättää ennalleen): ")
+                if uusi_arvo:
+                    muokattu = True
+                    tulos = parseri.muokkaa(param, uusi_arvo)
+                    if tulos >= 0:
+                        self.io.kirjoita("Muokkaus onnistui")
+                    else:
+                        self.io.kirjoita("Muokkaus epäonnistui tarkista parametrin tyyppi")
+
+            if muokattu:
+                viitteet = [viite if viite != muokattava_viite else str(parseri) for viite in viitteet]
+
+                with open(self.aktiivinen_tiedosto, "w") as tiedosto:
+                    tiedosto.write("\n\n".join(viitteet))
             return 0
 
         except FileNotFoundError:
