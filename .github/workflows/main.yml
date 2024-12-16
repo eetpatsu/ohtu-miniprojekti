@@ -32,3 +32,5 @@ jobs:
         run: poetry run pylint --disable=fixme src
       - name: Robot Framework
         run: poetry run robot --outputdir . src/tests/
+      - name: Check if report exists
+        run: ls .
