@@ -3,6 +3,16 @@ class ViiteValitsin:
 
     @staticmethod
     def hae_tagit(viite):
+        """
+        Palauttaa listana kaikki parametrinä annetun viitteen sisältämät tagit.
+        Metodi ei sisällä syötteen oikeellisuuden tarkastusta.
+        
+        Args:
+            viite (string): BibTeX-muotoinen Viite Editori:n käyttämä viite.
+        
+            returns:
+                [string]: Lista merkkijonoja viite-argumentin sisältämistä tageista.
+        """
 
         viimeinen_rivi = viite.splitlines()[-1]
 
@@ -23,6 +33,20 @@ class ViiteValitsin:
 
     @staticmethod
     def tagi_tiedustelu(viite,tiedusteltu_tagi):
+        """
+        Palauttaa tiedon siitä, sisältääkö parametrinä annettu viite toisena
+        parametrina annetun tagin. Metodi ei sisällä syötteen oikeellisuuden
+        tarkastusta.
+        
+        Args:
+            viite (string): BibTeX-muotoinen Viite Editori:n käyttämä viite.
+            tiedusteltu_tagi (string): Tagi, josta halutaan tietää onko se
+                toisena parametrinä annetussa viitteesä.
+        
+        returns:
+            boolean: True, jos tagi on viitteessä. False, jso tagi ei ole
+                viitteessä.
+        """
 
         if tiedusteltu_tagi == "":
             return False
@@ -37,6 +61,26 @@ class ViiteValitsin:
 
     @staticmethod
     def tagi_seulo_viitteet(viite_lista,tagi):
+        """
+        Käy läpi parametrina annetun listan BibTeX muotoisia viitteitä ja
+        palauttaa kopion listasta, joka sisältää vain ne viitteet, joissa
+        on kyseinen tagi. Metodi ei tarkasta viitteiden oikeellisuutta.
+        Toimii seuraavalla tavalla:
+        
+         # Lista merkkijonoja, joissa BibTex-muotoisia viitteitä.
+        viite_lista = [viite_1, viite_2,... ...,viite_n]
+        # Tagi, jolla viitteitä etsitään
+        tagi = 'python'
+        # Kopio alkuperäisestä listasta, jossa vain halutun tagin omaavat viitteet.
+        valikoitu_viite_lista = ViiteValitsin.tagi_seulo_viitteet(viite_lista, tagi)
+
+        Args:
+            viite_lista[string]: Lista BibTeX-muotoisia Viite Editori:n käyttämiä viiteitä.
+            tagi (string): Tagi, jolla viitteitä halutaan valikoida.
+        
+        returns:
+            [string]: Lista kaikista niistä viitteistä, jotka sisältävät halutun tagin.
+        """
 
         viite_lista_kopio = []
 

@@ -34,99 +34,56 @@ publisher={Wiley Online Library}
   publisher={IOP Publishing}
 }@comment{larsen,   fysiikka  , 2017,englannin kielinen}"""]
 
-    def test_tagien_haku(self):
+    # Staattisen hae_tagit-metodin testaus.
+    def test_tagien_haku_0(self):
         self.assertEqual(
             ViiteValitsin.hae_tagit(self.esimerkkiviitteet[0]),
             []
         )
-
+    def test_tagien_haku_1(self):
         self.assertEqual(
             ViiteValitsin.hae_tagit(self.esimerkkiviitteet[1]),
             ["python","katselmus","englannin kielinen"]
         )
-
+    def test_tagien_haku_2(self):
         self.assertEqual(
             ViiteValitsin.hae_tagit(self.esimerkkiviitteet[2]),
             ["larsen","fysiikka","2017","englannin kielinen"]
         )
 
-    def test_tagine_olemassaolo_tiedustelu(self):
-        self.assertEqual(
-            ViiteValitsin.tagi_tiedustelu(self.esimerkkiviitteet[0],"java"),
-            False
-        )
-        self.assertEqual(
-            ViiteValitsin.tagi_tiedustelu(self.esimerkkiviitteet[0],"englannin kielinen"),
-            False
-        )
+    # Staattisen tagi_tiedustelu-metodin testaus
+    def test_tagine_olemassaolo_tiedustelu_0(self):
+        self.assertEqual( ViiteValitsin.tagi_tiedustelu(self.esimerkkiviitteet[0],"java"), False )
+        self.assertEqual( ViiteValitsin.tagi_tiedustelu(self.esimerkkiviitteet[0],"englannin kielinen"), False )
+    def test_tagine_olemassaolo_tiedustelu_1(self):
+        self.assertEqual( ViiteValitsin.tagi_tiedustelu(self.esimerkkiviitteet[1],"python"), True )
+        self.assertEqual( ViiteValitsin.tagi_tiedustelu(self.esimerkkiviitteet[1],"englannin kielinen"), True )
+        self.assertEqual( ViiteValitsin.tagi_tiedustelu(self.esimerkkiviitteet[1],"java"), False )
+    def test_tagine_olemassaolo_tiedustelu_3(self):
+        self.assertEqual( ViiteValitsin.tagi_tiedustelu(self.esimerkkiviitteet[2],"fysiikka"), True )
+        self.assertEqual( ViiteValitsin.tagi_tiedustelu(self.esimerkkiviitteet[1],"englannin kielinen"), True )
+        self.assertEqual( ViiteValitsin.tagi_tiedustelu(self.esimerkkiviitteet[2],"python"), False )
+        self.assertEqual( ViiteValitsin.tagi_tiedustelu(self.esimerkkiviitteet[2],"java"), False )
 
-        self.assertEqual(
-            ViiteValitsin.tagi_tiedustelu(self.esimerkkiviitteet[1],"python"),
-            True
-        )
-        self.assertEqual(
-            ViiteValitsin.tagi_tiedustelu(self.esimerkkiviitteet[1],"englannin kielinen"),
-            True
-        )
-        self.assertEqual(
-            ViiteValitsin.tagi_tiedustelu(self.esimerkkiviitteet[1],"java"),
-            False
-        )
+    def test_tagine_olemassaolo_tiedustelu_tyhjalla_viitteella_0(self):
+        self.assertEqual( ViiteValitsin.tagi_tiedustelu(self.esimerkkiviitteet[0],""), False )
+    def test_tagine_olemassaolo_tiedustelu_tyhjalla_viitteella_1(self):
+        self.assertEqual( ViiteValitsin.tagi_tiedustelu(self.esimerkkiviitteet[1],""), False )
+    def test_tagine_olemassaolo_tiedustelu_tyhjalla_viitteella_2(self):
+        self.assertEqual( ViiteValitsin.tagi_tiedustelu(self.esimerkkiviitteet[2],""), False )
 
-        self.assertEqual(
-            ViiteValitsin.tagi_tiedustelu(self.esimerkkiviitteet[2],"fysiikka"),
-            True
-        )
-        self.assertEqual(
-            ViiteValitsin.tagi_tiedustelu(self.esimerkkiviitteet[1],"englannin kielinen"),
-            True
-        )
-        self.assertEqual(
-            ViiteValitsin.tagi_tiedustelu(self.esimerkkiviitteet[2],"python"),
-            False
-        )
-        self.assertEqual(
-            ViiteValitsin.tagi_tiedustelu(self.esimerkkiviitteet[2],"java"),
-            False
-        )
+    # Staattisen tagi_seulo_viitteet-metodin testaus
+    def test_viite_listan_seulonta_0(self):
+        self.assertEqual( len(ViiteValitsin.tagi_seulo_viitteet(self.esimerkkiviitteet,"java")), 0 )
+    def test_viite_listan_seulonta_1(self):
+        self.assertEqual( len(ViiteValitsin.tagi_seulo_viitteet(self.esimerkkiviitteet,"englannin kielinen")), 2 )
+    def test_viite_listan_seulonta_2(self):
+        self.assertEqual( len(ViiteValitsin.tagi_seulo_viitteet(self.esimerkkiviitteet,"python")), 1 )
 
+    def test_viite_listan_seulonta_3(self):
+        self.assertEqual( ViiteValitsin.tagi_seulo_viitteet(self.esimerkkiviitteet,"java"), [] )
 
-    def test_tagine_olemassaolo_tiedustelu_tyhjalla_viitteella(self):
-        self.assertEqual(
-            ViiteValitsin.tagi_tiedustelu(self.esimerkkiviitteet[0],""),
-            False
-        )
-
-        self.assertEqual(
-            ViiteValitsin.tagi_tiedustelu(self.esimerkkiviitteet[1],""),
-            False
-        )
-
-        self.assertEqual(
-            ViiteValitsin.tagi_tiedustelu(self.esimerkkiviitteet[2],""),
-            False
-        )
-
-
-    def test_viite_listan_seulonta_1_1(self):
-        self.assertEqual(
-            len(ViiteValitsin.tagi_seulo_viitteet(self.esimerkkiviitteet,"java")),
-            0
-        )
-
-    def test_viite_listan_seulonta_1_2(self):
-        self.assertEqual(
-            ViiteValitsin.tagi_seulo_viitteet(self.esimerkkiviitteet,"java"),
-            []
-        )
-
-    def test_viite_listan_seulonta_2_1(self):
-        self.assertEqual(
-            len(ViiteValitsin.tagi_seulo_viitteet(self.esimerkkiviitteet,"englannin kielinen")),
-            2
-        )
-
-    def test_viite_listan_seulonta_2_2(self):
+    def test_viite_listan_seulonta_4(self):
 
         esimerkkiviitteet_kopio = []
         for i in self.esimerkkiviitteet:
@@ -138,13 +95,7 @@ publisher={Wiley Online Library}
             esimerkkiviitteet_kopio
         )
 
-    def test_viite_listan_seulonta_3_1(self):
-        self.assertEqual(
-            len(ViiteValitsin.tagi_seulo_viitteet(self.esimerkkiviitteet,"python")),
-            1
-        )
-
-    def test_viite_listan_seulonta_3_2(self):
+    def test_viite_listan_seulonta_5(self):
 
         esimerkkiviitteet_kopio = []
         for i in self.esimerkkiviitteet:
