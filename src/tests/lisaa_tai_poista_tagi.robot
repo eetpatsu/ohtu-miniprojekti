@@ -21,3 +21,16 @@ Tagin Lisays Avaamatta Tiedostoa
     Syota Komennot  lisaatagi  CBH91  testitagi
     Tulosteen Tulisi Sisaltaa  Ei avattua tiedostoa. Avaa tiedosto ensin komennolla 'avaa'.
     [Teardown]  Remove File  ${TIEDOSTONIMI}
+      
+Poista Tagi
+    Kaynnista Sovellus Argumenteilla  ${TIEDOSTONIMI}
+    Syota Komennot  lisaatagi  CBH91  eka
+    Syota Komento  tulosta
+    Tulosteen Tulisi Sisaltaa  @comment{eka}
+    Syota Komennot  lisaatagi  CBH91  toka
+    Syota Komento  tulosta
+    Tulosteen tulisi sisaltaa   @comment{eka, toka}
+    Syota Komennot  poistatagi  CBH91  toka
+    Syota Komento  tulosta
+    Tulosteen tulisi sisaltaa   @comment{eka}
+    [Teardown]  Remove File  ${TIEDOSTONIMI}
