@@ -58,6 +58,10 @@ class Komentolukija:
                 poistettava_tagi = self.io.lue("Anna poistettava tagi: ")
                 self.viite_editori.poista_tagi(viitteen_avain, poistettava_tagi)
 
+            case "etsitagi":
+                etsittava_tagi = self.io.lue("Anna etsitävä tagi: ")
+                self.viite_editori.etsi_tagi(etsittava_tagi)
+
             case _:
                 if syote == "":
                     self.io.kirjoita("Tuntematon komento \""+syote+"\"")
