@@ -8,24 +8,27 @@ yksikkötestit. Toiminnallisuus on esitetty asiakkaalle ja asiakas on sen hyväk
   
 - Linkki backlogeihin: https://docs.google.com/spreadsheets/d/1OICdx9NOKYG2s7hhRJc7OWvsG8d-jwwOwvamELjMztY/edit?usp=sharing
 - Linkki CI-palveluun: https://github.com/eetupsutinen/ohtu-miniprojekti/actions
+- Linkki hyväksymistestausraporttiin: https://raw.githack.com/eetupsutinen/ohtu-miniprojekti/main/report.html
 - Linkki retrospektiivin muistioon: https://github.com/eetupsutinen/ohtu-miniprojekti/blob/main/retro.md
 - Ohjelma on lisensoitu [MIT-lisenssillä](https://raw.githubusercontent.com/eetupsutinen/ohtu-miniprojekti/refs/heads/main/LICENSE).
 
 **Asennus- ja käyttöohje:**
 
 1. Siirry hakemistoon, johon olet ladannut ohjelman. Aja ohjelma terminaalissa (src/index.py).
+   - Voit suorittaa kohdan 2 myös antamalla em. komennon argumentiksi haluamasi tiedostonimen (ml. polku tarvittaessa).
 2. Avaa
    - olemassaoleva bib-tiedosto komennolla 'avaa' 
    - **tai** luo uusi tiedosto komennolla 'luo'
    - kummassakin tapauksessa syötä tiedostonimi suhteessa polkuun, jossa olet.
-3. Tulosta bib-tiedoston sisältö komennolla 'tulosta'.
-4. Lisää lähteitä bib-muodossa komennolla 'syota'
+3. Käytettävät komennot tulostuvat terminaaliin ohjelman käynnistyessä. Saat ne uudelleen näkyviin komennolla ```help```.
+4. Tulosta bib-tiedoston sisältö komennolla 'tulosta'.
+5. Lisää lähteitä bib-muodossa komennolla 'syota'
    - voit liittää useita bib-tiedoston rivejä leikepöydältä tai kirjoittaa ne käsin
    - voit lisätä myös rivinvaihtoja haluamallasi tavalla
    - kun olet liittänyt haluamasi rivit, vahvista syötetyt rivit komennolla kirjaamalla **tyhjälle riville** ```valmis```
-5. Muokkaa haluamaasi viitettä seuraavalla komennolla: ```muokkaa <muokattavan viitteen avain> <muokattavan parametrin tyyppi> <muokkauksen jälkeinen haluttu merkkijono>```
+6. Muokkaa haluamaasi parametria komennolla: ```muokkaaparam```. Seuraa terminaalin ohjeita.
 - esimerkkiviite:
-```@article{kadiyala2018applications,
+```@article{kadiyala2018applications, # <-- Viitteen "avaimella" tarkoitetaan '{' ja ',' -symbolien välistä merkkijonoa.
 title={Applications of python to evaluate the performance of decision tree-based boosting algorithms},
 author={Kadiyala, Akhil and Kumar, Ashok},
 journal={Environmental Progress \& Sustainable Energy},
@@ -36,17 +39,8 @@ year={2018},
 publisher={Wiley Online Library}
 }
 ```
-- esimerkkikomento: ```muokkaa kadiyala2018applications author "Kadiyala et al"```
-- tulos:
-```@article{kadiyala2018applications,
-title={Applications of python to evaluate the performance of decision tree-based boosting algorithms},
-author={Kadiyala et al},
-journal={Environmental Progress \& Sustainable Energy},
-volume={37},
-number={2},
-pages={618--623},
-year={2018},
-publisher={Wiley Online Library}
-}
-```
-7. Poistu ohjelmasta komennolla 'exit'
+7. Ohjattu viitteen muokkaus komennolla: ```muokkaa```. Seuraa terminaalin ohjeita.
+8. Lisää haluamasi tunniste viiteelle komennolla: ```lisaatagi```. Ohjeet tulostuvat terminaaliin.
+9. Poista tunniste komennolla: ```poistatagi```.
+10. Hae viitteitä tunnisteen perusteella: ```etsitagi```.
+11. Poistu ohjelmasta komennolla 'exit'
