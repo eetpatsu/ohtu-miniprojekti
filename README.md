@@ -28,7 +28,8 @@ yksikkötestit. Toiminnallisuus on esitetty asiakkaalle ja asiakas on sen hyväk
    - kun olet liittänyt haluamasi rivit, vahvista syötetyt rivit komennolla kirjaamalla **tyhjälle riville** ```valmis```
 6. Muokkaa haluamaasi parametria komennolla: ```muokkaaparam```. Seuraa terminaalin ohjeita. (Viitteen "avaimella" tarkoitetaan ensimmäisen rivin '{' ja ',' -symbolien välistä merkkijonoa.)
 - esimerkkiviite:
-```@article{kadiyala2018applications,
+```
+@article{kadiyala2018applications,
 title={Applications of python to evaluate the performance of decision tree-based boosting algorithms},
 author={Kadiyala, Akhil and Kumar, Ashok},
 journal={Environmental Progress \& Sustainable Energy},
