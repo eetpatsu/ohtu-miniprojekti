@@ -10,6 +10,7 @@ yksikkötestit. Toiminnallisuus on esitetty asiakkaalle ja asiakas on sen hyväk
 - Linkki CI-palveluun: https://github.com/eetupsutinen/ohtu-miniprojekti/actions
 - Linkki hyväksymistestausraporttiin: https://raw.githack.com/eetupsutinen/ohtu-miniprojekti/main/report.html
 - Linkki retrospektiivin muistioon: https://github.com/eetupsutinen/ohtu-miniprojekti/blob/main/retro.md
+- Linkki loppuraporttiin: https://github.com/eetupsutinen/ohtu-miniprojekti/blob/main/loppuraportti.md
 - Ohjelma on lisensoitu [MIT-lisenssillä](https://raw.githubusercontent.com/eetupsutinen/ohtu-miniprojekti/refs/heads/main/LICENSE).
 
 **Asennus- ja käyttöohje:**
