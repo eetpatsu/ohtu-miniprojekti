@@ -82,7 +82,7 @@ tai pull request -ominaisuuksia käyttämällä. On selvää, että aikarajoitte
 vuoksi myös ohjelmointityössä jäi toteuttamatta joitakin kiinnostavia
 toiminnallisuuksia (esimerkiksi viitteiden tuonti rajapinnalla). Toisaalta
 varsinaisen prosessin näkökulmasta tärkeimmät opit saatiin, eikä päällimmäisenä
-ollutkaan tuote itsessään.
+ollutkaan tuote itsessään. Kokemus pariohjelmoinnista jäi niukaksi ja sitä olisi kaivattu enemmänkin.
 
 Turhaksi koettiin Codecov-toiminto, jossa ilmeni myös epäjohdonmukaisia teknisiä
 ongelmia silloin tällöin. Kattavuuden seuranta onnistui 
